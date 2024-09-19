@@ -1,0 +1,61 @@
+databaseChangeLog:
+  - changeSet:
+      id: 5
+      author: petrSushilin
+      changes:
+        - createTable:
+            tableName: Cards
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: bankaccount_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: card_secret_id
+                  type: UUID
+                  constraints:
+                    unique: true
+              - column:
+                  name: number
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: state
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: Cards
+            baseColumnNames: bankaccount_id
+            referencedTableName: BankAccounts
+            referencedColumnNames: id
+            onDelete: CASCADE
+            constraintName: fk_cards_bankaccounts
+        - addForeignKeyConstraint:
+            baseTableName: Cards
+            baseColumnNames: card_secret_id
+            referencedTableName: CardSecrets
+            referencedColumnNames: id
+            onDelete: CASCADE
+            constraintName: fk_cards_cardsecrets
+        - createIndex:
+            indexName: idx_cards_bankaccount_id
+            tableName: Cards
+            columns:
+              - column:
+                  name: bankaccount_id
+        - createIndex:
+            indexName: idx_cards_card_secret_id
+            tableName: Cards
+            columns:
+              - column:
+                  name: card_secret_id

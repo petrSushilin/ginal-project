@@ -1,0 +1,70 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: petrSushilin
+      changes:
+        - createTable:
+            tableName: BankAccounts
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: bank_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: registry_date
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: number
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: balance
+                  type: DECIMAL(20,2)
+                  defaultValueNumeric: 0.00
+              - column:
+                  name: state
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: BankAccounts
+            baseColumnNames: bank_id
+            referencedTableName: Banks
+            referencedColumnNames: id
+            onDelete: CASCADE
+            constraintName: fk_bankaccounts_banks
+        - addForeignKeyConstraint:
+            baseTableName: BankAccounts
+            baseColumnNames: user_id
+            referencedTableName: Users
+            referencedColumnNames: id
+            onDelete: CASCADE
+            constraintName: fk_bankaccounts_users
+        - createIndex:
+            indexName: idx_bankaccounts_bank_id
+            tableName: BankAccounts
+            columns:
+              - column:
+                  name: bank_id
+        - createIndex:
+            indexName: idx_bankaccounts_user_id
+            tableName: BankAccounts
+            columns:
+              - column:
+                  name: user_id
