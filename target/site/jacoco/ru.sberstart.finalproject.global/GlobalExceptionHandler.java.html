@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GlobalExceptionHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">final-project</a> &gt; <a href="index.source.html" class="el_package">ru.sberstart.finalproject.global</a> &gt; <span class="el_source">GlobalExceptionHandler.java</span></div><h1>GlobalExceptionHandler.java</h1><pre class="source lang-java linenums">package ru.sberstart.finalproject.global;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import ru.sberstart.finalproject.global.exceptions.ForbiddenTransactionException;
+import ru.sberstart.finalproject.global.exceptions.NotAvailableActionsException;
+import ru.sberstart.finalproject.global.exceptions.RecordNotFoundException;
+import ru.sberstart.finalproject.global.exceptions.UnsuccessfulOperationException;
+
+/**
+ * Глобальный обработчик исключений для всего приложения.
+ */
+@ControllerAdvice
+<span class="fc" id="L16">public class GlobalExceptionHandler {</span>
+
+    /**
+     * Обработка исключения некорректного формата числа.
+     *
+     * @param ex исключение NumberFormatException
+     * @return ResponseEntity с информацией об ошибке
+     */
+    @ExceptionHandler(NumberFormatException.class)
+    public ResponseEntity&lt;GlobalAppExceptionDTO&gt; handleNumberFormatException(NumberFormatException ex) {
+<span class="nc" id="L26">        GlobalAppExceptionDTO exception = new GlobalAppExceptionDTO(HttpStatus.BAD_REQUEST.value(), &quot;Некорректный формат числа: &quot; + ex.getMessage());</span>
+<span class="nc" id="L27">        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception);</span>
+    }
+
+    /**
+     * Обработка исключения запрещённой транзакции.
+     *
+     * @param ex исключение ForbiddenTransactionException
+     * @return ResponseEntity с информацией об ошибке
+     */
+    @ExceptionHandler(ForbiddenTransactionException.class)
+    public ResponseEntity&lt;GlobalAppExceptionDTO&gt; handleForbiddenTransactionException(ForbiddenTransactionException ex) {
+<span class="nc" id="L38">        GlobalAppExceptionDTO exception = new GlobalAppExceptionDTO(HttpStatus.FORBIDDEN.value(), ex.getMessage());</span>
+<span class="nc" id="L39">        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception);</span>
+    }
+
+    /**
+     * Обработка исключения недопустимых действий в текущем состоянии.
+     *
+     * @param ex исключение NoValidateActionsException
+     * @return ResponseEntity с информацией об ошибке
+     */
+    @ExceptionHandler(NotAvailableActionsException.class)
+    public ResponseEntity&lt;GlobalAppExceptionDTO&gt; handleNotAvailableActionsException(NotAvailableActionsException ex) {
+<span class="nc" id="L50">        GlobalAppExceptionDTO exception = new GlobalAppExceptionDTO(HttpStatus.UNPROCESSABLE_ENTITY.value(), ex.getMessage());</span>
+<span class="nc" id="L51">        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(exception);</span>
+    }
+
+    /**
+     * Обработка исключения, когда запись не найдена.
+     *
+     * @param ex исключение RecordNotFoundException
+     * @return ResponseEntity с информацией об ошибке
+     */
+    @ExceptionHandler(RecordNotFoundException.class)
+    public ResponseEntity&lt;GlobalAppExceptionDTO&gt; handleRecordNotFoundException(RecordNotFoundException ex) {
+<span class="nc" id="L62">        GlobalAppExceptionDTO exception = new GlobalAppExceptionDTO(HttpStatus.NOT_FOUND.value(), ex.getMessage());</span>
+<span class="nc" id="L63">        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception);</span>
+    }
+
+    /**
+     * Обработка исключения неудачной операции.
+     *
+     * @param ex исключение UnsuccessfulOperationException
+     * @return ResponseEntity с информацией об ошибке
+     */
+    @ExceptionHandler(UnsuccessfulOperationException.class)
+    public ResponseEntity&lt;GlobalAppExceptionDTO&gt; handleUnsuccessfulOperationException(UnsuccessfulOperationException ex) {
+<span class="nc" id="L74">        GlobalAppExceptionDTO exception = new GlobalAppExceptionDTO(HttpStatus.METHOD_NOT_ALLOWED.value(), &quot;Не удалось выполнить операцию.&quot;);</span>
+<span class="nc" id="L75">        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(exception);</span>
+    }
+
+    /**
+     * Обработка непредвиденных исключений времени выполнения.
+     *
+     * @param ex исключение RuntimeException
+     * @return ResponseEntity с информацией об ошибке
+     */
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity&lt;GlobalAppExceptionDTO&gt; handleRuntimeException(RuntimeException ex) {
+<span class="nc" id="L86">        GlobalAppExceptionDTO exception = new GlobalAppExceptionDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), &quot;Внутренняя ошибка сервера.&quot;);</span>
+        // Логирование исключения для отладки
+        // logger.error(&quot;RuntimeException:&quot;, ex);
+<span class="nc" id="L89">        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception);</span>
+    }
+
+    /**
+     * Обработка всех остальных исключений.
+     *
+     * @param ex исключение Exception
+     * @return ResponseEntity с информацией об ошибке
+     */
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity&lt;GlobalAppExceptionDTO&gt; handleException(Exception ex) {
+<span class="nc" id="L100">        GlobalAppExceptionDTO exception = new GlobalAppExceptionDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), &quot;Произошла внутренняя ошибка сервера.&quot;);</span>
+        // Логирование исключения для отладки
+        // logger.error(&quot;Exception:&quot;, ex);
+<span class="nc" id="L103">        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

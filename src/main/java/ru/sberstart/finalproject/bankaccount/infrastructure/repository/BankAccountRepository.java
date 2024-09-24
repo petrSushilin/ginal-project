@@ -1,9 +1,12 @@
 package ru.sberstart.finalproject.bankaccount.infrastructure.repository;
 
+import ru.sberstart.finalproject.bankaccount.api.dto.inner.BankAccountFullInformationDTO;
+import ru.sberstart.finalproject.bankaccount.api.dto.response.BankAccountInformationResponseDTO;
 import ru.sberstart.finalproject.bankaccount.domain.entity.BankAccount;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Данный поведенческий интерфейс слоя репозиторий банковских счетов является базовым.
@@ -15,7 +18,7 @@ public interface BankAccountRepository {
      * @param bankAccount
      * @return BankAccount
      */
-    BankAccount create(BankAccount bankAccount);
+    Optional<BankAccount> create(BankAccount bankAccount);
 
     /**
      * Метод получения сущности банковского счета в БД.
@@ -23,7 +26,9 @@ public interface BankAccountRepository {
      * @param number
      * @return BankAccount
      */
-    BankAccount getByNumber(String number);
+    Optional<BankAccount> getServiceInfoByNumber(String number);
+
+    Optional<BankAccountFullInformationDTO> getByNumber(String number);
 
     /**
      * Метод получения записей банковских счетов из БД, участвующих в процессе транзакции.
@@ -31,7 +36,7 @@ public interface BankAccountRepository {
      * @param parsedAccountNumbers
      * @return
      */
-    List<BankAccount> getTransactionAccounts(List<String> parsedAccountNumbers);
+    Optional<List<BankAccount>> getTransactionAccounts(List<String> parsedAccountNumbers);
 
     /**
      * Метод обновлнеия состояния банковского счета в БД.
@@ -39,7 +44,7 @@ public interface BankAccountRepository {
      * @param account
      * @return BankAccount
      */
-    BankAccount updateState(BankAccount account);
+    Optional<BankAccount> updateState(BankAccount account);
 
     /**
      * Метод исполнения денежной транзакции.
@@ -47,5 +52,5 @@ public interface BankAccountRepository {
      * @param transactionAccountRecords
      * @return List of BankAccount
      */
-    List<BankAccount> provideTransaction(List<BankAccount> transactionAccountRecords) throws IOException;
+    Optional<List<BankAccount>> provideTransaction(List<BankAccount> transactionAccountRecords) throws IOException;
 }

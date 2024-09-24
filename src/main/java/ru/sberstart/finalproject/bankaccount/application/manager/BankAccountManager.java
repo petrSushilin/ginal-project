@@ -3,26 +3,31 @@ package ru.sberstart.finalproject.bankaccount.application.manager;
 import org.springframework.lang.NonNull;
 import ru.sberstart.finalproject.bankaccount.domain.states.BankAccountState;
 import ru.sberstart.finalproject.bankaccount.domain.states.BankAccountStateFactory;
-import ru.sberstart.finalproject.bankaccount.api.dto.BankAccountCreationDTO;
+import ru.sberstart.finalproject.bankaccount.api.dto.request.BankAccountCreationRequestDTO;
 import ru.sberstart.finalproject.bankaccount.domain.entity.BankAccount;
 import ru.sberstart.finalproject.bankaccount.domain.entity.enums.BankAccountStates;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
- * Класс управления записями учетных записей (BankAccount) в рамках выполнения бизнес-логики.
+ * Класс для управления банковскими счетами (BankAccount) в рамках выполнения бизнес-логики.
+ * Основные функции включают в себя: работу по заполнению сведений создаваемого счета,
+ * проверку и изменение состояния банковских счетов.
  */
 public class BankAccountManager {
+    private static final Pattern PATTERN = Pattern.compile("^\\d{8}-[a-fA-F0-9]{32}$");
+
     /**
-     * Метод, применяющийся для донастройки шаблона создания банковского счета.
+     * Создает новый банковский счет на основе предоставленных данных.
      *
-     * @param bankAccountCreationDTO
-     * @return BankAccount
+     * @param bankAccountCreationDTO DTO с данными для создания банковского счета.
+     * @return Экземпляр созданного банковского счета.
      */
-    public BankAccount customize(@NonNull BankAccountCreationDTO bankAccountCreationDTO) {
-        return BankAccount.builder()
+    public BankAccount creatingCustomizeAccount(@NonNull BankAccountCreationRequestDTO bankAccountCreationDTO) {
+        return new BankAccount.Builder()
                 .withBankId(bankAccountCreationDTO.bankId())
                 .withUserId(bankAccountCreationDTO.userId())
                 .withRegistryDate(LocalDate.now())
@@ -32,6 +37,22 @@ public class BankAccountManager {
                 .build();
     }
 
+    /**
+     * Проверяет, соответствует ли номер банковского счета заданному шаблону.
+     *
+     * @param bankNumber Номер банковского счета для проверки.
+     * @return true, если номер соответствует шаблону, иначе false.
+     */
+    public boolean isInvalidateNumberPattern(String bankNumber) {
+        return !PATTERN.asMatchPredicate().test(bankNumber);
+    }
+
+    /**
+     * Проверяет, готовность предоставленных банковских счетов к выполнению транзакций.
+     *
+     * @param accounts Список банковских счетов для проверки.
+     * @return true, если оба счета готовы к выполнению транзакций, иначе false.
+     */
     public boolean reportNotAvailableTransactionExecution(@NonNull List<BankAccount> accounts) {
         return !accounts.stream()
                 .map(BankAccountStateFactory::getState)
@@ -39,27 +60,27 @@ public class BankAccountManager {
     }
 
     /**
-     * Метод, применяющийся для перевода экземпляра банковского счета в состояние активного.
+     * Переводит банковский счет в состояние "Активный".
      *
-     * @param account
+     * @param account Экземпляр банковского счета, который необходимо активировать.
      */
     public void approveAccount(BankAccount account) {
         BankAccountStateFactory.getState(account).approveAccount(account);
     }
 
     /**
-     * Метод, применяющийся для перевода экземпляра банковского счета в состояние приостановленного.
+     * Переводит банковский счет в состояние "Приостановленный".
      *
-     * @param account
+     * @param account Экземпляр банковского счета, который необходимо приостановить.
      */
     public void suspendAccount(BankAccount account) {
         BankAccountStateFactory.getState(account).suspendAccount(account);
     }
 
     /**
-     * Метод, применяющийся для перевода экземпляра банковского счета в состояние закрытого.
+     * Переводит банковский счет в состояние "Закрытый".
      *
-     * @param account
+     * @param account Экземпляр банковского счета, который необходимо закрыть.
      */
     public void closeAccount(BankAccount account) {
         BankAccountStateFactory.getState(account).closeAccount(account);

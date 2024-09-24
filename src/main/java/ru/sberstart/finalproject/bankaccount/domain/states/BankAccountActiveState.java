@@ -1,11 +1,8 @@
 package ru.sberstart.finalproject.bankaccount.domain.states;
 
 import ru.sberstart.finalproject.bankaccount.domain.entity.BankAccount;
-import ru.sberstart.finalproject.card.application.service.CardService;
 import ru.sberstart.finalproject.bankaccount.domain.entity.enums.BankAccountStates;
-import ru.sberstart.finalproject.global.exceptions.NoValidateActionsException;
-
-import java.math.BigDecimal;
+import ru.sberstart.finalproject.global.exceptions.NotAvailableActionsException;
 
 /**
  * Реализация поведения в состоянии "ACTIVE" для сущности BankAccount.
@@ -13,23 +10,14 @@ import java.math.BigDecimal;
  */
 public class BankAccountActiveState implements BankAccountState {
     /**
-     * Метод выпуска карты для существующего банковского счета.
-     * Доступен только в состоянии: ACTIVE.
-     *
-     * Для активного банковского счета может быть выпущенно неограниченное количество карт.
-     * Для выпуска карты счет должен быть положительным (не менее 0).
+     * Метод регистрации банковского счета.
+     * Доступен только для новых банковских счётов.
      *
      * @param account
-     * @param service
      */
-    @Override
-    public void createCard(BankAccount account, CardService service) {
-        if (account.getBalance().compareTo(BigDecimal.ZERO) < 0) {
-            throw new NoValidateActionsException();
-        }
-        service.createCard(account);
+    public void registerAccount(BankAccount account) {
+        throw new NotAvailableActionsException();
     }
-
     /**
      * Метод подтверждения банковского счета.
      * Доступен только в состоянии: CREATED, STOPPED.
@@ -38,7 +26,7 @@ public class BankAccountActiveState implements BankAccountState {
      */
     @Override
     public void approveAccount(BankAccount account) {
-        throw new NoValidateActionsException();
+        throw new NotAvailableActionsException();
     }
 
     /**

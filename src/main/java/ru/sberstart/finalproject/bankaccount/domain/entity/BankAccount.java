@@ -61,10 +61,6 @@ public class BankAccount {
         this.state = state;
     }
 
-    public static BankAccount.Builder builder() {
-        return new BankAccount.Builder();
-    }
-
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }

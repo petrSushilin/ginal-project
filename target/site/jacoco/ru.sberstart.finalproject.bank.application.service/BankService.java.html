@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BankService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">final-project</a> &gt; <a href="index.source.html" class="el_package">ru.sberstart.finalproject.bank.application.service</a> &gt; <span class="el_source">BankService.java</span></div><h1>BankService.java</h1><pre class="source lang-java linenums">package ru.sberstart.finalproject.bank.application.service;
+
+import ru.sberstart.finalproject.bank.BankMapper;
+import ru.sberstart.finalproject.bank.api.dto.BankCreationDTO;
+import ru.sberstart.finalproject.bank.api.dto.BankFullInformationDTO;
+import ru.sberstart.finalproject.bank.api.dto.BankInformationDTO;
+import ru.sberstart.finalproject.bank.domain.entity.Bank;
+import ru.sberstart.finalproject.bank.infrastructure.repository.BankRepositoryImpl;
+import ru.sberstart.finalproject.global.exceptions.UnsuccessfulOperationException;
+
+
+public class BankService {
+    private final BankRepositoryImpl repository;
+
+<span class="fc" id="L15">    public BankService(BankRepositoryImpl repository) {</span>
+<span class="fc" id="L16">        this.repository = repository;</span>
+<span class="fc" id="L17">    }</span>
+
+    public BankFullInformationDTO create(BankCreationDTO bankCreationDTO) {
+<span class="nc" id="L20">        Bank bankCreationRecord = BankMapper.INSTANCE.toEntity(bankCreationDTO);</span>
+
+<span class="nc" id="L22">        Bank bank = repository.create(bankCreationRecord).orElseThrow(UnsuccessfulOperationException::new);</span>
+
+<span class="nc" id="L24">        return BankMapper.INSTANCE.toBankFullInformationDTO(bank);</span>
+    }
+
+    public BankInformationDTO getByIdentityNumber(String identityNumber) {
+<span class="nc" id="L28">        Bank bank = repository.getByIdentityNumber(identityNumber).orElseThrow(UnsuccessfulOperationException::new);</span>
+
+<span class="nc" id="L30">        return BankMapper.INSTANCE.toBankInformationDTO(bank);</span>
+    }
+
+    public BankInformationDTO update(BankInformationDTO bankInformationDTO) {
+<span class="nc" id="L34">        Bank bankUpdateRecord = BankMapper.INSTANCE.toEntity(bankInformationDTO);</span>
+
+<span class="nc" id="L36">        Bank bank = repository.update(bankUpdateRecord).orElseThrow(UnsuccessfulOperationException::new);</span>
+
+<span class="nc" id="L38">        return BankMapper.INSTANCE.toBankInformationDTO(bank);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

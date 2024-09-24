@@ -1,9 +1,7 @@
 package ru.sberstart.finalproject.bankaccount.domain.states;
 
 import ru.sberstart.finalproject.bankaccount.domain.entity.BankAccount;
-import ru.sberstart.finalproject.card.application.service.CardService;
 import ru.sberstart.finalproject.bankaccount.domain.entity.enums.BankAccountStates;
-import ru.sberstart.finalproject.global.exceptions.NoValidateActionsException;
 
 /**
  * Реализация поведения в состоянии "CREATED" для сущности BankAccount.
@@ -11,15 +9,13 @@ import ru.sberstart.finalproject.global.exceptions.NoValidateActionsException;
  */
 public class BankAccountCreatedState implements BankAccountState {
     /**
-     * Метод выпуска карты для существующего банковского счета.
-     * Доступен только в состоянии: ACTIVE.
+     * Метод регистрации банковского счета.
+     * Доступен только для новых банковских счётов.
      *
      * @param account
-     * @param service
      */
-    @Override
-    public void createCard(BankAccount account, CardService service) {
-        throw new NoValidateActionsException();
+    public void registerAccount(BankAccount account) {
+        account.setState(BankAccountStates.CREATED);
     }
 
     /**

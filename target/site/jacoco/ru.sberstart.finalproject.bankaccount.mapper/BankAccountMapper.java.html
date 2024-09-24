@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BankAccountMapper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">final-project</a> &gt; <a href="index.source.html" class="el_package">ru.sberstart.finalproject.bankaccount.mapper</a> &gt; <span class="el_source">BankAccountMapper.java</span></div><h1>BankAccountMapper.java</h1><pre class="source lang-java linenums">package ru.sberstart.finalproject.bankaccount.mapper;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
+import ru.sberstart.finalproject.bankaccount.api.dto.inner.BankAccountCardIssueInformationDTO;
+import ru.sberstart.finalproject.bankaccount.api.dto.inner.BankAccountFullInformationDTO;
+import ru.sberstart.finalproject.bankaccount.api.dto.request.BankAccountCreationRequestDTO;
+import ru.sberstart.finalproject.bankaccount.api.dto.response.BankAccountActiveInformationResponseDTO;
+import ru.sberstart.finalproject.bankaccount.api.dto.response.BankAccountDeactivateInformationResponseDTO;
+import ru.sberstart.finalproject.bankaccount.api.dto.response.BankAccountCreationResponseDTO;
+import ru.sberstart.finalproject.bankaccount.api.dto.response.BankAccountInformationResponseDTO;
+import ru.sberstart.finalproject.bankaccount.api.dto.request.BankAccountStateRequestDTO;
+import ru.sberstart.finalproject.bankaccount.api.dto.response.BankAccountSuccessTransactionResponseDTO;
+import ru.sberstart.finalproject.bankaccount.domain.entity.BankAccount;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.UUID;
+
+@Mapper(componentModel = &quot;bankAccountService&quot;)
+public interface BankAccountMapper {
+<span class="nc" id="L23">    BankAccountMapper INSTANCE = Mappers.getMapper(BankAccountMapper.class);</span>
+
+    @Mapping(target = &quot;id&quot;, ignore = true)
+    @Mapping(target = &quot;registryDate&quot;, ignore = true)
+    @Mapping(target = &quot;number&quot;, ignore = true)
+    @Mapping(target = &quot;balance&quot;, ignore = true)
+    @Mapping(target = &quot;state&quot;, ignore = true)
+    BankAccount toEntity(BankAccountCreationRequestDTO dto);
+
+    @Mapping(target = &quot;id&quot;, ignore = true)
+    @Mapping(target = &quot;bankId&quot;, ignore = true)
+    @Mapping(target = &quot;userId&quot;, ignore = true)
+    @Mapping(target = &quot;registryDate&quot;, ignore = true)
+    @Mapping(target = &quot;balance&quot;, ignore = true)
+    BankAccount toEntity(BankAccountStateRequestDTO dto);
+
+    @Mapping(target = &quot;id&quot;, ignore = true)
+    BankAccountCreationResponseDTO toBankAccountFullInformationResponseDTO(BankAccount bankAccount);
+
+    @Mapping(target = &quot;id&quot;, ignore = true)
+    @Mapping(target = &quot;registryDate&quot;, ignore = true)
+    @Mapping(target = &quot;state&quot;, ignore = true)
+    BankAccountActiveInformationResponseDTO toBankAccountActiveInformationResponseDTO(BankAccount bankAccount);
+
+    @Mapping(target = &quot;id&quot;, ignore = true)
+    @Mapping(target = &quot;registryDate&quot;, ignore = true)
+    @Mapping(target = &quot;balance&quot;, ignore = true)
+    BankAccountDeactivateInformationResponseDTO toBankAccountDeactivateInformationResponseDTO(BankAccount bankAccount);
+
+    @Mapping(target = &quot;id&quot;, ignore = true)
+    @Mapping(target = &quot;bankId&quot;, ignore = true)
+    @Mapping(target = &quot;userId&quot;, ignore = true)
+    @Mapping(target = &quot;registryDate&quot;, ignore = true)
+    @Mapping(target = &quot;state&quot;, ignore = true)
+    BankAccountSuccessTransactionResponseDTO toBankAccountSuccessTransactionDTO(BankAccount bankAccount);
+
+    @Mapping(target = &quot;id&quot;, ignore = true)
+    @Mapping(target = &quot;bankId&quot;, ignore = true)
+    @Mapping(target = &quot;userId&quot;, ignore = true)
+    BankAccountInformationResponseDTO toBankAccountInformationResponseDTO(BankAccountFullInformationDTO bankAccountFullInformationDTO);
+
+    @Mapping(target = &quot;bankName&quot;, ignore = true)
+    @Mapping(target = &quot;bankIdentityNumber&quot;, ignore = true)
+    @Mapping(target = &quot;userId&quot;, ignore = true)
+    @Mapping(target = &quot;birthdate&quot;, ignore = true)
+    @Mapping(target = &quot;phoneNumber&quot;, ignore = true)
+    @Mapping(target = &quot;passportNumber&quot;, ignore = true)
+    @Mapping(target = &quot;registryDate&quot;, ignore = true)
+    @Mapping(target = &quot;number&quot;, ignore = true)
+    @Mapping(target = &quot;balance&quot;, ignore = true)
+    BankAccountCardIssueInformationDTO toBankAccountCardIssueInformationDTO(BankAccountFullInformationDTO bankAccountInformation);
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

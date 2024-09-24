@@ -1,20 +1,18 @@
 package ru.sberstart.finalproject.bankaccount.domain.states;
 
 import ru.sberstart.finalproject.bankaccount.domain.entity.BankAccount;
-import ru.sberstart.finalproject.card.application.service.CardService;
 
 /**
  * Данный поведенческий интерфейс банковского счета в разных состояниях является базовым.
  */
 public interface BankAccountState {
     /**
-     * Метод выпуска карты для существующего банковского счета.
-     * Доступен только в состоянии: ACTIVE.
+     * Метод регистрации банковского счета.
+     * Доступен только для новых банковских счётов.
      *
      * @param account
-     * @param service
      */
-    void createCard(BankAccount account, CardService service);
+    void registerAccount(BankAccount account);
 
     /**
      * Метод подтверждения банковского счета.

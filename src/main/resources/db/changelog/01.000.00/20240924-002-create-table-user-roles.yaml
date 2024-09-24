@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 7
+      author: petrSushilin
+      changes:
+        - createTable:
+            tableName: UserRoles
+            columns:
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            columnNames: user_id, role_id
+            tableName: UserRoles
+        - addForeignKeyConstraint:
+            baseTableName: UserRoles
+            baseColumnNames: user_id
+            constraintName: fk_user_roles_users
+            referencedTableName: Users
+            referencedColumnNames: id
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: UserRoles
+            baseColumnNames: role_id
+            constraintName: fk_user_roles_roles
+            referencedTableName: Roles
+            referencedColumnNames: id
+            onDelete: CASCADE

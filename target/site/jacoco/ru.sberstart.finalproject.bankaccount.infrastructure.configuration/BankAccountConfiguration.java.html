@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BankAccountConfiguration.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">final-project</a> &gt; <a href="index.source.html" class="el_package">ru.sberstart.finalproject.bankaccount.infrastructure.configuration</a> &gt; <span class="el_source">BankAccountConfiguration.java</span></div><h1>BankAccountConfiguration.java</h1><pre class="source lang-java linenums">package ru.sberstart.finalproject.bankaccount.infrastructure.configuration;
+
+import org.jooq.DSLContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import ru.sberstart.finalproject.bankaccount.api.BankAccountController;
+import ru.sberstart.finalproject.bankaccount.application.manager.BankAccountManager;
+import ru.sberstart.finalproject.bankaccount.application.service.BankAccountService;
+import ru.sberstart.finalproject.bankaccount.application.service.TransactionService;
+import ru.sberstart.finalproject.bankaccount.domain.transaction_cor.*;
+import ru.sberstart.finalproject.bankaccount.infrastructure.repository.BankAccountRepositoryImpl;
+
+@Configuration
+<span class="fc" id="L14">public class BankAccountConfiguration {</span>
+    @Bean
+    public BankAccountRepositoryImpl bankAccountRepository(DSLContext context) {
+<span class="fc" id="L17">        return new BankAccountRepositoryImpl(context);</span>
+    }
+
+    @Bean
+    public BankAccountManager bankAccountManager() {
+<span class="fc" id="L22">        return new BankAccountManager();</span>
+    }
+
+    @Bean
+    public TransactionService transactionService() {
+<span class="fc" id="L27">        return new TransactionService();</span>
+    }
+
+    @Bean
+    public BankAccountService bankAccountService(BankAccountRepositoryImpl bankAccountRepository, TransactionService transactionService, BankAccountManager manager) {
+<span class="fc" id="L32">        return new BankAccountService(bankAccountRepository, transactionService, manager);</span>
+    }
+
+    @Bean
+    public BankAccountController bankAccountController(BankAccountService bankAccountService) {
+<span class="fc" id="L37">        return new BankAccountController(bankAccountService);</span>
+    }
+
+    @Bean
+    public TransactionValidationInputHandler transactionValidationInputHandler(BankAccountManager bankAccountManager) {
+<span class="fc" id="L42">        return new TransactionValidationInputHandler(bankAccountManager);</span>
+    }
+
+    @Bean
+    public TransactionValidationDataHandler transactionValidationDataHandler(BankAccountRepositoryImpl bankAccountRepository, BankAccountManager manager) {
+<span class="fc" id="L47">        return new TransactionValidationDataHandler(bankAccountRepository, manager);</span>
+    }
+
+    @Bean
+    public TransactionParamsCustomizerHandler transactionParamsCustomizerHandler(){
+<span class="fc" id="L52">        return new TransactionParamsCustomizerHandler();</span>
+    }
+
+    @Bean
+    public TransactionProviderHandler transactionProviderHandler(BankAccountRepositoryImpl bankAccountRepository) {
+<span class="fc" id="L57">        return new TransactionProviderHandler(bankAccountRepository);</span>
+    }
+
+    @Bean
+    public TransactionSuccessValidatorHandler transactionSuccessValidatorHandler () {
+<span class="fc" id="L62">        return new TransactionSuccessValidatorHandler();</span>
+    }
+
+    @Bean
+    public TransactionHandlerFactory transactionHandlerFactory(TransactionValidationInputHandler transactionValidationInputHandler,
+                                                               TransactionValidationDataHandler transactionValidationDataHandler,
+                                                               TransactionParamsCustomizerHandler transactionParamsCustomizerHandler,
+                                                               TransactionProviderHandler transactionProviderHandler,
+                                                               TransactionSuccessValidatorHandler transactionSuccessValidatorHandler) {
+<span class="fc" id="L71">        return new TransactionHandlerFactory(transactionValidationInputHandler, transactionValidationDataHandler,</span>
+                transactionParamsCustomizerHandler, transactionProviderHandler, transactionSuccessValidatorHandler);
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

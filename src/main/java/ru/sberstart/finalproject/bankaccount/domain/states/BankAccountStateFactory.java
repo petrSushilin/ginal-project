@@ -1,6 +1,7 @@
 package ru.sberstart.finalproject.bankaccount.domain.states;
 
 import ru.sberstart.finalproject.bankaccount.domain.entity.BankAccount;
+import ru.sberstart.finalproject.global.exceptions.NotAvailableActionsException;
 
 public class BankAccountStateFactory {
     public static BankAccountState getState(BankAccount account) {

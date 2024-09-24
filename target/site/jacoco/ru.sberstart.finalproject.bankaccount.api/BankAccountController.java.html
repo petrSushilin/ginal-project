@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BankAccountController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">final-project</a> &gt; <a href="index.source.html" class="el_package">ru.sberstart.finalproject.bankaccount.api</a> &gt; <span class="el_source">BankAccountController.java</span></div><h1>BankAccountController.java</h1><pre class="source lang-java linenums">package ru.sberstart.finalproject.bankaccount.api;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import ru.sberstart.finalproject.bankaccount.api.dto.response.BankAccountActiveInformationResponseDTO;
+import ru.sberstart.finalproject.bankaccount.api.dto.request.BankAccountCreationRequestDTO;
+import ru.sberstart.finalproject.bankaccount.api.dto.response.BankAccountDeactivateInformationResponseDTO;
+import ru.sberstart.finalproject.bankaccount.api.dto.response.BankAccountCreationResponseDTO;
+import ru.sberstart.finalproject.bankaccount.api.dto.response.BankAccountInformationResponseDTO;
+import ru.sberstart.finalproject.bankaccount.api.dto.request.BankAccountStateRequestDTO;
+import ru.sberstart.finalproject.bankaccount.api.dto.response.BankAccountSuccessTransactionResponseDTO;
+import ru.sberstart.finalproject.bankaccount.api.dto.request.BankAccountTransactionRequestDTO;
+import ru.sberstart.finalproject.bankaccount.application.service.BankAccountService;
+import ru.sberstart.finalproject.global.GlobalAppExceptionDTO;
+
+/**
+ * Контроллер, обрабатывающий запросы по работе с сущностью банковских счетов.
+ * Основные функциональные особенности: создание банковского счета; получение информации о банковском счете;
+ * подтверждение банковского счета; приостановка действия банковского счета; закрытие банковского счета;
+ * выполнение транзакций между банковскими счетами
+ */
+@RestController
+@RequestMapping(&quot;/api/v1/bankaccounts&quot;)
+public class BankAccountController {
+    private final BankAccountService service;
+
+<span class="fc" id="L41">    public BankAccountController(BankAccountService service) {</span>
+<span class="fc" id="L42">        this.service = service;</span>
+<span class="fc" id="L43">    }</span>
+
+    /**
+     * Создание нового банковского счета.
+     * **Доступные Роли:** USER, MANAGER
+     *
+     * @param creationDTO DTO с информацией для создания банковского счета.
+     * @return ResponseEntity с полной информацией о созданном банковском счете.
+     */
+    @Operation(summary = &quot;Создание нового банковского счета&quot;,
+            description = &quot;Метод создает новый банковский счет и возвращает DTO с полной информацией о созданном счете.&quot;)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Банковский счет успешно создан&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = BankAccountCreationResponseDTO.class))),
+            @ApiResponse(responseCode = &quot;400&quot;, description = &quot;Некорректные данные для создания счета&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = GlobalAppExceptionDTO.class))),
+            @ApiResponse(responseCode = &quot;405&quot;, description = &quot;Метод не поддерживается&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = GlobalAppExceptionDTO.class))),
+            @ApiResponse(responseCode = &quot;500&quot;, description = &quot;Внутренняя ошибка сервера&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = GlobalAppExceptionDTO.class)))
+    })
+    @PreAuthorize(&quot;hasAnyRole('USER', 'MANAGER')&quot;)
+    @PostMapping(&quot;/new&quot;)
+    public ResponseEntity&lt;BankAccountCreationResponseDTO&gt; createBankAccount(
+            @Parameter(description = &quot;DTO с информацией для создания банковского счета&quot;, required = true)
+            @RequestBody BankAccountCreationRequestDTO creationDTO) {
+<span class="nc" id="L73">        BankAccountCreationResponseDTO createdBankAccount = service.createBankAccount(creationDTO);</span>
+<span class="nc" id="L74">        return new ResponseEntity&lt;&gt;(createdBankAccount, HttpStatus.OK);</span>
+    }
+
+    /**
+     * Получение полной информации о банковском счете по его номеру.
+     * **Доступные Роли:** USER, MANAGER
+     *
+     * @param number Номер банковского счета.
+     * @return ResponseEntity с полной информацией о банковском счете.
+     */
+    @Operation(summary = &quot;Получение полной информации о банковском счете по его номеру&quot;,
+            description = &quot;Метод выполняет JOIN таблиц BankAccounts, Banks и Users, возвращая DTO с полной информацией.&quot;)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Возвращает полную информацию о счете&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = BankAccountInformationResponseDTO.class))),
+            @ApiResponse(responseCode = &quot;404&quot;, description = &quot;Счет с указанным номером не найден&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = GlobalAppExceptionDTO.class))),
+            @ApiResponse(responseCode = &quot;500&quot;, description = &quot;Внутренняя ошибка сервера&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = GlobalAppExceptionDTO.class)))
+    })
+    @PreAuthorize(&quot;hasAnyRole('USER', 'MANAGER')&quot;)
+    @GetMapping(&quot;/info/{number}&quot;)
+    public ResponseEntity&lt;BankAccountInformationResponseDTO&gt; getBankAccountFullInfo(
+            @Parameter(description = &quot;Номер банковского счета&quot;, required = true)
+            @PathVariable String number) {
+<span class="nc" id="L102">        BankAccountInformationResponseDTO bankAccountFullInfo = service.getByNumber(number);</span>
+<span class="nc" id="L103">        return new ResponseEntity&lt;&gt;(bankAccountFullInfo, HttpStatus.OK);</span>
+    }
+
+    /**
+     * Подтверждение банковского счета.
+     * **Доступные Роли:** MANAGER
+     *
+     * @param stateDTO DTO с информацией о состоянии банковского счета.
+     * @return ResponseEntity с информацией об активированном банковском счете.
+     */
+    @Operation(summary = &quot;Подтверждение банковского счета&quot;,
+            description = &quot;Метод подтверждает банковский счет и возвращает DTO с информацией об активированном счете.&quot;)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Банковский счет успешно подтвержден&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = BankAccountActiveInformationResponseDTO.class))),
+            @ApiResponse(responseCode = &quot;400&quot;, description = &quot;Некорректные данные для подтверждения счета&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = GlobalAppExceptionDTO.class))),
+            @ApiResponse(responseCode = &quot;405&quot;, description = &quot;Метод не поддерживается&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = GlobalAppExceptionDTO.class))),
+            @ApiResponse(responseCode = &quot;422&quot;, description = &quot;Метод не может быть выполнен для банковского счета в текущем состоянии&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = GlobalAppExceptionDTO.class))),
+            @ApiResponse(responseCode = &quot;500&quot;, description = &quot;Внутренняя ошибка сервера&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = GlobalAppExceptionDTO.class)))
+    })
+    @PreAuthorize(&quot;hasRole('MANAGER')&quot;)
+    @PatchMapping(&quot;/approve&quot;)
+    public ResponseEntity&lt;BankAccountActiveInformationResponseDTO&gt; approveBankAccount(
+            @Parameter(description = &quot;DTO с информацией о состоянии банковского счета&quot;, required = true)
+            @RequestBody BankAccountStateRequestDTO stateDTO) {
+<span class="nc" id="L137">        BankAccountActiveInformationResponseDTO activatedBankAccount = service.approveBankAccount(stateDTO);</span>
+<span class="nc" id="L138">        return new ResponseEntity&lt;&gt;(activatedBankAccount, HttpStatus.OK);</span>
+    }
+
+    /**
+     * Приостановка действия банковского счета.
+     * **Доступные Роли:** MANAGER, ADMIN
+     *
+     * @param stateDTO DTO с информацией о состоянии банковского счета.
+     * @return ResponseEntity с информацией о приостановленном банковском счете.
+     */
+    @Operation(summary = &quot;Приостановка действия банковского счета&quot;,
+            description = &quot;Метод приостанавливает действие банковского счета и возвращает DTO с информацией о приостановленном счете.&quot;)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Банковский счет успешно приостановлен&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = BankAccountDeactivateInformationResponseDTO.class))),
+            @ApiResponse(responseCode = &quot;400&quot;, description = &quot;Некорректные данные для приостановки счета&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = GlobalAppExceptionDTO.class))),
+            @ApiResponse(responseCode = &quot;405&quot;, description = &quot;Метод не поддерживается&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = GlobalAppExceptionDTO.class))),
+            @ApiResponse(responseCode = &quot;422&quot;, description = &quot;Метод не может быть выполнен для банковского счета в текущем состоянии&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = GlobalAppExceptionDTO.class))),
+            @ApiResponse(responseCode = &quot;500&quot;, description = &quot;Внутренняя ошибка сервера&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = GlobalAppExceptionDTO.class)))
+    })
+    @PreAuthorize(&quot;hasAnyRole('MANAGER', 'ADMIN')&quot;)
+    @PatchMapping(&quot;/suspend&quot;)
+    public ResponseEntity&lt;BankAccountDeactivateInformationResponseDTO&gt; suspendBankAccount(
+            @Parameter(description = &quot;DTO с информацией о состоянии банковского счета&quot;, required = true)
+            @RequestBody BankAccountStateRequestDTO stateDTO) {
+<span class="nc" id="L172">        BankAccountDeactivateInformationResponseDTO deactivatedBankAccount = service.suspendBankAccount(stateDTO);</span>
+<span class="nc" id="L173">        return new ResponseEntity&lt;&gt;(deactivatedBankAccount, HttpStatus.OK);</span>
+    }
+
+    /**
+     * Закрытие банковского счета.
+     * **Доступные Роли:** ADMIN
+     *
+     * @param stateDTO DTO с информацией о состоянии банковского счета.
+     * @return ResponseEntity с информацией о закрытом банковском счете.
+     */
+    @Operation(summary = &quot;Закрытие банковского счета&quot;,
+            description = &quot;Метод закрывает банковский счет и возвращает DTO с информацией о закрытом счете.&quot;)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Банковский счет успешно закрыт&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = BankAccountDeactivateInformationResponseDTO.class))),
+            @ApiResponse(responseCode = &quot;400&quot;, description = &quot;Некорректные данные для закрытия счета&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = GlobalAppExceptionDTO.class))),
+            @ApiResponse(responseCode = &quot;405&quot;, description = &quot;Метод не поддерживается&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = GlobalAppExceptionDTO.class))),
+            @ApiResponse(responseCode = &quot;422&quot;, description = &quot;Метод не может быть выполнен для банковского счета в текущем состоянии&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = GlobalAppExceptionDTO.class))),
+            @ApiResponse(responseCode = &quot;500&quot;, description = &quot;Внутренняя ошибка сервера&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = GlobalAppExceptionDTO.class)))
+    })
+    @PreAuthorize(&quot;hasRole('ADMIN')&quot;)
+    @PatchMapping(&quot;/close&quot;)
+    public ResponseEntity&lt;BankAccountDeactivateInformationResponseDTO&gt; closeBankAccount(
+            @Parameter(description = &quot;DTO с информацией о состоянии банковского счета&quot;, required = true)
+            @RequestBody BankAccountStateRequestDTO stateDTO) {
+<span class="nc" id="L207">        BankAccountDeactivateInformationResponseDTO deactivatedBankAccount = service.closeBankAccount(stateDTO);</span>
+<span class="nc" id="L208">        return new ResponseEntity&lt;&gt;(deactivatedBankAccount, HttpStatus.OK);</span>
+    }
+
+
+    /**
+     * Выполнение транзакции между банковскими счетами.
+     * **Доступные Роли:** USER, MANAGER
+     *
+     * @param transactionDTO DTO с информацией о транзакции.
+     * @return ResponseEntity с информацией об успешной транзакции.
+     */
+    @Operation(summary = &quot;Выполнение транзакции между банковскими счетами&quot;,
+            description = &quot;Метод выполняет транзакцию между банковскими счетами и возвращает DTO с информацией об успешной транзакции.&quot;)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Транзакция успешно выполнена&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = BankAccountSuccessTransactionResponseDTO.class))),
+            @ApiResponse(responseCode = &quot;400&quot;, description = &quot;Некорректные данные для выполнения транзакции&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = GlobalAppExceptionDTO.class))),
+            @ApiResponse(responseCode = &quot;403&quot;, description = &quot;Операция запрещена&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = GlobalAppExceptionDTO.class))),
+            @ApiResponse(responseCode = &quot;500&quot;, description = &quot;Внутренняя ошибка сервера&quot;,
+                    content = @Content(mediaType = &quot;application/json&quot;,
+                            schema = @Schema(implementation = GlobalAppExceptionDTO.class)))
+    })
+    @PreAuthorize(&quot;hasRole('MANAGER')&quot;)
+    @PatchMapping(&quot;/transaction/execute&quot;)
+    public ResponseEntity&lt;BankAccountSuccessTransactionResponseDTO&gt; executeTransaction(
+            @Parameter(description = &quot;DTO с информацией о транзакции&quot;, required = true)
+            @RequestBody BankAccountTransactionRequestDTO transactionDTO) {
+<span class="nc" id="L240">        BankAccountSuccessTransactionResponseDTO successTransaction = service.executeTransaction(transactionDTO);</span>
+<span class="nc" id="L241">        return new ResponseEntity&lt;&gt;(successTransaction, HttpStatus.OK);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

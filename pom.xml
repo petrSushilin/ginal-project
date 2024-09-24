@@ -28,12 +28,12 @@
     </scm>
     <properties>
         <java.version>17</java.version>
-        <spring.web.version>6.0.13</spring.web.version>
+        <spring.version>6.3.3</spring.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <h2.version>2.2.224</h2.version>
         <jooq.version>3.18.4</jooq.version>
         <liquibase.version>4.23.0</liquibase.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <jupiter.version>5.11.0</jupiter.version>
         <jacoco.version>0.8.8</jacoco.version>
         <postgres.version>42.3.10</postgres.version>
@@ -74,15 +74,41 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
         </dependency>
 
         <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgres.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -98,6 +124,17 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>19.0.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
@@ -108,11 +145,6 @@
             <artifactId>junit-jupiter-api</artifactId>
             <version>${jupiter.version}</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>19.0.0</version>
         </dependency>
     </dependencies>
 
@@ -162,15 +194,15 @@
                 </executions>
                 <configuration>
                     <jdbc>
-                        <driver>org.h2.Driver</driver>
-                        <url>jdbc:h2:file:./data/testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=TRUE</url>
-                        <user>sa</user>
+                        <driver>org.postgresql.Driver</driver>
+                        <url>jdbc:postgresql://localhost:5432/postgres</url>
+                        <user>postgres</user>
                         <password>password</password>
                     </jdbc>
                     <generator>
                         <database>
-                            <name>org.jooq.meta.h2.H2Database</name>
-                            <inputSchema>PUBLIC</inputSchema>
+                            <name>org.jooq.meta.postgres.PostgresDatabase</name>
+                            <inputSchema>public</inputSchema>
                         </database>
                         <generate>
                             <daos>true</daos>

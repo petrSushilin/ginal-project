@@ -1,15 +1,22 @@
 package ru.sberstart.finalproject.user.domain.entity;
 
+import ru.sberstart.finalproject.user.domain.entity.enums.UserRoles;
+import ru.sberstart.finalproject.user.domain.entity.enums.UserStatus;
+
+import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 public class User {
      private UUID id;
      private String name;
      private String surname;
-     private String birthdate;
+     private LocalDate birthdate;
      private String phoneNumber;
      private String passportNumber;
+     private Set<UserRoles> roles;
+     private UserStatus status;
 
     public UUID getId() {
         return id;
@@ -31,11 +38,11 @@ public class User {
         this.surname = surname;
     }
 
-    public String getBirthdate() {
+    public LocalDate getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(String birthdate) {
+    public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
 
@@ -55,25 +62,45 @@ public class User {
         this.passportNumber = passportNumber;
     }
 
-    private User(UUID id, String name, String surname, String birthdate, String phoneNumber, String passportNumber) {
+    public Set<UserRoles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<UserRoles> roles) {
+        this.roles = roles;
+    }
+
+    public UserStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(UserStatus status) {
+        this.status = status;
+    }
+
+    public User(UUID id, String name, String surname, LocalDate birthdate, String phoneNumber, String passportNumber, Set<UserRoles> roles, UserStatus status) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.birthdate = birthdate;
         this.phoneNumber = phoneNumber;
         this.passportNumber = passportNumber;
+        this.roles = roles;
+        this.status = status;
     }
 
     public static class Builder {
         private UUID id;
         private String name;
         private String surname;
-        private String birthdate;
+        private LocalDate birthdate;
         private String phoneNumber;
         private String passportNumber;
+        private Set<UserRoles> roles;
+        private UserStatus status;
 
         public User build() {
-            return new User(id, name, surname, birthdate, phoneNumber, passportNumber);
+            return new User(id, name, surname, birthdate, phoneNumber, passportNumber, roles, status);
         }
 
         public Builder withId(UUID id) {
@@ -91,7 +118,7 @@ public class User {
             return this;
         }
 
-        public Builder withBirthdate(String birthdate) {
+        public Builder withBirthdate(LocalDate birthdate) {
             this.birthdate = birthdate;
             return this;
         }
@@ -103,6 +130,16 @@ public class User {
 
         public Builder withPassportNumber(String passportNumber) {
             this.passportNumber = passportNumber;
+            return this;
+        }
+
+        public Builder withRoles(Set<UserRoles> roles) {
+            this.roles = roles;
+            return this;
+        }
+
+        public Builder withStatus(UserStatus status) {
+            this.status = status;
             return this;
         }
     }

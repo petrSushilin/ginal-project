@@ -1,8 +1,8 @@
 package ru.sberstart.finalproject.bankaccount.domain.states;
 
 import ru.sberstart.finalproject.bankaccount.domain.entity.BankAccount;
-import ru.sberstart.finalproject.card.application.service.CardService;
-import ru.sberstart.finalproject.global.exceptions.NoValidateActionsException;
+import ru.sberstart.finalproject.bankaccount.domain.entity.enums.BankAccountStates;
+import ru.sberstart.finalproject.global.exceptions.NotAvailableActionsException;
 
 /**
  * Реализация поведения в состоянии "STOPPED" для сущности BankAccount.
@@ -10,15 +10,13 @@ import ru.sberstart.finalproject.global.exceptions.NoValidateActionsException;
  */
 public class BankAccountStoppedState implements BankAccountState {
     /**
-     * Метод выпуска карты для существующего банковского счета.
-     * Доступен только в состоянии: ACTIVE.
+     * Метод регистрации банковского счета.
+     * Доступен только для новых банковских счётов.
      *
      * @param account
-     * @param service
      */
-    @Override
-    public void createCard(BankAccount account, CardService service) {
-        throw new NoValidateActionsException();
+    public void registerAccount(BankAccount account) {
+        throw new NotAvailableActionsException();
     }
 
     /**
@@ -29,7 +27,7 @@ public class BankAccountStoppedState implements BankAccountState {
      */
     @Override
     public void approveAccount(BankAccount account) {
-
+        account.setState(BankAccountStates.ACTIVE);
     }
 
     /**
@@ -40,7 +38,7 @@ public class BankAccountStoppedState implements BankAccountState {
      */
     @Override
     public void suspendAccount(BankAccount account) {
-        throw new NoValidateActionsException();
+        throw new NotAvailableActionsException();
     }
 
     /**
@@ -51,7 +49,7 @@ public class BankAccountStoppedState implements BankAccountState {
      */
     @Override
     public void closeAccount(BankAccount account) {
-        throw new NoValidateActionsException();
+        throw new NotAvailableActionsException();
     }
 
     /**

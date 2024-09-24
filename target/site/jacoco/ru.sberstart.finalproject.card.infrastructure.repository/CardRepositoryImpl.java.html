@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CardRepositoryImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">final-project</a> &gt; <a href="index.source.html" class="el_package">ru.sberstart.finalproject.card.infrastructure.repository</a> &gt; <span class="el_source">CardRepositoryImpl.java</span></div><h1>CardRepositoryImpl.java</h1><pre class="source lang-java linenums">package ru.sberstart.finalproject.card.infrastructure.repository;
+
+import org.jooq.DSLContext;
+import org.jooq.Field;
+import org.jooq.Record;
+import org.jooq.TableField;
+import ru.sberstart.finalproject.card.api.dto.inner.CardGeneralInformationDTO;
+import ru.sberstart.finalproject.card.domain.entity.Card;
+import ru.sberstart.finalproject.card.domain.entity.enums.CardStates;
+import ru.sberstart.finalproject.jooq.tables.records.CardsRecord;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+import static ru.sberstart.finalproject.jooq.Tables.BANKACCOUNTS;
+import static ru.sberstart.finalproject.jooq.Tables.CARDS;
+import static ru.sberstart.finalproject.jooq.Tables.BANKS;
+import static ru.sberstart.finalproject.jooq.Tables.USERS;
+
+public class CardRepositoryImpl implements CardRepository {
+    DSLContext context;
+
+<span class="fc" id="L26">    public CardRepositoryImpl(DSLContext context) {</span>
+<span class="fc" id="L27">        this.context = context;</span>
+<span class="fc" id="L28">    }</span>
+
+<span class="fc" id="L30">    private final List&lt;TableField&lt;CardsRecord, ?&gt;&gt; CARD_FIELDS = List.of(</span>
+            CARDS.ID,
+            CARDS.BANKACCOUNT_ID,
+            CARDS.CARD_SECRET_ID,
+            CARDS.NUMBER,
+            CARDS.STATE
+    );
+
+<span class="fc" id="L38">    private final List&lt;Field&lt;?&gt;&gt; CARD_GENERAL_INFO_FIELDS = List.of(</span>
+            CARDS.ID,
+<span class="fc" id="L40">            BANKS.NAME.as(&quot;bankName&quot;),</span>
+            BANKS.IDENTITY_NUMBER,
+            CARDS.BANKACCOUNT_ID,
+<span class="fc" id="L43">            USERS.NAME.as(&quot;userName&quot;),</span>
+<span class="fc" id="L44">            USERS.SURNAME.as(&quot;userSurname&quot;),</span>
+<span class="fc" id="L45">            BANKACCOUNTS.NUMBER.as(&quot;bankAccountNumber&quot;),</span>
+            BANKACCOUNTS.BALANCE,
+<span class="fc" id="L47">            CARDS.NUMBER.as(&quot;cardNumber&quot;),</span>
+            CARDS.STATE
+    );
+
+    private static Card buildCard(Record record) {
+<span class="nc" id="L52">        return new Card.Builder()</span>
+<span class="nc" id="L53">                .withId(record.get(CARDS.ID))</span>
+<span class="nc" id="L54">                .withBankAccountId(record.get(CARDS.BANKACCOUNT_ID))</span>
+<span class="nc" id="L55">                .withCardSecretId(record.get(CARDS.CARD_SECRET_ID))</span>
+<span class="nc" id="L56">                .withNumber(record.get(CARDS.NUMBER))</span>
+<span class="nc" id="L57">                .withState(ru.sberstart.finalproject.card.domain.entity.enums.CardStates.valueOf(record.get(CARDS.STATE)))</span>
+<span class="nc" id="L58">                .build();</span>
+    }
+
+    public static CardGeneralInformationDTO buildGeneralInfoCard(Record record) {
+<span class="nc" id="L62">        return new CardGeneralInformationDTO(</span>
+<span class="nc" id="L63">                record.get(CARDS.ID),</span>
+<span class="nc" id="L64">                record.get(&quot;bankName&quot;, String.class),</span>
+<span class="nc" id="L65">                record.get(BANKS.IDENTITY_NUMBER),</span>
+<span class="nc" id="L66">                record.get(CARDS.BANKACCOUNT_ID),</span>
+<span class="nc" id="L67">                record.get(&quot;userName&quot;, String.class),</span>
+<span class="nc" id="L68">                record.get(&quot;userSurname&quot;, String.class),</span>
+<span class="nc" id="L69">                record.get(&quot;bankAccountNumber&quot;, String.class),</span>
+<span class="nc" id="L70">                record.get(BANKACCOUNTS.BALANCE),</span>
+<span class="nc" id="L71">                record.get(&quot;cardNumber&quot;, String.class),</span>
+<span class="nc" id="L72">                CardStates.valueOf(record.get(CARDS.STATE))</span>
+        );
+    }
+
+    @Override
+    public Optional&lt;Card&gt; create(Card card) {
+<span class="nc" id="L78">        Record record = context</span>
+<span class="nc" id="L79">                .insertInto(CARDS)</span>
+<span class="nc" id="L80">                .set(context.newRecord(CARDS, card))</span>
+<span class="nc" id="L81">                .returning()</span>
+<span class="nc" id="L82">                .fetchOne();</span>
+<span class="nc" id="L83">        return Optional.ofNullable(record).map(CardRepositoryImpl::buildCard);</span>
+    }
+
+    @Override
+    public Optional&lt;CardGeneralInformationDTO&gt; getByNumber(String number) {
+<span class="nc" id="L88">        Record record = context</span>
+<span class="nc" id="L89">                .select(CARD_GENERAL_INFO_FIELDS)</span>
+<span class="nc" id="L90">                .from(CARDS)</span>
+<span class="nc" id="L91">                .join(BANKACCOUNTS)</span>
+<span class="nc" id="L92">                .on(CARDS.BANKACCOUNT_ID.eq(BANKACCOUNTS.ID))</span>
+<span class="nc" id="L93">                .join(BANKS)</span>
+<span class="nc" id="L94">                .on(BANKACCOUNTS.BANK_ID.eq(BANKS.ID))</span>
+<span class="nc" id="L95">                .join(USERS)</span>
+<span class="nc" id="L96">                .on(BANKACCOUNTS.USER_ID.eq(USERS.ID))</span>
+<span class="nc" id="L97">                .where(CARDS.NUMBER.eq(number))</span>
+<span class="nc" id="L98">                .fetchOne();</span>
+<span class="nc" id="L99">        return Optional.ofNullable(record).map(CardRepositoryImpl::buildGeneralInfoCard);</span>
+    }
+
+    @Override
+    public Optional&lt;Card&gt; getServiceInfoByNumber(String number) {
+<span class="nc" id="L104">        Record record = context</span>
+<span class="nc" id="L105">                .select(CARD_FIELDS)</span>
+<span class="nc" id="L106">                .from(CARDS)</span>
+<span class="nc" id="L107">                .where(CARDS.NUMBER.eq(number))</span>
+<span class="nc" id="L108">                .fetchOne();</span>
+<span class="nc" id="L109">        return Optional.ofNullable(record).map(CardRepositoryImpl::buildCard);</span>
+    }
+
+    public List&lt;CardGeneralInformationDTO&gt; getCardsByUser(String userPhoneNumber) {
+<span class="nc" id="L113">        return  context</span>
+<span class="nc" id="L114">                .select(CARD_GENERAL_INFO_FIELDS)</span>
+<span class="nc" id="L115">                .from(CARDS)</span>
+<span class="nc" id="L116">                .join(BANKACCOUNTS)</span>
+<span class="nc" id="L117">                .on(CARDS.BANKACCOUNT_ID.eq(BANKACCOUNTS.ID))</span>
+<span class="nc" id="L118">                .join(BANKS)</span>
+<span class="nc" id="L119">                .on(BANKACCOUNTS.BANK_ID.eq(BANKS.ID))</span>
+<span class="nc" id="L120">                .join(USERS)</span>
+<span class="nc" id="L121">                .on(BANKACCOUNTS.USER_ID.eq(USERS.ID))</span>
+<span class="nc" id="L122">                .where(USERS.PHONE_NUMBER.eq(userPhoneNumber))</span>
+<span class="nc" id="L123">                .fetchInto(CardGeneralInformationDTO.class);</span>
+    }
+
+    @Override
+    public Optional&lt;Card&gt; updateState(Card card) {
+<span class="nc" id="L128">        Record record = context</span>
+<span class="nc" id="L129">                .update(CARDS)</span>
+<span class="nc" id="L130">                .set(context.newRecord(CARDS, card))</span>
+<span class="nc" id="L131">                .where(CARDS.NUMBER.eq(card.getNumber()))</span>
+<span class="nc" id="L132">                .returning()</span>
+<span class="nc" id="L133">                .fetchOne();</span>
+<span class="nc" id="L134">        return Optional.ofNullable(record).map(CardRepositoryImpl::buildCard);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

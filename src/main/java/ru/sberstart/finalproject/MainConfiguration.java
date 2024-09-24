@@ -8,12 +8,18 @@ import org.jooq.impl.DefaultDSLContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import ru.sberstart.finalproject.bank.infrastructure.configuration.BankConfiguration;
 import ru.sberstart.finalproject.bankaccount.infrastructure.configuration.BankAccountConfiguration;
+import ru.sberstart.finalproject.card.infrastructure.configuration.CardConfiguration;
+import ru.sberstart.finalproject.user.infrastructure.configuration.UserConfiguration;
 
 import javax.sql.DataSource;
 
 @Import({
-        BankAccountConfiguration.class
+        BankAccountConfiguration.class,
+        BankConfiguration.class,
+        CardConfiguration.class,
+        UserConfiguration.class
 })
 @Configuration
 public class MainConfiguration {

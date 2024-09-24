@@ -1,4 +1,4 @@
 databaseChangeLog:
   - includeAll:
-      path: "db/changelog"
+      path: "db/changelog/01.000.00/"
       relativeToChangelogFile: true
