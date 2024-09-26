@@ -41,7 +41,7 @@ public class DatabasechangeloglockDao extends DAOImpl<DatabasechangeloglockRecor
     }
 
     /**
-     * Fetch records that have <code>id BETWEEN lowerInclusive AND
+     * Fetch records that have <code>ID BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Databasechangeloglock> fetchRangeOfId(Integer lowerInclusive, Integer upperInclusive) {
@@ -49,28 +49,28 @@ public class DatabasechangeloglockDao extends DAOImpl<DatabasechangeloglockRecor
     }
 
     /**
-     * Fetch records that have <code>id IN (values)</code>
+     * Fetch records that have <code>ID IN (values)</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Databasechangeloglock> fetchById(Integer... values) {
         return fetch(Databasechangeloglock.DATABASECHANGELOGLOCK.ID, values);
     }
 
     /**
-     * Fetch a unique record that has <code>id = value</code>
+     * Fetch a unique record that has <code>ID = value</code>
      */
     public ru.sberstart.finalproject.jooq.tables.pojos.Databasechangeloglock fetchOneById(Integer value) {
         return fetchOne(Databasechangeloglock.DATABASECHANGELOGLOCK.ID, value);
     }
 
     /**
-     * Fetch a unique record that has <code>id = value</code>
+     * Fetch a unique record that has <code>ID = value</code>
      */
     public Optional<ru.sberstart.finalproject.jooq.tables.pojos.Databasechangeloglock> fetchOptionalById(Integer value) {
         return fetchOptional(Databasechangeloglock.DATABASECHANGELOGLOCK.ID, value);
     }
 
     /**
-     * Fetch records that have <code>locked BETWEEN lowerInclusive AND
+     * Fetch records that have <code>LOCKED BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Databasechangeloglock> fetchRangeOfLocked(Boolean lowerInclusive, Boolean upperInclusive) {
@@ -78,14 +78,14 @@ public class DatabasechangeloglockDao extends DAOImpl<DatabasechangeloglockRecor
     }
 
     /**
-     * Fetch records that have <code>locked IN (values)</code>
+     * Fetch records that have <code>LOCKED IN (values)</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Databasechangeloglock> fetchByLocked(Boolean... values) {
         return fetch(Databasechangeloglock.DATABASECHANGELOGLOCK.LOCKED, values);
     }
 
     /**
-     * Fetch records that have <code>lockgranted BETWEEN lowerInclusive AND
+     * Fetch records that have <code>LOCKGRANTED BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Databasechangeloglock> fetchRangeOfLockgranted(LocalDateTime lowerInclusive, LocalDateTime upperInclusive) {
@@ -93,14 +93,14 @@ public class DatabasechangeloglockDao extends DAOImpl<DatabasechangeloglockRecor
     }
 
     /**
-     * Fetch records that have <code>lockgranted IN (values)</code>
+     * Fetch records that have <code>LOCKGRANTED IN (values)</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Databasechangeloglock> fetchByLockgranted(LocalDateTime... values) {
         return fetch(Databasechangeloglock.DATABASECHANGELOGLOCK.LOCKGRANTED, values);
     }
 
     /**
-     * Fetch records that have <code>lockedby BETWEEN lowerInclusive AND
+     * Fetch records that have <code>LOCKEDBY BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Databasechangeloglock> fetchRangeOfLockedby(String lowerInclusive, String upperInclusive) {
@@ -108,7 +108,7 @@ public class DatabasechangeloglockDao extends DAOImpl<DatabasechangeloglockRecor
     }
 
     /**
-     * Fetch records that have <code>lockedby IN (values)</code>
+     * Fetch records that have <code>LOCKEDBY IN (values)</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Databasechangeloglock> fetchByLockedby(String... values) {
         return fetch(Databasechangeloglock.DATABASECHANGELOGLOCK.LOCKEDBY, values);

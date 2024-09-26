@@ -35,28 +35,28 @@ public class Userroles implements Serializable {
     }
 
     /**
-     * Getter for <code>public.UserRoles.user_id</code>.
+     * Getter for <code>PUBLIC.USERROLES.USER_ID</code>.
      */
     public UUID getUserId() {
         return this.userId;
     }
 
     /**
-     * Setter for <code>public.UserRoles.user_id</code>.
+     * Setter for <code>PUBLIC.USERROLES.USER_ID</code>.
      */
     public void setUserId(UUID userId) {
         this.userId = userId;
     }
 
     /**
-     * Getter for <code>public.UserRoles.role_id</code>.
+     * Getter for <code>PUBLIC.USERROLES.ROLE_ID</code>.
      */
     public UUID getRoleId() {
         return this.roleId;
     }
 
     /**
-     * Setter for <code>public.UserRoles.role_id</code>.
+     * Setter for <code>PUBLIC.USERROLES.ROLE_ID</code>.
      */
     public void setRoleId(UUID roleId) {
         this.roleId = roleId;

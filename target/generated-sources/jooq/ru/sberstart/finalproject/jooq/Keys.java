@@ -30,7 +30,7 @@ import ru.sberstart.finalproject.jooq.tables.records.UsersRecord;
 
 /**
  * A class modelling foreign key relationships and constraints of tables in
- * public.
+ * PUBLIC.
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Keys {
@@ -39,30 +39,30 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<BankaccountsRecord> BANKACCOUNTS_NUMBER_KEY = Internal.createUniqueKey(Bankaccounts.BANKACCOUNTS, DSL.name("BankAccounts_number_key"), new TableField[] { Bankaccounts.BANKACCOUNTS.NUMBER }, true);
-    public static final UniqueKey<BankaccountsRecord> BANKACCOUNTS_PKEY = Internal.createUniqueKey(Bankaccounts.BANKACCOUNTS, DSL.name("BankAccounts_pkey"), new TableField[] { Bankaccounts.BANKACCOUNTS.ID }, true);
-    public static final UniqueKey<BanksRecord> BANKS_IDENTITY_NUMBER_KEY = Internal.createUniqueKey(Banks.BANKS, DSL.name("Banks_identity_number_key"), new TableField[] { Banks.BANKS.IDENTITY_NUMBER }, true);
-    public static final UniqueKey<BanksRecord> BANKS_PKEY = Internal.createUniqueKey(Banks.BANKS, DSL.name("Banks_pkey"), new TableField[] { Banks.BANKS.ID }, true);
-    public static final UniqueKey<CardsRecord> CARDS_CARD_SECRET_ID_KEY = Internal.createUniqueKey(Cards.CARDS, DSL.name("Cards_card_secret_id_key"), new TableField[] { Cards.CARDS.CARD_SECRET_ID }, true);
-    public static final UniqueKey<CardsRecord> CARDS_NUMBER_KEY = Internal.createUniqueKey(Cards.CARDS, DSL.name("Cards_number_key"), new TableField[] { Cards.CARDS.NUMBER }, true);
-    public static final UniqueKey<CardsRecord> CARDS_PKEY = Internal.createUniqueKey(Cards.CARDS, DSL.name("Cards_pkey"), new TableField[] { Cards.CARDS.ID }, true);
-    public static final UniqueKey<CardsecretsRecord> CARDSECRETS_PKEY = Internal.createUniqueKey(Cardsecrets.CARDSECRETS, DSL.name("CardSecrets_pkey"), new TableField[] { Cardsecrets.CARDSECRETS.ID }, true);
-    public static final UniqueKey<DatabasechangeloglockRecord> DATABASECHANGELOGLOCK_PKEY = Internal.createUniqueKey(Databasechangeloglock.DATABASECHANGELOGLOCK, DSL.name("databasechangeloglock_pkey"), new TableField[] { Databasechangeloglock.DATABASECHANGELOGLOCK.ID }, true);
-    public static final UniqueKey<RolesRecord> ROLES_PKEY = Internal.createUniqueKey(Roles.ROLES, DSL.name("Roles_pkey"), new TableField[] { Roles.ROLES.ID }, true);
-    public static final UniqueKey<RolesRecord> ROLES_ROLE_NAME_KEY = Internal.createUniqueKey(Roles.ROLES, DSL.name("Roles_role_name_key"), new TableField[] { Roles.ROLES.ROLE_NAME }, true);
-    public static final UniqueKey<UserrolesRecord> USERROLES_PKEY = Internal.createUniqueKey(Userroles.USERROLES, DSL.name("UserRoles_pkey"), new TableField[] { Userroles.USERROLES.USER_ID, Userroles.USERROLES.ROLE_ID }, true);
-    public static final UniqueKey<UsersRecord> USERS_PASSPORT_NUMBER_KEY = Internal.createUniqueKey(Users.USERS, DSL.name("Users_passport_number_key"), new TableField[] { Users.USERS.PASSPORT_NUMBER }, true);
-    public static final UniqueKey<UsersRecord> USERS_PHONE_NUMBER_KEY = Internal.createUniqueKey(Users.USERS, DSL.name("Users_phone_number_key"), new TableField[] { Users.USERS.PHONE_NUMBER }, true);
-    public static final UniqueKey<UsersRecord> USERS_PKEY = Internal.createUniqueKey(Users.USERS, DSL.name("Users_pkey"), new TableField[] { Users.USERS.ID }, true);
+    public static final UniqueKey<BankaccountsRecord> CONSTRAINT_5 = Internal.createUniqueKey(Bankaccounts.BANKACCOUNTS, DSL.name("CONSTRAINT_5"), new TableField[] { Bankaccounts.BANKACCOUNTS.NUMBER }, true);
+    public static final UniqueKey<BankaccountsRecord> PK_BANKACCOUNTS = Internal.createUniqueKey(Bankaccounts.BANKACCOUNTS, DSL.name("PK_BANKACCOUNTS"), new TableField[] { Bankaccounts.BANKACCOUNTS.ID }, true);
+    public static final UniqueKey<BanksRecord> CONSTRAINT_3 = Internal.createUniqueKey(Banks.BANKS, DSL.name("CONSTRAINT_3"), new TableField[] { Banks.BANKS.IDENTITY_NUMBER }, true);
+    public static final UniqueKey<BanksRecord> PK_BANKS = Internal.createUniqueKey(Banks.BANKS, DSL.name("PK_BANKS"), new TableField[] { Banks.BANKS.ID }, true);
+    public static final UniqueKey<CardsRecord> CONSTRAINT_3C = Internal.createUniqueKey(Cards.CARDS, DSL.name("CONSTRAINT_3C"), new TableField[] { Cards.CARDS.NUMBER }, true);
+    public static final UniqueKey<CardsRecord> PK_CARDS = Internal.createUniqueKey(Cards.CARDS, DSL.name("PK_CARDS"), new TableField[] { Cards.CARDS.ID }, true);
+    public static final UniqueKey<CardsecretsRecord> CONSTRAINT_B = Internal.createUniqueKey(Cardsecrets.CARDSECRETS, DSL.name("CONSTRAINT_B"), new TableField[] { Cardsecrets.CARDSECRETS.CARD_NUMBER }, true);
+    public static final UniqueKey<CardsecretsRecord> PK_CARDSECRETS = Internal.createUniqueKey(Cardsecrets.CARDSECRETS, DSL.name("PK_CARDSECRETS"), new TableField[] { Cardsecrets.CARDSECRETS.CARD_NUMBER }, true);
+    public static final UniqueKey<DatabasechangeloglockRecord> PK_DATABASECHANGELOGLOCK = Internal.createUniqueKey(Databasechangeloglock.DATABASECHANGELOGLOCK, DSL.name("PK_DATABASECHANGELOGLOCK"), new TableField[] { Databasechangeloglock.DATABASECHANGELOGLOCK.ID }, true);
+    public static final UniqueKey<RolesRecord> CONSTRAINT_4A = Internal.createUniqueKey(Roles.ROLES, DSL.name("CONSTRAINT_4A"), new TableField[] { Roles.ROLES.ROLE_NAME }, true);
+    public static final UniqueKey<RolesRecord> PK_ROLES = Internal.createUniqueKey(Roles.ROLES, DSL.name("PK_ROLES"), new TableField[] { Roles.ROLES.ID }, true);
+    public static final UniqueKey<UserrolesRecord> CONSTRAINT_BB = Internal.createUniqueKey(Userroles.USERROLES, DSL.name("CONSTRAINT_BB"), new TableField[] { Userroles.USERROLES.USER_ID, Userroles.USERROLES.ROLE_ID }, true);
+    public static final UniqueKey<UsersRecord> CONSTRAINT_4 = Internal.createUniqueKey(Users.USERS, DSL.name("CONSTRAINT_4"), new TableField[] { Users.USERS.PHONE_NUMBER }, true);
+    public static final UniqueKey<UsersRecord> CONSTRAINT_4D = Internal.createUniqueKey(Users.USERS, DSL.name("CONSTRAINT_4D"), new TableField[] { Users.USERS.PASSPORT_NUMBER }, true);
+    public static final UniqueKey<UsersRecord> PK_USERS = Internal.createUniqueKey(Users.USERS, DSL.name("PK_USERS"), new TableField[] { Users.USERS.ID }, true);
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final ForeignKey<BankaccountsRecord, BanksRecord> BANKACCOUNTS__FK_BANKACCOUNTS_BANKS = Internal.createForeignKey(Bankaccounts.BANKACCOUNTS, DSL.name("fk_bankaccounts_banks"), new TableField[] { Bankaccounts.BANKACCOUNTS.BANK_ID }, Keys.BANKS_PKEY, new TableField[] { Banks.BANKS.ID }, true);
-    public static final ForeignKey<BankaccountsRecord, UsersRecord> BANKACCOUNTS__FK_BANKACCOUNTS_USERS = Internal.createForeignKey(Bankaccounts.BANKACCOUNTS, DSL.name("fk_bankaccounts_users"), new TableField[] { Bankaccounts.BANKACCOUNTS.USER_ID }, Keys.USERS_PKEY, new TableField[] { Users.USERS.ID }, true);
-    public static final ForeignKey<CardsRecord, BankaccountsRecord> CARDS__FK_CARDS_BANKACCOUNTS = Internal.createForeignKey(Cards.CARDS, DSL.name("fk_cards_bankaccounts"), new TableField[] { Cards.CARDS.BANKACCOUNT_ID }, Keys.BANKACCOUNTS_PKEY, new TableField[] { Bankaccounts.BANKACCOUNTS.ID }, true);
-    public static final ForeignKey<CardsRecord, CardsecretsRecord> CARDS__FK_CARDS_CARDSECRETS = Internal.createForeignKey(Cards.CARDS, DSL.name("fk_cards_cardsecrets"), new TableField[] { Cards.CARDS.CARD_SECRET_ID }, Keys.CARDSECRETS_PKEY, new TableField[] { Cardsecrets.CARDSECRETS.ID }, true);
-    public static final ForeignKey<UserrolesRecord, RolesRecord> USERROLES__FK_USER_ROLES_ROLES = Internal.createForeignKey(Userroles.USERROLES, DSL.name("fk_user_roles_roles"), new TableField[] { Userroles.USERROLES.ROLE_ID }, Keys.ROLES_PKEY, new TableField[] { Roles.ROLES.ID }, true);
-    public static final ForeignKey<UserrolesRecord, UsersRecord> USERROLES__FK_USER_ROLES_USERS = Internal.createForeignKey(Userroles.USERROLES, DSL.name("fk_user_roles_users"), new TableField[] { Userroles.USERROLES.USER_ID }, Keys.USERS_PKEY, new TableField[] { Users.USERS.ID }, true);
+    public static final ForeignKey<BankaccountsRecord, BanksRecord> FK_BANKACCOUNTS_BANKS = Internal.createForeignKey(Bankaccounts.BANKACCOUNTS, DSL.name("FK_BANKACCOUNTS_BANKS"), new TableField[] { Bankaccounts.BANKACCOUNTS.BANK_ID }, Keys.PK_BANKS, new TableField[] { Banks.BANKS.ID }, true);
+    public static final ForeignKey<BankaccountsRecord, UsersRecord> FK_BANKACCOUNTS_USERS = Internal.createForeignKey(Bankaccounts.BANKACCOUNTS, DSL.name("FK_BANKACCOUNTS_USERS"), new TableField[] { Bankaccounts.BANKACCOUNTS.USER_ID }, Keys.PK_USERS, new TableField[] { Users.USERS.ID }, true);
+    public static final ForeignKey<CardsRecord, BankaccountsRecord> FK_CARDS_BANKACCOUNTS = Internal.createForeignKey(Cards.CARDS, DSL.name("FK_CARDS_BANKACCOUNTS"), new TableField[] { Cards.CARDS.BANKACCOUNT_ID }, Keys.PK_BANKACCOUNTS, new TableField[] { Bankaccounts.BANKACCOUNTS.ID }, true);
+    public static final ForeignKey<CardsRecord, CardsecretsRecord> FK_CARDSECRETS_CARDS_CARD_NUMBER = Internal.createForeignKey(Cards.CARDS, DSL.name("FK_CARDSECRETS_CARDS_CARD_NUMBER"), new TableField[] { Cards.CARDS.NUMBER }, Keys.PK_CARDSECRETS, new TableField[] { Cardsecrets.CARDSECRETS.CARD_NUMBER }, true);
+    public static final ForeignKey<UserrolesRecord, RolesRecord> FK_USER_ROLES_ROLES = Internal.createForeignKey(Userroles.USERROLES, DSL.name("FK_USER_ROLES_ROLES"), new TableField[] { Userroles.USERROLES.ROLE_ID }, Keys.PK_ROLES, new TableField[] { Roles.ROLES.ID }, true);
+    public static final ForeignKey<UserrolesRecord, UsersRecord> FK_USER_ROLES_USERS = Internal.createForeignKey(Userroles.USERROLES, DSL.name("FK_USER_ROLES_USERS"), new TableField[] { Userroles.USERROLES.USER_ID }, Keys.PK_USERS, new TableField[] { Users.USERS.ID }, true);
 }

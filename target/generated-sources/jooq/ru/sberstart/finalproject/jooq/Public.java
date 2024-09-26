@@ -31,52 +31,52 @@ public class Public extends SchemaImpl {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>public</code>
+     * The reference instance of <code>PUBLIC</code>
      */
     public static final Public PUBLIC = new Public();
 
     /**
-     * The table <code>public.BankAccounts</code>.
+     * The table <code>PUBLIC.BANKACCOUNTS</code>.
      */
     public final Bankaccounts BANKACCOUNTS = Bankaccounts.BANKACCOUNTS;
 
     /**
-     * The table <code>public.Banks</code>.
+     * The table <code>PUBLIC.BANKS</code>.
      */
     public final Banks BANKS = Banks.BANKS;
 
     /**
-     * The table <code>public.Cards</code>.
+     * The table <code>PUBLIC.CARDS</code>.
      */
     public final Cards CARDS = Cards.CARDS;
 
     /**
-     * The table <code>public.CardSecrets</code>.
+     * The table <code>PUBLIC.CARDSECRETS</code>.
      */
     public final Cardsecrets CARDSECRETS = Cardsecrets.CARDSECRETS;
 
     /**
-     * The table <code>public.databasechangelog</code>.
+     * The table <code>PUBLIC.DATABASECHANGELOG</code>.
      */
     public final Databasechangelog DATABASECHANGELOG = Databasechangelog.DATABASECHANGELOG;
 
     /**
-     * The table <code>public.databasechangeloglock</code>.
+     * The table <code>PUBLIC.DATABASECHANGELOGLOCK</code>.
      */
     public final Databasechangeloglock DATABASECHANGELOGLOCK = Databasechangeloglock.DATABASECHANGELOGLOCK;
 
     /**
-     * The table <code>public.Roles</code>.
+     * The table <code>PUBLIC.ROLES</code>.
      */
     public final Roles ROLES = Roles.ROLES;
 
     /**
-     * The table <code>public.UserRoles</code>.
+     * The table <code>PUBLIC.USERROLES</code>.
      */
     public final Userroles USERROLES = Userroles.USERROLES;
 
     /**
-     * The table <code>public.Users</code>.
+     * The table <code>PUBLIC.USERS</code>.
      */
     public final Users USERS = Users.USERS;
 
@@ -84,7 +84,7 @@ public class Public extends SchemaImpl {
      * No further instances allowed
      */
     private Public() {
-        super("public", null);
+        super("PUBLIC", null);
     }
 
 

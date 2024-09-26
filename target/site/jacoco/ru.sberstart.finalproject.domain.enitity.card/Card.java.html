@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Card.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">final-project</a> &gt; <a href="index.source.html" class="el_package">ru.sberstart.finalproject.domain.enitity.card</a> &gt; <span class="el_source">Card.java</span></div><h1>Card.java</h1><pre class="source lang-java linenums">package ru.sberstart.finalproject.domain.enitity.card;
+
+
+import ru.sberstart.finalproject.domain.enitity.card.enums.CardStates;
+
+import java.util.Objects;
+import java.util.UUID;
+
+public class Card {
+    private UUID id;
+    private UUID bankaccountId;
+    private String number;
+    private CardStates state;
+
+
+<span class="nc" id="L16">    private Card(UUID id, UUID bankaccountId, String number, CardStates state) {</span>
+<span class="nc" id="L17">        this.id = id;</span>
+<span class="nc" id="L18">        this.bankaccountId = bankaccountId;</span>
+<span class="nc" id="L19">        this.number = number;</span>
+<span class="nc" id="L20">        this.state = state;</span>
+<span class="nc" id="L21">    }</span>
+
+    public UUID getId() {
+<span class="nc" id="L24">        return id;</span>
+    }
+
+    public UUID getBankAccountId() {
+<span class="nc" id="L28">        return bankaccountId;</span>
+    }
+
+    public String getNumber() {
+<span class="nc" id="L32">        return number;</span>
+    }
+
+    public CardStates getState() {
+<span class="nc" id="L36">        return state;</span>
+    }
+
+    public void setState(CardStates state) {
+<span class="nc" id="L40">        this.state = state;</span>
+<span class="nc" id="L41">    }</span>
+
+<span class="nc" id="L43">    public static class Builder {</span>
+        private UUID id;
+        private UUID bankaccountId;
+        private String number;
+        private CardStates state;
+
+        public Builder withId(UUID id) {
+<span class="nc" id="L50">            this.id = id;</span>
+<span class="nc" id="L51">            return this;</span>
+        }
+
+        public Builder withBankAccountId(UUID bankaccountId) {
+<span class="nc" id="L55">            this.bankaccountId = bankaccountId;</span>
+<span class="nc" id="L56">            return this;</span>
+        }
+
+        public Builder withNumber(String number) {
+<span class="nc" id="L60">            this.number = number;</span>
+<span class="nc" id="L61">            return this;</span>
+        }
+
+        public Builder withState(CardStates state) {
+<span class="nc" id="L65">            this.state = state;</span>
+<span class="nc" id="L66">            return this;</span>
+        }
+
+        public Card build() {
+<span class="nc" id="L70">            return new Card(id, bankaccountId, number, state);</span>
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        if (this == o) return true;</span>
+<span class="nc bnc" id="L77" title="All 4 branches missed.">        if (o == null || getClass() != o.getClass()) return false;</span>
+<span class="nc" id="L78">        Card card = (Card) o;</span>
+<span class="nc bnc" id="L79" title="All 4 branches missed.">        return Objects.equals(bankaccountId, card.bankaccountId) &amp;&amp; Objects.equals(number, card.number);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L84">        return Objects.hash(bankaccountId, number);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L89">        return &quot;Card{&quot; +</span>
+                &quot;id=&quot; + id +
+                &quot;, bankAccountId=&quot; + bankaccountId +
+                &quot;, number='&quot; + number + '\'' +
+                &quot;, state=&quot; + state +
+                '}';
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -75,31 +75,31 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(exception);
     }
 
-    /**
-     * Обработка непредвиденных исключений времени выполнения.
-     *
-     * @param ex исключение RuntimeException
-     * @return ResponseEntity с информацией об ошибке
-     */
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<GlobalAppExceptionDTO> handleRuntimeException(RuntimeException ex) {
-        GlobalAppExceptionDTO exception = new GlobalAppExceptionDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Внутренняя ошибка сервера.");
-        // Логирование исключения для отладки
-        // logger.error("RuntimeException:", ex);
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception);
-    }
-
-    /**
-     * Обработка всех остальных исключений.
-     *
-     * @param ex исключение Exception
-     * @return ResponseEntity с информацией об ошибке
-     */
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<GlobalAppExceptionDTO> handleException(Exception ex) {
-        GlobalAppExceptionDTO exception = new GlobalAppExceptionDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Произошла внутренняя ошибка сервера.");
-        // Логирование исключения для отладки
-        // logger.error("Exception:", ex);
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception);
-    }
+//    /**
+//     * Обработка непредвиденных исключений времени выполнения.
+//     *
+//     * @param ex исключение RuntimeException
+//     * @return ResponseEntity с информацией об ошибке
+//     */
+//    @ExceptionHandler(RuntimeException.class)
+//    public ResponseEntity<GlobalAppExceptionDTO> handleRuntimeException(RuntimeException ex) {
+//        GlobalAppExceptionDTO exception = new GlobalAppExceptionDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Внутренняя ошибка сервера.");
+//        // Логирование исключения для отладки
+//        // logger.error("RuntimeException:", ex);
+//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception);
+//    }
+//
+//    /**
+//     * Обработка всех остальных исключений.
+//     *
+//     * @param ex исключение Exception
+//     * @return ResponseEntity с информацией об ошибке
+//     */
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<GlobalAppExceptionDTO> handleException(Exception ex) {
+//        GlobalAppExceptionDTO exception = new GlobalAppExceptionDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Произошла внутренняя ошибка сервера.");
+//        // Логирование исключения для отладки
+//        // logger.error("Exception:", ex);
+//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception);
+//    }
 }

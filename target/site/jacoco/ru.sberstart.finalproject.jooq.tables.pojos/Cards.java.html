@@ -18,170 +18,144 @@ public class Cards implements Serializable {
 
     private UUID id;
     private UUID bankaccountId;
-    private UUID cardSecretId;
     private String number;
     private String state;
 
-<span class="nc" id="L25">    public Cards() {}</span>
+<span class="nc" id="L24">    public Cards() {}</span>
 
-<span class="nc" id="L27">    public Cards(Cards value) {</span>
-<span class="nc" id="L28">        this.id = value.id;</span>
-<span class="nc" id="L29">        this.bankaccountId = value.bankaccountId;</span>
-<span class="nc" id="L30">        this.cardSecretId = value.cardSecretId;</span>
-<span class="nc" id="L31">        this.number = value.number;</span>
-<span class="nc" id="L32">        this.state = value.state;</span>
-<span class="nc" id="L33">    }</span>
+<span class="nc" id="L26">    public Cards(Cards value) {</span>
+<span class="nc" id="L27">        this.id = value.id;</span>
+<span class="nc" id="L28">        this.bankaccountId = value.bankaccountId;</span>
+<span class="nc" id="L29">        this.number = value.number;</span>
+<span class="nc" id="L30">        this.state = value.state;</span>
+<span class="nc" id="L31">    }</span>
 
     public Cards(
         UUID id,
         UUID bankaccountId,
-        UUID cardSecretId,
         String number,
         String state
-<span class="nc" id="L41">    ) {</span>
-<span class="nc" id="L42">        this.id = id;</span>
-<span class="nc" id="L43">        this.bankaccountId = bankaccountId;</span>
-<span class="nc" id="L44">        this.cardSecretId = cardSecretId;</span>
-<span class="nc" id="L45">        this.number = number;</span>
-<span class="nc" id="L46">        this.state = state;</span>
-<span class="nc" id="L47">    }</span>
+<span class="nc" id="L38">    ) {</span>
+<span class="nc" id="L39">        this.id = id;</span>
+<span class="nc" id="L40">        this.bankaccountId = bankaccountId;</span>
+<span class="nc" id="L41">        this.number = number;</span>
+<span class="nc" id="L42">        this.state = state;</span>
+<span class="nc" id="L43">    }</span>
 
     /**
-     * Getter for &lt;code&gt;public.Cards.id&lt;/code&gt;.
+     * Getter for &lt;code&gt;PUBLIC.CARDS.ID&lt;/code&gt;.
      */
     public UUID getId() {
-<span class="nc" id="L53">        return this.id;</span>
+<span class="nc" id="L49">        return this.id;</span>
     }
 
     /**
-     * Setter for &lt;code&gt;public.Cards.id&lt;/code&gt;.
+     * Setter for &lt;code&gt;PUBLIC.CARDS.ID&lt;/code&gt;.
      */
     public void setId(UUID id) {
-<span class="nc" id="L60">        this.id = id;</span>
-<span class="nc" id="L61">    }</span>
+<span class="nc" id="L56">        this.id = id;</span>
+<span class="nc" id="L57">    }</span>
 
     /**
-     * Getter for &lt;code&gt;public.Cards.bankaccount_id&lt;/code&gt;.
+     * Getter for &lt;code&gt;PUBLIC.CARDS.BANKACCOUNT_ID&lt;/code&gt;.
      */
     public UUID getBankaccountId() {
-<span class="nc" id="L67">        return this.bankaccountId;</span>
+<span class="nc" id="L63">        return this.bankaccountId;</span>
     }
 
     /**
-     * Setter for &lt;code&gt;public.Cards.bankaccount_id&lt;/code&gt;.
+     * Setter for &lt;code&gt;PUBLIC.CARDS.BANKACCOUNT_ID&lt;/code&gt;.
      */
     public void setBankaccountId(UUID bankaccountId) {
-<span class="nc" id="L74">        this.bankaccountId = bankaccountId;</span>
-<span class="nc" id="L75">    }</span>
+<span class="nc" id="L70">        this.bankaccountId = bankaccountId;</span>
+<span class="nc" id="L71">    }</span>
 
     /**
-     * Getter for &lt;code&gt;public.Cards.card_secret_id&lt;/code&gt;.
-     */
-    public UUID getCardSecretId() {
-<span class="nc" id="L81">        return this.cardSecretId;</span>
-    }
-
-    /**
-     * Setter for &lt;code&gt;public.Cards.card_secret_id&lt;/code&gt;.
-     */
-    public void setCardSecretId(UUID cardSecretId) {
-<span class="nc" id="L88">        this.cardSecretId = cardSecretId;</span>
-<span class="nc" id="L89">    }</span>
-
-    /**
-     * Getter for &lt;code&gt;public.Cards.number&lt;/code&gt;.
+     * Getter for &lt;code&gt;PUBLIC.CARDS.NUMBER&lt;/code&gt;.
      */
     public String getNumber() {
-<span class="nc" id="L95">        return this.number;</span>
+<span class="nc" id="L77">        return this.number;</span>
     }
 
     /**
-     * Setter for &lt;code&gt;public.Cards.number&lt;/code&gt;.
+     * Setter for &lt;code&gt;PUBLIC.CARDS.NUMBER&lt;/code&gt;.
      */
     public void setNumber(String number) {
-<span class="nc" id="L102">        this.number = number;</span>
-<span class="nc" id="L103">    }</span>
+<span class="nc" id="L84">        this.number = number;</span>
+<span class="nc" id="L85">    }</span>
 
     /**
-     * Getter for &lt;code&gt;public.Cards.state&lt;/code&gt;.
+     * Getter for &lt;code&gt;PUBLIC.CARDS.STATE&lt;/code&gt;.
      */
     public String getState() {
-<span class="nc" id="L109">        return this.state;</span>
+<span class="nc" id="L91">        return this.state;</span>
     }
 
     /**
-     * Setter for &lt;code&gt;public.Cards.state&lt;/code&gt;.
+     * Setter for &lt;code&gt;PUBLIC.CARDS.STATE&lt;/code&gt;.
      */
     public void setState(String state) {
-<span class="nc" id="L116">        this.state = state;</span>
-<span class="nc" id="L117">    }</span>
+<span class="nc" id="L98">        this.state = state;</span>
+<span class="nc" id="L99">    }</span>
 
     @Override
     public boolean equals(Object obj) {
-<span class="nc bnc" id="L121" title="All 2 branches missed.">        if (this == obj)</span>
-<span class="nc" id="L122">            return true;</span>
-<span class="nc bnc" id="L123" title="All 2 branches missed.">        if (obj == null)</span>
-<span class="nc" id="L124">            return false;</span>
-<span class="nc bnc" id="L125" title="All 2 branches missed.">        if (getClass() != obj.getClass())</span>
-<span class="nc" id="L126">            return false;</span>
-<span class="nc" id="L127">        final Cards other = (Cards) obj;</span>
-<span class="nc bnc" id="L128" title="All 2 branches missed.">        if (this.id == null) {</span>
-<span class="nc bnc" id="L129" title="All 2 branches missed.">            if (other.id != null)</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">        if (this == obj)</span>
+<span class="nc" id="L104">            return true;</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">        if (obj == null)</span>
+<span class="nc" id="L106">            return false;</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        if (getClass() != obj.getClass())</span>
+<span class="nc" id="L108">            return false;</span>
+<span class="nc" id="L109">        final Cards other = (Cards) obj;</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        if (this.id == null) {</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">            if (other.id != null)</span>
+<span class="nc" id="L112">                return false;</span>
+        }
+<span class="nc bnc" id="L114" title="All 2 branches missed.">        else if (!this.id.equals(other.id))</span>
+<span class="nc" id="L115">            return false;</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">        if (this.bankaccountId == null) {</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">            if (other.bankaccountId != null)</span>
+<span class="nc" id="L118">                return false;</span>
+        }
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        else if (!this.bankaccountId.equals(other.bankaccountId))</span>
+<span class="nc" id="L121">            return false;</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">        if (this.number == null) {</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">            if (other.number != null)</span>
+<span class="nc" id="L124">                return false;</span>
+        }
+<span class="nc bnc" id="L126" title="All 2 branches missed.">        else if (!this.number.equals(other.number))</span>
+<span class="nc" id="L127">            return false;</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">        if (this.state == null) {</span>
+<span class="nc bnc" id="L129" title="All 2 branches missed.">            if (other.state != null)</span>
 <span class="nc" id="L130">                return false;</span>
         }
-<span class="nc bnc" id="L132" title="All 2 branches missed.">        else if (!this.id.equals(other.id))</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">        else if (!this.state.equals(other.state))</span>
 <span class="nc" id="L133">            return false;</span>
-<span class="nc bnc" id="L134" title="All 2 branches missed.">        if (this.bankaccountId == null) {</span>
-<span class="nc bnc" id="L135" title="All 2 branches missed.">            if (other.bankaccountId != null)</span>
-<span class="nc" id="L136">                return false;</span>
-        }
-<span class="nc bnc" id="L138" title="All 2 branches missed.">        else if (!this.bankaccountId.equals(other.bankaccountId))</span>
-<span class="nc" id="L139">            return false;</span>
-<span class="nc bnc" id="L140" title="All 2 branches missed.">        if (this.cardSecretId == null) {</span>
-<span class="nc bnc" id="L141" title="All 2 branches missed.">            if (other.cardSecretId != null)</span>
-<span class="nc" id="L142">                return false;</span>
-        }
-<span class="nc bnc" id="L144" title="All 2 branches missed.">        else if (!this.cardSecretId.equals(other.cardSecretId))</span>
-<span class="nc" id="L145">            return false;</span>
-<span class="nc bnc" id="L146" title="All 2 branches missed.">        if (this.number == null) {</span>
-<span class="nc bnc" id="L147" title="All 2 branches missed.">            if (other.number != null)</span>
-<span class="nc" id="L148">                return false;</span>
-        }
-<span class="nc bnc" id="L150" title="All 2 branches missed.">        else if (!this.number.equals(other.number))</span>
-<span class="nc" id="L151">            return false;</span>
-<span class="nc bnc" id="L152" title="All 2 branches missed.">        if (this.state == null) {</span>
-<span class="nc bnc" id="L153" title="All 2 branches missed.">            if (other.state != null)</span>
-<span class="nc" id="L154">                return false;</span>
-        }
-<span class="nc bnc" id="L156" title="All 2 branches missed.">        else if (!this.state.equals(other.state))</span>
-<span class="nc" id="L157">            return false;</span>
-<span class="nc" id="L158">        return true;</span>
+<span class="nc" id="L134">        return true;</span>
     }
 
     @Override
     public int hashCode() {
-<span class="nc" id="L163">        final int prime = 31;</span>
-<span class="nc" id="L164">        int result = 1;</span>
-<span class="nc bnc" id="L165" title="All 2 branches missed.">        result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());</span>
-<span class="nc bnc" id="L166" title="All 2 branches missed.">        result = prime * result + ((this.bankaccountId == null) ? 0 : this.bankaccountId.hashCode());</span>
-<span class="nc bnc" id="L167" title="All 2 branches missed.">        result = prime * result + ((this.cardSecretId == null) ? 0 : this.cardSecretId.hashCode());</span>
-<span class="nc bnc" id="L168" title="All 2 branches missed.">        result = prime * result + ((this.number == null) ? 0 : this.number.hashCode());</span>
-<span class="nc bnc" id="L169" title="All 2 branches missed.">        result = prime * result + ((this.state == null) ? 0 : this.state.hashCode());</span>
-<span class="nc" id="L170">        return result;</span>
+<span class="nc" id="L139">        final int prime = 31;</span>
+<span class="nc" id="L140">        int result = 1;</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">        result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        result = prime * result + ((this.bankaccountId == null) ? 0 : this.bankaccountId.hashCode());</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        result = prime * result + ((this.number == null) ? 0 : this.number.hashCode());</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">        result = prime * result + ((this.state == null) ? 0 : this.state.hashCode());</span>
+<span class="nc" id="L145">        return result;</span>
     }
 
     @Override
     public String toString() {
-<span class="nc" id="L175">        StringBuilder sb = new StringBuilder(&quot;Cards (&quot;);</span>
+<span class="nc" id="L150">        StringBuilder sb = new StringBuilder(&quot;Cards (&quot;);</span>
 
-<span class="nc" id="L177">        sb.append(id);</span>
-<span class="nc" id="L178">        sb.append(&quot;, &quot;).append(bankaccountId);</span>
-<span class="nc" id="L179">        sb.append(&quot;, &quot;).append(cardSecretId);</span>
-<span class="nc" id="L180">        sb.append(&quot;, &quot;).append(number);</span>
-<span class="nc" id="L181">        sb.append(&quot;, &quot;).append(state);</span>
+<span class="nc" id="L152">        sb.append(id);</span>
+<span class="nc" id="L153">        sb.append(&quot;, &quot;).append(bankaccountId);</span>
+<span class="nc" id="L154">        sb.append(&quot;, &quot;).append(number);</span>
+<span class="nc" id="L155">        sb.append(&quot;, &quot;).append(state);</span>
 
-<span class="nc" id="L183">        sb.append(&quot;)&quot;);</span>
-<span class="nc" id="L184">        return sb.toString();</span>
+<span class="nc" id="L157">        sb.append(&quot;)&quot;);</span>
+<span class="nc" id="L158">        return sb.toString();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

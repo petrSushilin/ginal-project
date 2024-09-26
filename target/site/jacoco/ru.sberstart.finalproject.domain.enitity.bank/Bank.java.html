@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Bank.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">final-project</a> &gt; <a href="index.source.html" class="el_package">ru.sberstart.finalproject.domain.enitity.bank</a> &gt; <span class="el_source">Bank.java</span></div><h1>Bank.java</h1><pre class="source lang-java linenums">package ru.sberstart.finalproject.domain.enitity.bank;
+
+
+import java.util.Objects;
+import java.util.UUID;
+
+public class Bank {
+    private UUID id;
+    private String name;
+    private String identityNumber;
+
+<span class="nc" id="L12">    public Bank(UUID id, String name, String identityNumber) {</span>
+<span class="nc" id="L13">        this.id = id;</span>
+<span class="nc" id="L14">        this.name = name;</span>
+<span class="nc" id="L15">        this.identityNumber = identityNumber;</span>
+<span class="nc" id="L16">    }</span>
+
+    public UUID getId() {
+<span class="nc" id="L19">        return id;</span>
+    }
+
+    public String getName() {
+<span class="nc" id="L23">        return name;</span>
+    }
+
+    public void setName(String name) {
+<span class="nc" id="L27">        this.name = name;</span>
+<span class="nc" id="L28">    }</span>
+
+    public String getIdentityNumber() {
+<span class="nc" id="L31">        return identityNumber;</span>
+    }
+
+    public void setIdentityNumber(String identityNumber) {
+<span class="nc" id="L35">        this.identityNumber = identityNumber;</span>
+<span class="nc" id="L36">    }</span>
+
+<span class="nc" id="L38">    public static class Builder {</span>
+        private UUID id;
+        private String name;
+        private String identityNumber;
+
+        public Builder withId(UUID id) {
+<span class="nc" id="L44">            this.id = id;</span>
+<span class="nc" id="L45">            return this;</span>
+        }
+
+        public Builder withName(String name) {
+<span class="nc" id="L49">            this.name = name;</span>
+<span class="nc" id="L50">            return this;</span>
+        }
+
+        public Builder withIdentityNumber(String identityNumber) {
+<span class="nc" id="L54">            this.identityNumber = identityNumber;</span>
+<span class="nc" id="L55">            return this;</span>
+        }
+
+        public Bank build() {
+<span class="nc" id="L59">            return new Bank(id, name, identityNumber);</span>
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        if (this == o) return true;</span>
+<span class="nc bnc" id="L66" title="All 4 branches missed.">        if (o == null || getClass() != o.getClass()) return false;</span>
+<span class="nc" id="L67">        Bank bank = (Bank) o;</span>
+<span class="nc bnc" id="L68" title="All 4 branches missed.">        return Objects.equals(name, bank.name) &amp;&amp; Objects.equals(identityNumber, bank.identityNumber);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L73">        return Objects.hash(name, identityNumber);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L78">        return &quot;Bank{&quot; +</span>
+                &quot;id=&quot; + id +
+                &quot;, name='&quot; + name + '\'' +
+                &quot;, identityNumber='&quot; + identityNumber + '\'' +
+                '}';
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

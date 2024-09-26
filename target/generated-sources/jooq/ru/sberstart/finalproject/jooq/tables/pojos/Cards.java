@@ -18,7 +18,6 @@ public class Cards implements Serializable {
 
     private UUID id;
     private UUID bankaccountId;
-    private UUID cardSecretId;
     private String number;
     private String state;
 
@@ -27,7 +26,6 @@ public class Cards implements Serializable {
     public Cards(Cards value) {
         this.id = value.id;
         this.bankaccountId = value.bankaccountId;
-        this.cardSecretId = value.cardSecretId;
         this.number = value.number;
         this.state = value.state;
     }
@@ -35,82 +33,66 @@ public class Cards implements Serializable {
     public Cards(
         UUID id,
         UUID bankaccountId,
-        UUID cardSecretId,
         String number,
         String state
     ) {
         this.id = id;
         this.bankaccountId = bankaccountId;
-        this.cardSecretId = cardSecretId;
         this.number = number;
         this.state = state;
     }
 
     /**
-     * Getter for <code>public.Cards.id</code>.
+     * Getter for <code>PUBLIC.CARDS.ID</code>.
      */
     public UUID getId() {
         return this.id;
     }
 
     /**
-     * Setter for <code>public.Cards.id</code>.
+     * Setter for <code>PUBLIC.CARDS.ID</code>.
      */
     public void setId(UUID id) {
         this.id = id;
     }
 
     /**
-     * Getter for <code>public.Cards.bankaccount_id</code>.
+     * Getter for <code>PUBLIC.CARDS.BANKACCOUNT_ID</code>.
      */
     public UUID getBankaccountId() {
         return this.bankaccountId;
     }
 
     /**
-     * Setter for <code>public.Cards.bankaccount_id</code>.
+     * Setter for <code>PUBLIC.CARDS.BANKACCOUNT_ID</code>.
      */
     public void setBankaccountId(UUID bankaccountId) {
         this.bankaccountId = bankaccountId;
     }
 
     /**
-     * Getter for <code>public.Cards.card_secret_id</code>.
-     */
-    public UUID getCardSecretId() {
-        return this.cardSecretId;
-    }
-
-    /**
-     * Setter for <code>public.Cards.card_secret_id</code>.
-     */
-    public void setCardSecretId(UUID cardSecretId) {
-        this.cardSecretId = cardSecretId;
-    }
-
-    /**
-     * Getter for <code>public.Cards.number</code>.
+     * Getter for <code>PUBLIC.CARDS.NUMBER</code>.
      */
     public String getNumber() {
         return this.number;
     }
 
     /**
-     * Setter for <code>public.Cards.number</code>.
+     * Setter for <code>PUBLIC.CARDS.NUMBER</code>.
      */
     public void setNumber(String number) {
         this.number = number;
     }
 
     /**
-     * Getter for <code>public.Cards.state</code>.
+     * Getter for <code>PUBLIC.CARDS.STATE</code>.
      */
     public String getState() {
         return this.state;
     }
 
     /**
-     * Setter for <code>public.Cards.state</code>.
+     * Setter for <code>PUBLIC.CARDS.STATE</code>.
      */
     public void setState(String state) {
         this.state = state;
@@ -137,12 +119,6 @@ public class Cards implements Serializable {
         }
         else if (!this.bankaccountId.equals(other.bankaccountId))
             return false;
-        if (this.cardSecretId == null) {
-            if (other.cardSecretId != null)
-                return false;
-        }
-        else if (!this.cardSecretId.equals(other.cardSecretId))
-            return false;
         if (this.number == null) {
             if (other.number != null)
                 return false;
@@ -164,7 +140,6 @@ public class Cards implements Serializable {
         int result = 1;
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         result = prime * result + ((this.bankaccountId == null) ? 0 : this.bankaccountId.hashCode());
-        result = prime * result + ((this.cardSecretId == null) ? 0 : this.cardSecretId.hashCode());
         result = prime * result + ((this.number == null) ? 0 : this.number.hashCode());
         result = prime * result + ((this.state == null) ? 0 : this.state.hashCode());
         return result;
@@ -176,7 +151,6 @@ public class Cards implements Serializable {
 
         sb.append(id);
         sb.append(", ").append(bankaccountId);
-        sb.append(", ").append(cardSecretId);
         sb.append(", ").append(number);
         sb.append(", ").append(state);
 

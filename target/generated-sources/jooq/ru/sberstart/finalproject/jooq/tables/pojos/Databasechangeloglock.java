@@ -43,56 +43,56 @@ public class Databasechangeloglock implements Serializable {
     }
 
     /**
-     * Getter for <code>public.databasechangeloglock.id</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOGLOCK.ID</code>.
      */
     public Integer getId() {
         return this.id;
     }
 
     /**
-     * Setter for <code>public.databasechangeloglock.id</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOGLOCK.ID</code>.
      */
     public void setId(Integer id) {
         this.id = id;
     }
 
     /**
-     * Getter for <code>public.databasechangeloglock.locked</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOGLOCK.LOCKED</code>.
      */
     public Boolean getLocked() {
         return this.locked;
     }
 
     /**
-     * Setter for <code>public.databasechangeloglock.locked</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOGLOCK.LOCKED</code>.
      */
     public void setLocked(Boolean locked) {
         this.locked = locked;
     }
 
     /**
-     * Getter for <code>public.databasechangeloglock.lockgranted</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOGLOCK.LOCKGRANTED</code>.
      */
     public LocalDateTime getLockgranted() {
         return this.lockgranted;
     }
 
     /**
-     * Setter for <code>public.databasechangeloglock.lockgranted</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOGLOCK.LOCKGRANTED</code>.
      */
     public void setLockgranted(LocalDateTime lockgranted) {
         this.lockgranted = lockgranted;
     }
 
     /**
-     * Getter for <code>public.databasechangeloglock.lockedby</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOGLOCK.LOCKEDBY</code>.
      */
     public String getLockedby() {
         return this.lockedby;
     }
 
     /**
-     * Setter for <code>public.databasechangeloglock.lockedby</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOGLOCK.LOCKEDBY</code>.
      */
     public void setLockedby(String lockedby) {
         this.lockedby = lockedby;

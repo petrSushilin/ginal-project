@@ -11,12 +11,12 @@ import java.util.function.Function;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function5;
+import org.jooq.Function4;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row5;
+import org.jooq.Row4;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -42,7 +42,7 @@ public class Cards extends TableImpl&lt;CardsRecord&gt; {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of &lt;code&gt;public.Cards&lt;/code&gt;
+     * The reference instance of &lt;code&gt;PUBLIC.CARDS&lt;/code&gt;
      */
 <span class="fc" id="L47">    public static final Cards CARDS = new Cards();</span>
 
@@ -55,124 +55,119 @@ public class Cards extends TableImpl&lt;CardsRecord&gt; {
     }
 
     /**
-     * The column &lt;code&gt;public.Cards.id&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.CARDS.ID&lt;/code&gt;.
      */
-<span class="pc" id="L60">    public final TableField&lt;CardsRecord, UUID&gt; ID = createField(DSL.name(&quot;id&quot;), SQLDataType.UUID.nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L60">    public final TableField&lt;CardsRecord, UUID&gt; ID = createField(DSL.name(&quot;ID&quot;), SQLDataType.UUID.nullable(false).defaultValue(DSL.field(DSL.raw(&quot;RANDOM_UUID()&quot;), SQLDataType.UUID)), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.Cards.bankaccount_id&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.CARDS.BANKACCOUNT_ID&lt;/code&gt;.
      */
-<span class="pc" id="L65">    public final TableField&lt;CardsRecord, UUID&gt; BANKACCOUNT_ID = createField(DSL.name(&quot;bankaccount_id&quot;), SQLDataType.UUID.nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L65">    public final TableField&lt;CardsRecord, UUID&gt; BANKACCOUNT_ID = createField(DSL.name(&quot;BANKACCOUNT_ID&quot;), SQLDataType.UUID.nullable(false), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.Cards.card_secret_id&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.CARDS.NUMBER&lt;/code&gt;.
      */
-<span class="pc" id="L70">    public final TableField&lt;CardsRecord, UUID&gt; CARD_SECRET_ID = createField(DSL.name(&quot;card_secret_id&quot;), SQLDataType.UUID, this, &quot;&quot;);</span>
+<span class="pc" id="L70">    public final TableField&lt;CardsRecord, String&gt; NUMBER = createField(DSL.name(&quot;NUMBER&quot;), SQLDataType.VARCHAR(255).nullable(false), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.Cards.number&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.CARDS.STATE&lt;/code&gt;.
      */
-<span class="pc" id="L75">    public final TableField&lt;CardsRecord, String&gt; NUMBER = createField(DSL.name(&quot;number&quot;), SQLDataType.VARCHAR(50).nullable(false), this, &quot;&quot;);</span>
-
-    /**
-     * The column &lt;code&gt;public.Cards.state&lt;/code&gt;.
-     */
-<span class="pc" id="L80">    public final TableField&lt;CardsRecord, String&gt; STATE = createField(DSL.name(&quot;state&quot;), SQLDataType.VARCHAR(20).nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L75">    public final TableField&lt;CardsRecord, String&gt; STATE = createField(DSL.name(&quot;STATE&quot;), SQLDataType.VARCHAR(20).nullable(false), this, &quot;&quot;);</span>
 
     private Cards(Name alias, Table&lt;CardsRecord&gt; aliased) {
-<span class="fc" id="L83">        this(alias, aliased, null);</span>
-<span class="fc" id="L84">    }</span>
+<span class="fc" id="L78">        this(alias, aliased, null);</span>
+<span class="fc" id="L79">    }</span>
 
     private Cards(Name alias, Table&lt;CardsRecord&gt; aliased, Field&lt;?&gt;[] parameters) {
-<span class="fc" id="L87">        super(alias, null, aliased, parameters, DSL.comment(&quot;&quot;), TableOptions.table());</span>
-<span class="fc" id="L88">    }</span>
+<span class="fc" id="L82">        super(alias, null, aliased, parameters, DSL.comment(&quot;&quot;), TableOptions.table());</span>
+<span class="fc" id="L83">    }</span>
 
     /**
-     * Create an aliased &lt;code&gt;public.Cards&lt;/code&gt; table reference
+     * Create an aliased &lt;code&gt;PUBLIC.CARDS&lt;/code&gt; table reference
      */
     public Cards(String alias) {
-<span class="nc" id="L94">        this(DSL.name(alias), CARDS);</span>
-<span class="nc" id="L95">    }</span>
+<span class="nc" id="L89">        this(DSL.name(alias), CARDS);</span>
+<span class="nc" id="L90">    }</span>
 
     /**
-     * Create an aliased &lt;code&gt;public.Cards&lt;/code&gt; table reference
+     * Create an aliased &lt;code&gt;PUBLIC.CARDS&lt;/code&gt; table reference
      */
     public Cards(Name alias) {
-<span class="nc" id="L101">        this(alias, CARDS);</span>
-<span class="nc" id="L102">    }</span>
+<span class="nc" id="L96">        this(alias, CARDS);</span>
+<span class="nc" id="L97">    }</span>
 
     /**
-     * Create a &lt;code&gt;public.Cards&lt;/code&gt; table reference
+     * Create a &lt;code&gt;PUBLIC.CARDS&lt;/code&gt; table reference
      */
     public Cards() {
-<span class="fc" id="L108">        this(DSL.name(&quot;Cards&quot;), null);</span>
-<span class="fc" id="L109">    }</span>
+<span class="fc" id="L103">        this(DSL.name(&quot;CARDS&quot;), null);</span>
+<span class="fc" id="L104">    }</span>
 
     public &lt;O extends Record&gt; Cards(Table&lt;O&gt; child, ForeignKey&lt;O, CardsRecord&gt; key) {
-<span class="nc" id="L112">        super(child, key, CARDS);</span>
-<span class="nc" id="L113">    }</span>
+<span class="nc" id="L107">        super(child, key, CARDS);</span>
+<span class="nc" id="L108">    }</span>
 
     @Override
     public Schema getSchema() {
-<span class="nc bnc" id="L117" title="All 2 branches missed.">        return aliased() ? null : Public.PUBLIC;</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        return aliased() ? null : Public.PUBLIC;</span>
     }
 
     @Override
     public List&lt;Index&gt; getIndexes() {
-<span class="nc" id="L122">        return Arrays.asList(Indexes.IDX_CARDS_BANKACCOUNT_ID, Indexes.IDX_CARDS_CARD_SECRET_ID);</span>
+<span class="nc" id="L117">        return Arrays.asList(Indexes.IDX_CARD_NUMBER, Indexes.IDX_CARDS_BANKACCOUNT_ID);</span>
     }
 
     @Override
     public UniqueKey&lt;CardsRecord&gt; getPrimaryKey() {
-<span class="nc" id="L127">        return Keys.CARDS_PKEY;</span>
+<span class="nc" id="L122">        return Keys.PK_CARDS;</span>
     }
 
     @Override
     public List&lt;UniqueKey&lt;CardsRecord&gt;&gt; getUniqueKeys() {
-<span class="nc" id="L132">        return Arrays.asList(Keys.CARDS_CARD_SECRET_ID_KEY, Keys.CARDS_NUMBER_KEY);</span>
+<span class="nc" id="L127">        return Arrays.asList(Keys.CONSTRAINT_3C);</span>
     }
 
     @Override
     public List&lt;ForeignKey&lt;CardsRecord, ?&gt;&gt; getReferences() {
-<span class="nc" id="L137">        return Arrays.asList(Keys.CARDS__FK_CARDS_BANKACCOUNTS, Keys.CARDS__FK_CARDS_CARDSECRETS);</span>
+<span class="nc" id="L132">        return Arrays.asList(Keys.FK_CARDS_BANKACCOUNTS, Keys.FK_CARDSECRETS_CARDS_CARD_NUMBER);</span>
     }
 
     private transient Bankaccounts _bankaccounts;
     private transient Cardsecrets _cardsecrets;
 
     /**
-     * Get the implicit join path to the &lt;code&gt;public.BankAccounts&lt;/code&gt; table.
+     * Get the implicit join path to the &lt;code&gt;PUBLIC.BANKACCOUNTS&lt;/code&gt; table.
      */
     public Bankaccounts bankaccounts() {
-<span class="nc bnc" id="L147" title="All 2 branches missed.">        if (_bankaccounts == null)</span>
-<span class="nc" id="L148">            _bankaccounts = new Bankaccounts(this, Keys.CARDS__FK_CARDS_BANKACCOUNTS);</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        if (_bankaccounts == null)</span>
+<span class="nc" id="L143">            _bankaccounts = new Bankaccounts(this, Keys.FK_CARDS_BANKACCOUNTS);</span>
 
-<span class="nc" id="L150">        return _bankaccounts;</span>
+<span class="nc" id="L145">        return _bankaccounts;</span>
     }
 
     /**
-     * Get the implicit join path to the &lt;code&gt;public.CardSecrets&lt;/code&gt; table.
+     * Get the implicit join path to the &lt;code&gt;PUBLIC.CARDSECRETS&lt;/code&gt; table.
      */
     public Cardsecrets cardsecrets() {
-<span class="nc bnc" id="L157" title="All 2 branches missed.">        if (_cardsecrets == null)</span>
-<span class="nc" id="L158">            _cardsecrets = new Cardsecrets(this, Keys.CARDS__FK_CARDS_CARDSECRETS);</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">        if (_cardsecrets == null)</span>
+<span class="nc" id="L153">            _cardsecrets = new Cardsecrets(this, Keys.FK_CARDSECRETS_CARDS_CARD_NUMBER);</span>
 
-<span class="nc" id="L160">        return _cardsecrets;</span>
+<span class="nc" id="L155">        return _cardsecrets;</span>
     }
 
     @Override
     public Cards as(String alias) {
-<span class="nc" id="L165">        return new Cards(DSL.name(alias), this);</span>
+<span class="nc" id="L160">        return new Cards(DSL.name(alias), this);</span>
     }
 
     @Override
     public Cards as(Name alias) {
-<span class="nc" id="L170">        return new Cards(alias, this);</span>
+<span class="nc" id="L165">        return new Cards(alias, this);</span>
     }
 
     @Override
     public Cards as(Table&lt;?&gt; alias) {
-<span class="nc" id="L175">        return new Cards(alias.getQualifiedName(), this);</span>
+<span class="nc" id="L170">        return new Cards(alias.getQualifiedName(), this);</span>
     }
 
     /**
@@ -180,7 +175,7 @@ public class Cards extends TableImpl&lt;CardsRecord&gt; {
      */
     @Override
     public Cards rename(String name) {
-<span class="nc" id="L183">        return new Cards(DSL.name(name), null);</span>
+<span class="nc" id="L178">        return new Cards(DSL.name(name), null);</span>
     }
 
     /**
@@ -188,7 +183,7 @@ public class Cards extends TableImpl&lt;CardsRecord&gt; {
      */
     @Override
     public Cards rename(Name name) {
-<span class="nc" id="L191">        return new Cards(name, null);</span>
+<span class="nc" id="L186">        return new Cards(name, null);</span>
     }
 
     /**
@@ -196,31 +191,31 @@ public class Cards extends TableImpl&lt;CardsRecord&gt; {
      */
     @Override
     public Cards rename(Table&lt;?&gt; name) {
-<span class="nc" id="L199">        return new Cards(name.getQualifiedName(), null);</span>
+<span class="nc" id="L194">        return new Cards(name.getQualifiedName(), null);</span>
     }
 
     // -------------------------------------------------------------------------
-    // Row5 type methods
+    // Row4 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5&lt;UUID, UUID, UUID, String, String&gt; fieldsRow() {
-<span class="nc" id="L208">        return (Row5) super.fieldsRow();</span>
+    public Row4&lt;UUID, UUID, String, String&gt; fieldsRow() {
+<span class="nc" id="L203">        return (Row4) super.fieldsRow();</span>
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public &lt;U&gt; SelectField&lt;U&gt; mapping(Function5&lt;? super UUID, ? super UUID, ? super UUID, ? super String, ? super String, ? extends U&gt; from) {
-<span class="nc" id="L215">        return convertFrom(Records.mapping(from));</span>
+    public &lt;U&gt; SelectField&lt;U&gt; mapping(Function4&lt;? super UUID, ? super UUID, ? super String, ? super String, ? extends U&gt; from) {
+<span class="nc" id="L210">        return convertFrom(Records.mapping(from));</span>
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public &lt;U&gt; SelectField&lt;U&gt; mapping(Class&lt;U&gt; toType, Function5&lt;? super UUID, ? super UUID, ? super UUID, ? super String, ? super String, ? extends U&gt; from) {
-<span class="nc" id="L223">        return convertFrom(toType, Records.mapping(from));</span>
+    public &lt;U&gt; SelectField&lt;U&gt; mapping(Class&lt;U&gt; toType, Function4&lt;? super UUID, ? super UUID, ? super String, ? super String, ? extends U&gt; from) {
+<span class="nc" id="L218">        return convertFrom(toType, Records.mapping(from));</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

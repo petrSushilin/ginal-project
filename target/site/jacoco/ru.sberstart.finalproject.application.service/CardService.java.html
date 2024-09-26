@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CardService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">final-project</a> &gt; <a href="index.source.html" class="el_package">ru.sberstart.finalproject.application.service</a> &gt; <span class="el_source">CardService.java</span></div><h1>CardService.java</h1><pre class="source lang-java linenums">package ru.sberstart.finalproject.application.service;
+
+import ru.sberstart.finalproject.api.dto.card.inner.CardCustomizingDTO;
+import ru.sberstart.finalproject.api.dto.card.inner.CardGeneralInformationDTO;
+import ru.sberstart.finalproject.api.dto.card.inner.CardSecretInformationDTO;
+import ru.sberstart.finalproject.api.dto.card.request.CardIssueRequestDTO;
+import ru.sberstart.finalproject.api.dto.card.request.CardStateRequestDTO;
+import ru.sberstart.finalproject.api.dto.card.response.CardStateResponseDTO;
+import ru.sberstart.finalproject.application.manager.CardManager;
+import ru.sberstart.finalproject.domain.enitity.card.Card;
+import ru.sberstart.finalproject.domain.enitity.card.CardSecret;
+import ru.sberstart.finalproject.domain.enitity.card.enums.CardStates;
+import ru.sberstart.finalproject.global.exceptions.NotAvailableActionsException;
+import ru.sberstart.finalproject.infrastructure.repostitory.implementation.CardRepositoryImpl;
+import ru.sberstart.finalproject.mapper.CardMapper;
+import ru.sberstart.finalproject.global.exceptions.UnsuccessfulOperationException;
+
+import java.util.List;
+import java.util.UUID;
+
+public class CardService {
+    private final CardSecretService cardSecretService;
+    private final CardManager manager;
+    private final CardRepositoryImpl repository;
+
+<span class="fc" id="L26">    public CardService(CardSecretService cardSecretService, CardManager manager, CardRepositoryImpl repository) {</span>
+<span class="fc" id="L27">        this.cardSecretService = cardSecretService;</span>
+<span class="fc" id="L28">        this.manager = manager;</span>
+<span class="fc" id="L29">        this.repository = repository;</span>
+<span class="fc" id="L30">    }</span>
+
+    public CardStateResponseDTO issueCard(CardIssueRequestDTO cardIssueDTO) {
+<span class="nc" id="L33">        UUID bankId = UUID.fromString(cardIssueDTO.bankId());</span>
+<span class="nc" id="L34">        String cardNumber = manager.generateCardNumber(bankId);</span>
+
+<span class="nc" id="L36">        String bankAccountNumber = cardIssueDTO.bankAccountNumber();</span>
+<span class="nc" id="L37">        CardCustomizingDTO cardCustomizingDTO = cardSecretService.register(bankAccountNumber, cardNumber);</span>
+
+<span class="nc" id="L39">        Card card = manager.customizeCard(cardCustomizingDTO);</span>
+<span class="nc" id="L40">        Card createdCard = repository.create(card).orElseThrow(UnsuccessfulOperationException::new);</span>
+
+<span class="nc" id="L42">        return CardMapper.INSTANCE.toCardStateResponseDTO(createdCard);</span>
+    }
+
+    public CardGeneralInformationDTO getGeneralInformationByNumber(String cardNumber) {
+<span class="nc" id="L46">        return repository.getByNumber(cardNumber).orElseThrow(UnsuccessfulOperationException::new);</span>
+    }
+
+    public List&lt;CardGeneralInformationDTO&gt; getListCardsByUserPhoneNumber(String userPhoneNumber) {
+<span class="nc" id="L50">        List&lt;CardGeneralInformationDTO&gt; cardsList = repository.getCardsByUser(userPhoneNumber);</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        if (cardsList.isEmpty()) throw new UnsuccessfulOperationException();</span>
+<span class="nc" id="L52">        return cardsList;</span>
+    }
+
+    public CardSecretInformationDTO getSecretInformation(String cardNumber) {
+<span class="nc" id="L56">        CardSecret cardSecret = cardSecretService.getCardSecret(cardNumber);</span>
+<span class="nc" id="L57">        return CardMapper.INSTANCE.toCardSecretInformation(cardSecret);</span>
+    }
+
+    /**
+     * Процесс подтверждения выпуска карты.
+     *
+     * @param stateDTO DTO с информацией с ожидаемым состоянием карты.
+     * @return CardStateResponseDTO с информацией об подтверждении выпуска карты.
+     */
+    public CardStateResponseDTO approveCard(CardStateRequestDTO stateDTO) {
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        if (!stateDTO.state().equals(CardStates.APPROVED)) throw new NotAvailableActionsException();</span>
+<span class="nc" id="L68">        return updateStateCard(stateDTO);</span>
+    }
+
+    /**
+     * Процесс активации карты.
+     *
+     * @param stateDTO DTO с информацией с ожидаемым состоянием карты.
+     * @return CardStateResponseDTO с информацией об подтверждении выдачи и активации карты.
+     */
+    public CardStateResponseDTO activateCard(CardStateRequestDTO stateDTO) {
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        if (!stateDTO.state().equals(CardStates.ACTIVE))</span>
+<span class="nc" id="L79">            throw new NotAvailableActionsException();</span>
+<span class="nc" id="L80">        return updateStateCard(stateDTO);</span>
+    }
+
+    /**
+     * Процесс приостановки действия карты.
+     *
+     * @param stateDTO DTO с информацией с ожидаемым состоянием карты.
+     * @return CardStateResponseDTO с информацией о приостановке карты.
+     */
+    public CardStateResponseDTO suspendCard(CardStateRequestDTO stateDTO) {
+<span class="nc bnc" id="L90" title="All 2 branches missed.">        if (!stateDTO.state().equals(CardStates.BLOCKED)) throw new NotAvailableActionsException();</span>
+<span class="nc" id="L91">        return updateStateCard(stateDTO);</span>
+    }
+
+    /**
+     * Процесс блокирования карты.
+     *
+     * @param stateDTO DTO с информацией с ожидаемым состоянием карты.
+     * @return CardStateResponseDTO с информацией о блокировке карты.
+     */
+    public CardStateResponseDTO blockExpireCard(CardStateRequestDTO stateDTO) {
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        if (!stateDTO.state().equals(CardStates.EXPIRED)) throw new NotAvailableActionsException();</span>
+<span class="nc" id="L102">        return updateStateCard(stateDTO);</span>
+    }
+
+    /**
+     * Процесс обновления состояния карты.
+     * Сначала выполняется изменение состояния карты, затем выполняется обновление записи в БД.
+     * После корректного изменения состояния карты в БД, происходит отправка ожидаемого DTO сущности.
+     *
+     * @param stateDTO DTO с информацией с ожидаемым состоянием карты.
+     * @return CardStateResponseDTO с информацией об обновленном состоянии счета.
+     */
+    private CardStateResponseDTO updateStateCard(CardStateRequestDTO stateDTO) {
+<span class="nc" id="L114">        Card card = consistencyCardRecordWithState(stateDTO);</span>
+
+<span class="nc" id="L116">        Card cardRecord = repository.updateState(card).orElseThrow(UnsuccessfulOperationException::new);</span>
+
+<span class="nc" id="L118">        return CardMapper.INSTANCE.toCardStateResponseDTO(cardRecord);</span>
+    }
+
+    /**
+     * Внутренний метод, реализующий изменение состояния банковского счета.
+     * В зависимости от переданного состояния, выполняется соответствующее действие.
+     *
+     * @param stateDTO DTO с информацией с ожидаемым состоянием карты.
+     * @return BankAccount с обновленным состоянием.
+     */
+    private Card consistencyCardRecordWithState(CardStateRequestDTO stateDTO) {
+<span class="nc" id="L129">        Card card = repository.getServiceInfoByNumber(stateDTO.number()).orElseThrow(UnsuccessfulOperationException::new);</span>
+        // для желаемого состояния вызываем соответствующий метод у менеджера
+<span class="nc bnc" id="L131" title="All 6 branches missed.">        switch (stateDTO.state()) {</span>
+<span class="nc" id="L132">            case ORDERED -&gt; throw new UnsupportedOperationException();</span>
+<span class="nc" id="L133">            case APPROVED -&gt; manager.approveCard(card);</span>
+<span class="nc" id="L134">            case ACTIVE -&gt; manager.activateCard(card);</span>
+<span class="nc" id="L135">            case BLOCKED -&gt; manager.suspendCard(card);</span>
+<span class="nc" id="L136">            case EXPIRED -&gt; manager.blockExpireCard(card);</span>
+        }
+<span class="nc" id="L138">        return card;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -35,28 +35,28 @@ public class Roles implements Serializable {
     }
 
     /**
-     * Getter for <code>public.Roles.id</code>.
+     * Getter for <code>PUBLIC.ROLES.ID</code>.
      */
     public UUID getId() {
         return this.id;
     }
 
     /**
-     * Setter for <code>public.Roles.id</code>.
+     * Setter for <code>PUBLIC.ROLES.ID</code>.
      */
     public void setId(UUID id) {
         this.id = id;
     }
 
     /**
-     * Getter for <code>public.Roles.role_name</code>.
+     * Getter for <code>PUBLIC.ROLES.ROLE_NAME</code>.
      */
     public String getRoleName() {
         return this.roleName;
     }
 
     /**
-     * Setter for <code>public.Roles.role_name</code>.
+     * Setter for <code>PUBLIC.ROLES.ROLE_NAME</code>.
      */
     public void setRoleName(String roleName) {
         this.roleName = roleName;

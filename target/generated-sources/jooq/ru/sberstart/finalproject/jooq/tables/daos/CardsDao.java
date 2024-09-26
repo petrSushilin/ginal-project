@@ -41,7 +41,7 @@ public class CardsDao extends DAOImpl<CardsRecord, ru.sberstart.finalproject.joo
     }
 
     /**
-     * Fetch records that have <code>id BETWEEN lowerInclusive AND
+     * Fetch records that have <code>ID BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Cards> fetchRangeOfId(UUID lowerInclusive, UUID upperInclusive) {
@@ -49,28 +49,28 @@ public class CardsDao extends DAOImpl<CardsRecord, ru.sberstart.finalproject.joo
     }
 
     /**
-     * Fetch records that have <code>id IN (values)</code>
+     * Fetch records that have <code>ID IN (values)</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Cards> fetchById(UUID... values) {
         return fetch(Cards.CARDS.ID, values);
     }
 
     /**
-     * Fetch a unique record that has <code>id = value</code>
+     * Fetch a unique record that has <code>ID = value</code>
      */
     public ru.sberstart.finalproject.jooq.tables.pojos.Cards fetchOneById(UUID value) {
         return fetchOne(Cards.CARDS.ID, value);
     }
 
     /**
-     * Fetch a unique record that has <code>id = value</code>
+     * Fetch a unique record that has <code>ID = value</code>
      */
     public Optional<ru.sberstart.finalproject.jooq.tables.pojos.Cards> fetchOptionalById(UUID value) {
         return fetchOptional(Cards.CARDS.ID, value);
     }
 
     /**
-     * Fetch records that have <code>bankaccount_id BETWEEN lowerInclusive AND
+     * Fetch records that have <code>BANKACCOUNT_ID BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Cards> fetchRangeOfBankaccountId(UUID lowerInclusive, UUID upperInclusive) {
@@ -78,43 +78,14 @@ public class CardsDao extends DAOImpl<CardsRecord, ru.sberstart.finalproject.joo
     }
 
     /**
-     * Fetch records that have <code>bankaccount_id IN (values)</code>
+     * Fetch records that have <code>BANKACCOUNT_ID IN (values)</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Cards> fetchByBankaccountId(UUID... values) {
         return fetch(Cards.CARDS.BANKACCOUNT_ID, values);
     }
 
     /**
-     * Fetch records that have <code>card_secret_id BETWEEN lowerInclusive AND
-     * upperInclusive</code>
-     */
-    public List<ru.sberstart.finalproject.jooq.tables.pojos.Cards> fetchRangeOfCardSecretId(UUID lowerInclusive, UUID upperInclusive) {
-        return fetchRange(Cards.CARDS.CARD_SECRET_ID, lowerInclusive, upperInclusive);
-    }
-
-    /**
-     * Fetch records that have <code>card_secret_id IN (values)</code>
-     */
-    public List<ru.sberstart.finalproject.jooq.tables.pojos.Cards> fetchByCardSecretId(UUID... values) {
-        return fetch(Cards.CARDS.CARD_SECRET_ID, values);
-    }
-
-    /**
-     * Fetch a unique record that has <code>card_secret_id = value</code>
-     */
-    public ru.sberstart.finalproject.jooq.tables.pojos.Cards fetchOneByCardSecretId(UUID value) {
-        return fetchOne(Cards.CARDS.CARD_SECRET_ID, value);
-    }
-
-    /**
-     * Fetch a unique record that has <code>card_secret_id = value</code>
-     */
-    public Optional<ru.sberstart.finalproject.jooq.tables.pojos.Cards> fetchOptionalByCardSecretId(UUID value) {
-        return fetchOptional(Cards.CARDS.CARD_SECRET_ID, value);
-    }
-
-    /**
-     * Fetch records that have <code>number BETWEEN lowerInclusive AND
+     * Fetch records that have <code>NUMBER BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Cards> fetchRangeOfNumber(String lowerInclusive, String upperInclusive) {
@@ -122,28 +93,28 @@ public class CardsDao extends DAOImpl<CardsRecord, ru.sberstart.finalproject.joo
     }
 
     /**
-     * Fetch records that have <code>number IN (values)</code>
+     * Fetch records that have <code>NUMBER IN (values)</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Cards> fetchByNumber(String... values) {
         return fetch(Cards.CARDS.NUMBER, values);
     }
 
     /**
-     * Fetch a unique record that has <code>number = value</code>
+     * Fetch a unique record that has <code>NUMBER = value</code>
      */
     public ru.sberstart.finalproject.jooq.tables.pojos.Cards fetchOneByNumber(String value) {
         return fetchOne(Cards.CARDS.NUMBER, value);
     }
 
     /**
-     * Fetch a unique record that has <code>number = value</code>
+     * Fetch a unique record that has <code>NUMBER = value</code>
      */
     public Optional<ru.sberstart.finalproject.jooq.tables.pojos.Cards> fetchOptionalByNumber(String value) {
         return fetchOptional(Cards.CARDS.NUMBER, value);
     }
 
     /**
-     * Fetch records that have <code>state BETWEEN lowerInclusive AND
+     * Fetch records that have <code>STATE BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Cards> fetchRangeOfState(String lowerInclusive, String upperInclusive) {
@@ -151,7 +122,7 @@ public class CardsDao extends DAOImpl<CardsRecord, ru.sberstart.finalproject.joo
     }
 
     /**
-     * Fetch records that have <code>state IN (values)</code>
+     * Fetch records that have <code>STATE IN (values)</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Cards> fetchByState(String... values) {
         return fetch(Cards.CARDS.STATE, values);

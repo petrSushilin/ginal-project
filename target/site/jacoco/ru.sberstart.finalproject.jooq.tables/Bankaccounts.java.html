@@ -44,7 +44,7 @@ public class Bankaccounts extends TableImpl&lt;BankaccountsRecord&gt; {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of &lt;code&gt;public.BankAccounts&lt;/code&gt;
+     * The reference instance of &lt;code&gt;PUBLIC.BANKACCOUNTS&lt;/code&gt;
      */
 <span class="fc" id="L49">    public static final Bankaccounts BANKACCOUNTS = new Bankaccounts();</span>
 
@@ -57,39 +57,39 @@ public class Bankaccounts extends TableImpl&lt;BankaccountsRecord&gt; {
     }
 
     /**
-     * The column &lt;code&gt;public.BankAccounts.id&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.BANKACCOUNTS.ID&lt;/code&gt;.
      */
-<span class="pc" id="L62">    public final TableField&lt;BankaccountsRecord, UUID&gt; ID = createField(DSL.name(&quot;id&quot;), SQLDataType.UUID.nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L62">    public final TableField&lt;BankaccountsRecord, UUID&gt; ID = createField(DSL.name(&quot;ID&quot;), SQLDataType.UUID.nullable(false).defaultValue(DSL.field(DSL.raw(&quot;RANDOM_UUID()&quot;), SQLDataType.UUID)), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.BankAccounts.bank_id&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.BANKACCOUNTS.BANK_ID&lt;/code&gt;.
      */
-<span class="pc" id="L67">    public final TableField&lt;BankaccountsRecord, UUID&gt; BANK_ID = createField(DSL.name(&quot;bank_id&quot;), SQLDataType.UUID.nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L67">    public final TableField&lt;BankaccountsRecord, UUID&gt; BANK_ID = createField(DSL.name(&quot;BANK_ID&quot;), SQLDataType.UUID.nullable(false), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.BankAccounts.user_id&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.BANKACCOUNTS.USER_ID&lt;/code&gt;.
      */
-<span class="pc" id="L72">    public final TableField&lt;BankaccountsRecord, UUID&gt; USER_ID = createField(DSL.name(&quot;user_id&quot;), SQLDataType.UUID.nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L72">    public final TableField&lt;BankaccountsRecord, UUID&gt; USER_ID = createField(DSL.name(&quot;USER_ID&quot;), SQLDataType.UUID.nullable(false), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.BankAccounts.registry_date&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.BANKACCOUNTS.REGISTRY_DATE&lt;/code&gt;.
      */
-<span class="pc" id="L77">    public final TableField&lt;BankaccountsRecord, LocalDate&gt; REGISTRY_DATE = createField(DSL.name(&quot;registry_date&quot;), SQLDataType.LOCALDATE.nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L77">    public final TableField&lt;BankaccountsRecord, LocalDate&gt; REGISTRY_DATE = createField(DSL.name(&quot;REGISTRY_DATE&quot;), SQLDataType.LOCALDATE.nullable(false), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.BankAccounts.number&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.BANKACCOUNTS.NUMBER&lt;/code&gt;.
      */
-<span class="pc" id="L82">    public final TableField&lt;BankaccountsRecord, String&gt; NUMBER = createField(DSL.name(&quot;number&quot;), SQLDataType.VARCHAR(50).nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L82">    public final TableField&lt;BankaccountsRecord, String&gt; NUMBER = createField(DSL.name(&quot;NUMBER&quot;), SQLDataType.VARCHAR(50).nullable(false), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.BankAccounts.balance&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.BANKACCOUNTS.BALANCE&lt;/code&gt;.
      */
-<span class="pc" id="L87">    public final TableField&lt;BankaccountsRecord, BigDecimal&gt; BALANCE = createField(DSL.name(&quot;balance&quot;), SQLDataType.NUMERIC(20, 2).defaultValue(DSL.field(DSL.raw(&quot;0&quot;), SQLDataType.NUMERIC)), this, &quot;&quot;);</span>
+<span class="pc" id="L87">    public final TableField&lt;BankaccountsRecord, BigDecimal&gt; BALANCE = createField(DSL.name(&quot;BALANCE&quot;), SQLDataType.DECIMAL(20, 2).defaultValue(DSL.field(DSL.raw(&quot;0&quot;), SQLDataType.DECIMAL)), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.BankAccounts.state&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.BANKACCOUNTS.STATE&lt;/code&gt;.
      */
-<span class="pc" id="L92">    public final TableField&lt;BankaccountsRecord, String&gt; STATE = createField(DSL.name(&quot;state&quot;), SQLDataType.VARCHAR(20).nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L92">    public final TableField&lt;BankaccountsRecord, String&gt; STATE = createField(DSL.name(&quot;STATE&quot;), SQLDataType.VARCHAR(20).nullable(false), this, &quot;&quot;);</span>
 
     private Bankaccounts(Name alias, Table&lt;BankaccountsRecord&gt; aliased) {
 <span class="fc" id="L95">        this(alias, aliased, null);</span>
@@ -100,24 +100,24 @@ public class Bankaccounts extends TableImpl&lt;BankaccountsRecord&gt; {
 <span class="fc" id="L100">    }</span>
 
     /**
-     * Create an aliased &lt;code&gt;public.BankAccounts&lt;/code&gt; table reference
+     * Create an aliased &lt;code&gt;PUBLIC.BANKACCOUNTS&lt;/code&gt; table reference
      */
     public Bankaccounts(String alias) {
 <span class="nc" id="L106">        this(DSL.name(alias), BANKACCOUNTS);</span>
 <span class="nc" id="L107">    }</span>
 
     /**
-     * Create an aliased &lt;code&gt;public.BankAccounts&lt;/code&gt; table reference
+     * Create an aliased &lt;code&gt;PUBLIC.BANKACCOUNTS&lt;/code&gt; table reference
      */
     public Bankaccounts(Name alias) {
 <span class="nc" id="L113">        this(alias, BANKACCOUNTS);</span>
 <span class="nc" id="L114">    }</span>
 
     /**
-     * Create a &lt;code&gt;public.BankAccounts&lt;/code&gt; table reference
+     * Create a &lt;code&gt;PUBLIC.BANKACCOUNTS&lt;/code&gt; table reference
      */
     public Bankaccounts() {
-<span class="fc" id="L120">        this(DSL.name(&quot;BankAccounts&quot;), null);</span>
+<span class="fc" id="L120">        this(DSL.name(&quot;BANKACCOUNTS&quot;), null);</span>
 <span class="fc" id="L121">    }</span>
 
     public &lt;O extends Record&gt; Bankaccounts(Table&lt;O&gt; child, ForeignKey&lt;O, BankaccountsRecord&gt; key) {
@@ -131,43 +131,43 @@ public class Bankaccounts extends TableImpl&lt;BankaccountsRecord&gt; {
 
     @Override
     public List&lt;Index&gt; getIndexes() {
-<span class="nc" id="L134">        return Arrays.asList(Indexes.IDX_BANKACCOUNTS_BANK_ID, Indexes.IDX_BANKACCOUNTS_USER_ID);</span>
+<span class="nc" id="L134">        return Arrays.asList(Indexes.IDX_BANKACCOUNT_NUMBER, Indexes.IDX_BANKACCOUNTS_BANK_ID, Indexes.IDX_BANKACCOUNTS_USER_ID);</span>
     }
 
     @Override
     public UniqueKey&lt;BankaccountsRecord&gt; getPrimaryKey() {
-<span class="nc" id="L139">        return Keys.BANKACCOUNTS_PKEY;</span>
+<span class="nc" id="L139">        return Keys.PK_BANKACCOUNTS;</span>
     }
 
     @Override
     public List&lt;UniqueKey&lt;BankaccountsRecord&gt;&gt; getUniqueKeys() {
-<span class="nc" id="L144">        return Arrays.asList(Keys.BANKACCOUNTS_NUMBER_KEY);</span>
+<span class="nc" id="L144">        return Arrays.asList(Keys.CONSTRAINT_5);</span>
     }
 
     @Override
     public List&lt;ForeignKey&lt;BankaccountsRecord, ?&gt;&gt; getReferences() {
-<span class="nc" id="L149">        return Arrays.asList(Keys.BANKACCOUNTS__FK_BANKACCOUNTS_BANKS, Keys.BANKACCOUNTS__FK_BANKACCOUNTS_USERS);</span>
+<span class="nc" id="L149">        return Arrays.asList(Keys.FK_BANKACCOUNTS_BANKS, Keys.FK_BANKACCOUNTS_USERS);</span>
     }
 
     private transient Banks _banks;
     private transient Users _users;
 
     /**
-     * Get the implicit join path to the &lt;code&gt;public.Banks&lt;/code&gt; table.
+     * Get the implicit join path to the &lt;code&gt;PUBLIC.BANKS&lt;/code&gt; table.
      */
     public Banks banks() {
 <span class="nc bnc" id="L159" title="All 2 branches missed.">        if (_banks == null)</span>
-<span class="nc" id="L160">            _banks = new Banks(this, Keys.BANKACCOUNTS__FK_BANKACCOUNTS_BANKS);</span>
+<span class="nc" id="L160">            _banks = new Banks(this, Keys.FK_BANKACCOUNTS_BANKS);</span>
 
 <span class="nc" id="L162">        return _banks;</span>
     }
 
     /**
-     * Get the implicit join path to the &lt;code&gt;public.Users&lt;/code&gt; table.
+     * Get the implicit join path to the &lt;code&gt;PUBLIC.USERS&lt;/code&gt; table.
      */
     public Users users() {
 <span class="nc bnc" id="L169" title="All 2 branches missed.">        if (_users == null)</span>
-<span class="nc" id="L170">            _users = new Users(this, Keys.BANKACCOUNTS__FK_BANKACCOUNTS_USERS);</span>
+<span class="nc" id="L170">            _users = new Users(this, Keys.FK_BANKACCOUNTS_USERS);</span>
 
 <span class="nc" id="L172">        return _users;</span>
     }

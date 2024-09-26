@@ -39,42 +39,42 @@ public class Banks implements Serializable {
     }
 
     /**
-     * Getter for <code>public.Banks.id</code>.
+     * Getter for <code>PUBLIC.BANKS.ID</code>.
      */
     public UUID getId() {
         return this.id;
     }
 
     /**
-     * Setter for <code>public.Banks.id</code>.
+     * Setter for <code>PUBLIC.BANKS.ID</code>.
      */
     public void setId(UUID id) {
         this.id = id;
     }
 
     /**
-     * Getter for <code>public.Banks.name</code>.
+     * Getter for <code>PUBLIC.BANKS.NAME</code>.
      */
     public String getName() {
         return this.name;
     }
 
     /**
-     * Setter for <code>public.Banks.name</code>.
+     * Setter for <code>PUBLIC.BANKS.NAME</code>.
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * Getter for <code>public.Banks.identity_number</code>.
+     * Getter for <code>PUBLIC.BANKS.IDENTITY_NUMBER</code>.
      */
     public String getIdentityNumber() {
         return this.identityNumber;
     }
 
     /**
-     * Setter for <code>public.Banks.identity_number</code>.
+     * Setter for <code>PUBLIC.BANKS.IDENTITY_NUMBER</code>.
      */
     public void setIdentityNumber(String identityNumber) {
         this.identityNumber = identityNumber;

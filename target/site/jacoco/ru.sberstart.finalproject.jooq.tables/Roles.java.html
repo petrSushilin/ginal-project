@@ -40,7 +40,7 @@ public class Roles extends TableImpl&lt;RolesRecord&gt; {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of &lt;code&gt;public.Roles&lt;/code&gt;
+     * The reference instance of &lt;code&gt;PUBLIC.ROLES&lt;/code&gt;
      */
 <span class="fc" id="L45">    public static final Roles ROLES = new Roles();</span>
 
@@ -53,14 +53,14 @@ public class Roles extends TableImpl&lt;RolesRecord&gt; {
     }
 
     /**
-     * The column &lt;code&gt;public.Roles.id&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.ROLES.ID&lt;/code&gt;.
      */
-<span class="pc" id="L58">    public final TableField&lt;RolesRecord, UUID&gt; ID = createField(DSL.name(&quot;id&quot;), SQLDataType.UUID.nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L58">    public final TableField&lt;RolesRecord, UUID&gt; ID = createField(DSL.name(&quot;ID&quot;), SQLDataType.UUID.nullable(false).defaultValue(DSL.field(DSL.raw(&quot;RANDOM_UUID()&quot;), SQLDataType.UUID)), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.Roles.role_name&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.ROLES.ROLE_NAME&lt;/code&gt;.
      */
-<span class="pc" id="L63">    public final TableField&lt;RolesRecord, String&gt; ROLE_NAME = createField(DSL.name(&quot;role_name&quot;), SQLDataType.VARCHAR(20).nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L63">    public final TableField&lt;RolesRecord, String&gt; ROLE_NAME = createField(DSL.name(&quot;ROLE_NAME&quot;), SQLDataType.VARCHAR(20).nullable(false), this, &quot;&quot;);</span>
 
     private Roles(Name alias, Table&lt;RolesRecord&gt; aliased) {
 <span class="fc" id="L66">        this(alias, aliased, null);</span>
@@ -71,24 +71,24 @@ public class Roles extends TableImpl&lt;RolesRecord&gt; {
 <span class="fc" id="L71">    }</span>
 
     /**
-     * Create an aliased &lt;code&gt;public.Roles&lt;/code&gt; table reference
+     * Create an aliased &lt;code&gt;PUBLIC.ROLES&lt;/code&gt; table reference
      */
     public Roles(String alias) {
 <span class="nc" id="L77">        this(DSL.name(alias), ROLES);</span>
 <span class="nc" id="L78">    }</span>
 
     /**
-     * Create an aliased &lt;code&gt;public.Roles&lt;/code&gt; table reference
+     * Create an aliased &lt;code&gt;PUBLIC.ROLES&lt;/code&gt; table reference
      */
     public Roles(Name alias) {
 <span class="nc" id="L84">        this(alias, ROLES);</span>
 <span class="nc" id="L85">    }</span>
 
     /**
-     * Create a &lt;code&gt;public.Roles&lt;/code&gt; table reference
+     * Create a &lt;code&gt;PUBLIC.ROLES&lt;/code&gt; table reference
      */
     public Roles() {
-<span class="fc" id="L91">        this(DSL.name(&quot;Roles&quot;), null);</span>
+<span class="fc" id="L91">        this(DSL.name(&quot;ROLES&quot;), null);</span>
 <span class="fc" id="L92">    }</span>
 
     public &lt;O extends Record&gt; Roles(Table&lt;O&gt; child, ForeignKey&lt;O, RolesRecord&gt; key) {
@@ -102,12 +102,12 @@ public class Roles extends TableImpl&lt;RolesRecord&gt; {
 
     @Override
     public UniqueKey&lt;RolesRecord&gt; getPrimaryKey() {
-<span class="nc" id="L105">        return Keys.ROLES_PKEY;</span>
+<span class="nc" id="L105">        return Keys.PK_ROLES;</span>
     }
 
     @Override
     public List&lt;UniqueKey&lt;RolesRecord&gt;&gt; getUniqueKeys() {
-<span class="nc" id="L110">        return Arrays.asList(Keys.ROLES_ROLE_NAME_KEY);</span>
+<span class="nc" id="L110">        return Arrays.asList(Keys.CONSTRAINT_4A);</span>
     }
 
     @Override

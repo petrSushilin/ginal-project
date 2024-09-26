@@ -24,42 +24,42 @@ public class BanksRecord extends UpdatableRecordImpl<BanksRecord> implements Rec
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>public.Banks.id</code>.
+     * Setter for <code>PUBLIC.BANKS.ID</code>.
      */
     public void setId(UUID value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>public.Banks.id</code>.
+     * Getter for <code>PUBLIC.BANKS.ID</code>.
      */
     public UUID getId() {
         return (UUID) get(0);
     }
 
     /**
-     * Setter for <code>public.Banks.name</code>.
+     * Setter for <code>PUBLIC.BANKS.NAME</code>.
      */
     public void setName(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>public.Banks.name</code>.
+     * Getter for <code>PUBLIC.BANKS.NAME</code>.
      */
     public String getName() {
         return (String) get(1);
     }
 
     /**
-     * Setter for <code>public.Banks.identity_number</code>.
+     * Setter for <code>PUBLIC.BANKS.IDENTITY_NUMBER</code>.
      */
     public void setIdentityNumber(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>public.Banks.identity_number</code>.
+     * Getter for <code>PUBLIC.BANKS.IDENTITY_NUMBER</code>.
      */
     public String getIdentityNumber() {
         return (String) get(2);

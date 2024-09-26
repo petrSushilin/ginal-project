@@ -11,12 +11,12 @@ import java.util.function.Function;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function5;
+import org.jooq.Function4;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row5;
+import org.jooq.Row4;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -42,7 +42,7 @@ public class Cards extends TableImpl<CardsRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>public.Cards</code>
+     * The reference instance of <code>PUBLIC.CARDS</code>
      */
     public static final Cards CARDS = new Cards();
 
@@ -55,29 +55,24 @@ public class Cards extends TableImpl<CardsRecord> {
     }
 
     /**
-     * The column <code>public.Cards.id</code>.
+     * The column <code>PUBLIC.CARDS.ID</code>.
      */
-    public final TableField<CardsRecord, UUID> ID = createField(DSL.name("id"), SQLDataType.UUID.nullable(false), this, "");
+    public final TableField<CardsRecord, UUID> ID = createField(DSL.name("ID"), SQLDataType.UUID.nullable(false).defaultValue(DSL.field(DSL.raw("RANDOM_UUID()"), SQLDataType.UUID)), this, "");
 
     /**
-     * The column <code>public.Cards.bankaccount_id</code>.
+     * The column <code>PUBLIC.CARDS.BANKACCOUNT_ID</code>.
      */
-    public final TableField<CardsRecord, UUID> BANKACCOUNT_ID = createField(DSL.name("bankaccount_id"), SQLDataType.UUID.nullable(false), this, "");
+    public final TableField<CardsRecord, UUID> BANKACCOUNT_ID = createField(DSL.name("BANKACCOUNT_ID"), SQLDataType.UUID.nullable(false), this, "");
 
     /**
-     * The column <code>public.Cards.card_secret_id</code>.
+     * The column <code>PUBLIC.CARDS.NUMBER</code>.
      */
-    public final TableField<CardsRecord, UUID> CARD_SECRET_ID = createField(DSL.name("card_secret_id"), SQLDataType.UUID, this, "");
+    public final TableField<CardsRecord, String> NUMBER = createField(DSL.name("NUMBER"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
-     * The column <code>public.Cards.number</code>.
+     * The column <code>PUBLIC.CARDS.STATE</code>.
      */
-    public final TableField<CardsRecord, String> NUMBER = createField(DSL.name("number"), SQLDataType.VARCHAR(50).nullable(false), this, "");
-
-    /**
-     * The column <code>public.Cards.state</code>.
-     */
-    public final TableField<CardsRecord, String> STATE = createField(DSL.name("state"), SQLDataType.VARCHAR(20).nullable(false), this, "");
+    public final TableField<CardsRecord, String> STATE = createField(DSL.name("STATE"), SQLDataType.VARCHAR(20).nullable(false), this, "");
 
     private Cards(Name alias, Table<CardsRecord> aliased) {
         this(alias, aliased, null);
@@ -88,24 +83,24 @@ public class Cards extends TableImpl<CardsRecord> {
     }
 
     /**
-     * Create an aliased <code>public.Cards</code> table reference
+     * Create an aliased <code>PUBLIC.CARDS</code> table reference
      */
     public Cards(String alias) {
         this(DSL.name(alias), CARDS);
     }
 
     /**
-     * Create an aliased <code>public.Cards</code> table reference
+     * Create an aliased <code>PUBLIC.CARDS</code> table reference
      */
     public Cards(Name alias) {
         this(alias, CARDS);
     }
 
     /**
-     * Create a <code>public.Cards</code> table reference
+     * Create a <code>PUBLIC.CARDS</code> table reference
      */
     public Cards() {
-        this(DSL.name("Cards"), null);
+        this(DSL.name("CARDS"), null);
     }
 
     public <O extends Record> Cards(Table<O> child, ForeignKey<O, CardsRecord> key) {
@@ -119,43 +114,43 @@ public class Cards extends TableImpl<CardsRecord> {
 
     @Override
     public List<Index> getIndexes() {
-        return Arrays.asList(Indexes.IDX_CARDS_BANKACCOUNT_ID, Indexes.IDX_CARDS_CARD_SECRET_ID);
+        return Arrays.asList(Indexes.IDX_CARD_NUMBER, Indexes.IDX_CARDS_BANKACCOUNT_ID);
     }
 
     @Override
     public UniqueKey<CardsRecord> getPrimaryKey() {
-        return Keys.CARDS_PKEY;
+        return Keys.PK_CARDS;
     }
 
     @Override
     public List<UniqueKey<CardsRecord>> getUniqueKeys() {
-        return Arrays.asList(Keys.CARDS_CARD_SECRET_ID_KEY, Keys.CARDS_NUMBER_KEY);
+        return Arrays.asList(Keys.CONSTRAINT_3C);
     }
 
     @Override
     public List<ForeignKey<CardsRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.CARDS__FK_CARDS_BANKACCOUNTS, Keys.CARDS__FK_CARDS_CARDSECRETS);
+        return Arrays.asList(Keys.FK_CARDS_BANKACCOUNTS, Keys.FK_CARDSECRETS_CARDS_CARD_NUMBER);
     }
 
     private transient Bankaccounts _bankaccounts;
     private transient Cardsecrets _cardsecrets;
 
     /**
-     * Get the implicit join path to the <code>public.BankAccounts</code> table.
+     * Get the implicit join path to the <code>PUBLIC.BANKACCOUNTS</code> table.
      */
     public Bankaccounts bankaccounts() {
         if (_bankaccounts == null)
-            _bankaccounts = new Bankaccounts(this, Keys.CARDS__FK_CARDS_BANKACCOUNTS);
+            _bankaccounts = new Bankaccounts(this, Keys.FK_CARDS_BANKACCOUNTS);
 
         return _bankaccounts;
     }
 
     /**
-     * Get the implicit join path to the <code>public.CardSecrets</code> table.
+     * Get the implicit join path to the <code>PUBLIC.CARDSECRETS</code> table.
      */
     public Cardsecrets cardsecrets() {
         if (_cardsecrets == null)
-            _cardsecrets = new Cardsecrets(this, Keys.CARDS__FK_CARDS_CARDSECRETS);
+            _cardsecrets = new Cardsecrets(this, Keys.FK_CARDSECRETS_CARDS_CARD_NUMBER);
 
         return _cardsecrets;
     }
@@ -200,18 +195,18 @@ public class Cards extends TableImpl<CardsRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row5 type methods
+    // Row4 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5<UUID, UUID, UUID, String, String> fieldsRow() {
-        return (Row5) super.fieldsRow();
+    public Row4<UUID, UUID, String, String> fieldsRow() {
+        return (Row4) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function5<? super UUID, ? super UUID, ? super UUID, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function4<? super UUID, ? super UUID, ? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -219,7 +214,7 @@ public class Cards extends TableImpl<CardsRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function5<? super UUID, ? super UUID, ? super UUID, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function4<? super UUID, ? super UUID, ? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

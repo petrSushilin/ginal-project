@@ -4,17 +4,17 @@
 package ru.sberstart.finalproject.jooq.tables;
 
 
-import java.time.LocalDate;
-import java.util.UUID;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function5;
+import org.jooq.Function6;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row5;
+import org.jooq.Row6;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -39,7 +39,7 @@ public class Cardsecrets extends TableImpl<CardsecretsRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>public.CardSecrets</code>
+     * The reference instance of <code>PUBLIC.CARDSECRETS</code>
      */
     public static final Cardsecrets CARDSECRETS = new Cardsecrets();
 
@@ -52,29 +52,34 @@ public class Cardsecrets extends TableImpl<CardsecretsRecord> {
     }
 
     /**
-     * The column <code>public.CardSecrets.id</code>.
+     * The column <code>PUBLIC.CARDSECRETS.CARD_NUMBER</code>.
      */
-    public final TableField<CardsecretsRecord, UUID> ID = createField(DSL.name("id"), SQLDataType.UUID.nullable(false), this, "");
+    public final TableField<CardsecretsRecord, String> CARD_NUMBER = createField(DSL.name("CARD_NUMBER"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
-     * The column <code>public.CardSecrets.holder_name</code>.
+     * The column <code>PUBLIC.CARDSECRETS.HOLDER_NAME</code>.
      */
-    public final TableField<CardsecretsRecord, String> HOLDER_NAME = createField(DSL.name("holder_name"), SQLDataType.VARCHAR(255).nullable(false), this, "");
+    public final TableField<CardsecretsRecord, String> HOLDER_NAME = createField(DSL.name("HOLDER_NAME"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
-     * The column <code>public.CardSecrets.holder_surname</code>.
+     * The column <code>PUBLIC.CARDSECRETS.HOLDER_SURNAME</code>.
      */
-    public final TableField<CardsecretsRecord, String> HOLDER_SURNAME = createField(DSL.name("holder_surname"), SQLDataType.VARCHAR(255).nullable(false), this, "");
+    public final TableField<CardsecretsRecord, String> HOLDER_SURNAME = createField(DSL.name("HOLDER_SURNAME"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
-     * The column <code>public.CardSecrets.validate_period</code>.
+     * The column <code>PUBLIC.CARDSECRETS.VALIDATE_PERIOD</code>.
      */
-    public final TableField<CardsecretsRecord, LocalDate> VALIDATE_PERIOD = createField(DSL.name("validate_period"), SQLDataType.LOCALDATE.nullable(false), this, "");
+    public final TableField<CardsecretsRecord, String> VALIDATE_PERIOD = createField(DSL.name("VALIDATE_PERIOD"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
-     * The column <code>public.CardSecrets.secret_code</code>.
+     * The column <code>PUBLIC.CARDSECRETS.CVV</code>.
      */
-    public final TableField<CardsecretsRecord, String> SECRET_CODE = createField(DSL.name("secret_code"), SQLDataType.VARCHAR(255).nullable(false), this, "");
+    public final TableField<CardsecretsRecord, String> CVV = createField(DSL.name("CVV"), SQLDataType.VARCHAR(255).nullable(false), this, "");
+
+    /**
+     * The column <code>PUBLIC.CARDSECRETS.SECRET_CODE</code>.
+     */
+    public final TableField<CardsecretsRecord, String> SECRET_CODE = createField(DSL.name("SECRET_CODE"), SQLDataType.VARCHAR(270).nullable(false), this, "");
 
     private Cardsecrets(Name alias, Table<CardsecretsRecord> aliased) {
         this(alias, aliased, null);
@@ -85,24 +90,24 @@ public class Cardsecrets extends TableImpl<CardsecretsRecord> {
     }
 
     /**
-     * Create an aliased <code>public.CardSecrets</code> table reference
+     * Create an aliased <code>PUBLIC.CARDSECRETS</code> table reference
      */
     public Cardsecrets(String alias) {
         this(DSL.name(alias), CARDSECRETS);
     }
 
     /**
-     * Create an aliased <code>public.CardSecrets</code> table reference
+     * Create an aliased <code>PUBLIC.CARDSECRETS</code> table reference
      */
     public Cardsecrets(Name alias) {
         this(alias, CARDSECRETS);
     }
 
     /**
-     * Create a <code>public.CardSecrets</code> table reference
+     * Create a <code>PUBLIC.CARDSECRETS</code> table reference
      */
     public Cardsecrets() {
-        this(DSL.name("CardSecrets"), null);
+        this(DSL.name("CARDSECRETS"), null);
     }
 
     public <O extends Record> Cardsecrets(Table<O> child, ForeignKey<O, CardsecretsRecord> key) {
@@ -116,7 +121,12 @@ public class Cardsecrets extends TableImpl<CardsecretsRecord> {
 
     @Override
     public UniqueKey<CardsecretsRecord> getPrimaryKey() {
-        return Keys.CARDSECRETS_PKEY;
+        return Keys.PK_CARDSECRETS;
+    }
+
+    @Override
+    public List<UniqueKey<CardsecretsRecord>> getUniqueKeys() {
+        return Arrays.asList(Keys.CONSTRAINT_B);
     }
 
     @Override
@@ -159,18 +169,18 @@ public class Cardsecrets extends TableImpl<CardsecretsRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row5 type methods
+    // Row6 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5<UUID, String, String, LocalDate, String> fieldsRow() {
-        return (Row5) super.fieldsRow();
+    public Row6<String, String, String, String, String, String> fieldsRow() {
+        return (Row6) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function5<? super UUID, ? super String, ? super String, ? super LocalDate, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function6<? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -178,7 +188,7 @@ public class Cardsecrets extends TableImpl<CardsecretsRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function5<? super UUID, ? super String, ? super String, ? super LocalDate, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function6<? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

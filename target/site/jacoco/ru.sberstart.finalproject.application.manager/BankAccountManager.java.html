@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BankAccountManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">final-project</a> &gt; <a href="index.source.html" class="el_package">ru.sberstart.finalproject.application.manager</a> &gt; <span class="el_source">BankAccountManager.java</span></div><h1>BankAccountManager.java</h1><pre class="source lang-java linenums">package ru.sberstart.finalproject.application.manager;
+
+import org.springframework.lang.NonNull;
+import ru.sberstart.finalproject.domain.state.bankaccount.BankAccountState;
+import ru.sberstart.finalproject.domain.state.bankaccount.BankAccountStateFactory;
+import ru.sberstart.finalproject.api.dto.bankaccount.request.BankAccountCreationRequestDTO;
+import ru.sberstart.finalproject.domain.enitity.bankaccount.BankAccount;
+import ru.sberstart.finalproject.domain.enitity.bankaccount.enums.BankAccountStates;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.regex.Pattern;
+
+/**
+ * Класс для управления банковскими счетами (BankAccount) в рамках выполнения бизнес-логики.
+ * Основные функции включают в себя: работу по заполнению сведений создаваемого счета,
+ * проверку и изменение состояния банковских счетов.
+ */
+<span class="fc" id="L21">public class BankAccountManager {</span>
+<span class="fc" id="L22">    private static final Pattern PATTERN = Pattern.compile(&quot;^\\d{8}-[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$&quot;);</span>
+
+
+    /**
+     * Создает новый банковский счет на основе предоставленных данных.
+     *
+     * @param bankAccountCreationDTO DTO с данными для создания банковского счета.
+     * @return Экземпляр созданного банковского счета.
+     */
+    public BankAccount creatingCustomizeAccount(@NonNull BankAccountCreationRequestDTO bankAccountCreationDTO) {
+<span class="nc" id="L32">        return new BankAccount.Builder()</span>
+<span class="nc" id="L33">                .withBankId(bankAccountCreationDTO.bankId())</span>
+<span class="nc" id="L34">                .withUserId(bankAccountCreationDTO.userId())</span>
+<span class="nc" id="L35">                .withRegistryDate(LocalDate.now())</span>
+<span class="nc" id="L36">                .withNumber(LocalDate.now().format(DateTimeFormatter.ofPattern(&quot;yyyyMMdd&quot;)) + &quot;-&quot;</span>
+<span class="nc" id="L37">                                                                            + bankAccountCreationDTO.userId())</span>
+<span class="nc" id="L38">                .withBalance(BigDecimal.ZERO)</span>
+<span class="nc" id="L39">                .withState(BankAccountStates.CREATED)</span>
+<span class="nc" id="L40">                .build();</span>
+    }
+
+    /**
+     * Проверяет, соответствует ли номер банковского счета заданному шаблону.
+     *
+     * @param bankNumber Номер банковского счета для проверки.
+     * @return true, если номер соответствует шаблону, иначе false.
+     */
+    public boolean isInvalidateNumberPattern(String bankNumber) {
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        return !PATTERN.asMatchPredicate().test(bankNumber);</span>
+    }
+
+    /**
+     * Проверяет, готовность предоставленных банковских счетов к выполнению транзакций.
+     *
+     * @param accounts Список банковских счетов для проверки.
+     * @return true, если оба счета готовы к выполнению транзакций, иначе false.
+     */
+    public boolean reportAllAvailableTransactionExecution(@NonNull List&lt;BankAccount&gt; accounts) {
+<span class="nc" id="L60">        return !accounts.stream()</span>
+<span class="nc" id="L61">                .map(BankAccountStateFactory::getState)</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">                .allMatch(BankAccountState::isReadyForTransaction);</span>
+    }
+
+    public boolean reportUnavailableTransactionExecution(@NonNull List&lt;BankAccount&gt; accounts) {
+<span class="nc" id="L66">        return accounts.stream()</span>
+<span class="nc" id="L67">                .map(BankAccountStateFactory::getState)</span>
+<span class="nc" id="L68">                .peek(System.out::println)</span>
+<span class="nc" id="L69">                .anyMatch(BankAccountState::isReadyForTransaction);</span>
+    }
+
+    /**
+     * Переводит банковский счет в состояние &quot;Активный&quot;.
+     *
+     * @param account Экземпляр банковского счета, который необходимо активировать.
+     */
+    public void approveAccount(BankAccount account) {
+<span class="nc" id="L78">        BankAccountStateFactory.getState(account).approveAccount(account);</span>
+<span class="nc" id="L79">    }</span>
+
+    /**
+     * Переводит банковский счет в состояние &quot;Приостановленный&quot;.
+     *
+     * @param account Экземпляр банковского счета, который необходимо приостановить.
+     */
+    public void suspendAccount(BankAccount account) {
+<span class="nc" id="L87">        BankAccountStateFactory.getState(account).suspendAccount(account);</span>
+<span class="nc" id="L88">    }</span>
+
+    /**
+     * Переводит банковский счет в состояние &quot;Закрытый&quot;.
+     *
+     * @param account Экземпляр банковского счета, который необходимо закрыть.
+     */
+    public void closeAccount(BankAccount account) {
+<span class="nc" id="L96">        BankAccountStateFactory.getState(account).closeAccount(account);</span>
+<span class="nc" id="L97">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

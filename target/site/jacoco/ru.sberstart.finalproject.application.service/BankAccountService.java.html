@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BankAccountService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">final-project</a> &gt; <a href="index.source.html" class="el_package">ru.sberstart.finalproject.application.service</a> &gt; <span class="el_source">BankAccountService.java</span></div><h1>BankAccountService.java</h1><pre class="source lang-java linenums">package ru.sberstart.finalproject.application.service;
+
+import org.springframework.transaction.annotation.Transactional;
+import ru.sberstart.finalproject.api.dto.bankaccount.inner.BankAccountCardIssueInformationDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.inner.BankAccountFullInformationDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.response.BankAccountActiveInformationResponseDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.request.BankAccountCreationRequestDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.response.BankAccountDeactivateInformationResponseDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.response.BankAccountCreationResponseDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.response.BankAccountInformationResponseDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.request.BankAccountStateRequestDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.response.BankAccountSuccessTransactionResponseDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.request.BankAccountTransferTransactionRequestDTO;
+import ru.sberstart.finalproject.domain.enitity.bankaccount.enums.BankAccountStates;
+import ru.sberstart.finalproject.global.exceptions.NotAvailableActionsException;
+import ru.sberstart.finalproject.mapper.BankAccountMapper;
+import ru.sberstart.finalproject.infrastructure.repostitory.implementation.BankAccountRepositoryImpl;
+import ru.sberstart.finalproject.application.manager.BankAccountManager;
+import ru.sberstart.finalproject.domain.enitity.bankaccount.BankAccount;
+import ru.sberstart.finalproject.global.exceptions.ForbiddenTransactionException;
+import ru.sberstart.finalproject.global.exceptions.RecordNotFoundException;
+import ru.sberstart.finalproject.global.exceptions.UnsuccessfulOperationException;
+
+import java.math.BigDecimal;
+
+/**
+ * Класс управления бизнес-логикой при работе с банковскими счетами.
+ * Основные функциональные особенности: Создание, подтверждение, приостановка и закрытие банковских счетов.
+ * Валидация номеров банковских счетов. Выполнение транзакций между банковскими счетами.
+ * Ограничения: Номера банковских счетов должны соответствовать определенному шаблону.
+ * Некоторые состояния банковских счетов не могут быть изменены напрямую.
+ */
+public class BankAccountService {
+    private final BankAccountRepositoryImpl repository;
+    private final BankAccountManager manager;
+    private final TransactionService transactionService;
+
+<span class="fc" id="L38">    public BankAccountService(BankAccountRepositoryImpl repository, TransactionService transactionService, BankAccountManager manager) {</span>
+<span class="fc" id="L39">        this.repository = repository;</span>
+<span class="fc" id="L40">        this.transactionService = transactionService;</span>
+<span class="fc" id="L41">        this.manager = manager;</span>
+<span class="fc" id="L42">    }</span>
+
+    /**
+     * Процесс создания банковского счета.
+     * Сначала выполняется донастройка сущности, затем выполняется создание банковского счета.
+     * После корректного добавления банковского счета в БД, происходит получение записи из БД
+     * и возврат ожидаемого DTO сущности.
+     *
+     * @param bankAccountCreationDTO DTO с информацией для создания банковского счета.
+     * @return BankAccountFullInformationResponseDTO с полной информацией о созданном банковском счете.
+     */
+    public BankAccountCreationResponseDTO createBankAccount(BankAccountCreationRequestDTO bankAccountCreationDTO) {
+<span class="nc" id="L54">        BankAccount bankAccount = manager.creatingCustomizeAccount(bankAccountCreationDTO);</span>
+
+<span class="nc" id="L56">        BankAccount bankAccountRecord = repository.create(bankAccount).orElseThrow(UnsuccessfulOperationException::new);</span>
+
+<span class="nc" id="L58">        return BankAccountMapper.INSTANCE.toBankAccountFullInformationResponseDTO(bankAccountRecord);</span>
+    }
+
+    /**
+     * Получение информации о банковском счете по его номеру.
+     *
+     * @param bankAccountNumber Номер банковского счета.
+     * @return BankAccountInformationResponseDTO с информацией о банковском счете.
+     */
+    public BankAccountInformationResponseDTO getByNumber(String bankAccountNumber) {
+<span class="nc" id="L68">        BankAccountFullInformationDTO bankAccountInformation = getBankAccountFullInformationByNumber(bankAccountNumber);</span>
+<span class="nc" id="L69">        return BankAccountMapper.INSTANCE.toBankAccountInformationResponseDTO(bankAccountInformation);</span>
+    }
+
+    /**
+     * Получение информации о банковском счете по его номеру для выпуска карты.
+     *
+     * @param bankAccountNumber Номер банковского счета.
+     * @return BankAccountCardIssueInformationDTO с информацией о банковском счете.
+     */
+    public BankAccountCardIssueInformationDTO getBankAccountCardIssueInformationByNumber(String bankAccountNumber) {
+<span class="nc" id="L79">        BankAccountFullInformationDTO bankAccountInformation = getBankAccountFullInformationByNumber(bankAccountNumber);</span>
+<span class="nc" id="L80">        return BankAccountMapper.INSTANCE.toBankAccountCardIssueInformationDTO(bankAccountInformation);</span>
+    }
+
+    /**
+     * Внутренний метод для получения полной информации о банковском счете по его номеру.
+     * Перед обращением к БД проводится валидация номера счета.
+     *
+     * @param bankAccountNumber Номер банковского счета.
+     * @return BankAccountFullInformationDTO с информацией о банковском счете.
+     */
+    private BankAccountFullInformationDTO getBankAccountFullInformationByNumber(String bankAccountNumber) {
+<span class="nc bnc" id="L91" title="All 2 branches missed.">        if (manager.isInvalidateNumberPattern(bankAccountNumber)) throw new IllegalArgumentException();</span>
+<span class="nc" id="L92">        return repository.getByNumber(bankAccountNumber).orElseThrow(RecordNotFoundException::new);</span>
+    }
+
+    /**
+     * Процесс подтверждения банковского счета.
+     * Сначала выполняется изменение состояния банковского счета, затем выполняется обновление записи в БД.
+     * После корректного изменения состояния банковского счета в БД, происходит отправка ожидаемого DTO сущности.
+     *
+     * @param stateDTO DTO с информацией о состоянии банковского счета.
+     * @return BankAccountActiveInformationResponseDTO с информацией об активированном банковском счете.
+     */
+    public BankAccountActiveInformationResponseDTO approveBankAccount(BankAccountStateRequestDTO stateDTO) {
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        if(!stateDTO.state().equals(BankAccountStates.ACTIVE)) throw new NotAvailableActionsException();</span>
+
+<span class="nc" id="L106">        BankAccount bankAccount = updateBankAccount(stateDTO);</span>
+
+<span class="nc" id="L108">        return BankAccountMapper.INSTANCE.toBankAccountActiveInformationResponseDTO(bankAccount);</span>
+    }
+
+    /**
+     * Процесс приостановки действия банковского счета.
+     * Сначала выполняется изменение состояния банковского счета, затем выполняется обновление записи в БД.
+     * После корректного изменения состояния банковского счета в БД, происходит отправка ожидаемого DTO сущности.
+     *
+     * @param stateDTO DTO с информацией о состоянии банковского счета.
+     * @return BankAccountDeactivateInformationResponseDTO с информацией о приостановленном банковском счете.
+     */
+    public BankAccountDeactivateInformationResponseDTO suspendBankAccount(BankAccountStateRequestDTO stateDTO) {
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        if(!stateDTO.state().equals(BankAccountStates.STOPPED)) throw new NotAvailableActionsException();</span>
+
+<span class="nc" id="L122">        BankAccount bankAccount = updateBankAccount(stateDTO);</span>
+
+<span class="nc" id="L124">        return BankAccountMapper.INSTANCE.toBankAccountDeactivateInformationResponseDTO(bankAccount);</span>
+    }
+
+    /**
+     * Процесс закрытия банковского счета.
+     * Сначала выполняется изменение состояния банковского счета, затем выполняется обновление записи в БД.
+     * После корректного изменения состояния банковского счета в БД, происходит отправка ожидаемого DTO сущности.
+     *
+     * @param stateDTO DTO с информацией о состоянии банковского счета.
+     * @return BankAccountDeactivateInformationResponseDTO с информацией о закрытом банковском счете.
+     */
+    public BankAccountDeactivateInformationResponseDTO closeBankAccount(BankAccountStateRequestDTO stateDTO) {
+<span class="nc bnc" id="L136" title="All 2 branches missed.">        if(!stateDTO.state().equals(BankAccountStates.CLOSED)) throw new NotAvailableActionsException();</span>
+
+<span class="nc" id="L138">        BankAccount bankAccount = updateBankAccount(stateDTO);</span>
+
+<span class="nc" id="L140">        return BankAccountMapper.INSTANCE.toBankAccountDeactivateInformationResponseDTO(bankAccount);</span>
+    }
+
+    public BankAccount updateBankAccount(BankAccountStateRequestDTO stateDTO) {
+<span class="nc" id="L144">        BankAccount bankAccount = consistencyAccountRecordWithState(stateDTO);</span>
+
+<span class="nc" id="L146">        return repository.updateState(bankAccount).orElseThrow(UnsuccessfulOperationException::new);</span>
+    }
+
+    /**
+     * Внутренний метод, реализующий изменение состояния банковского счета.
+     * В зависимости от переданного состояния, выполняется соответствующее действие.
+     *
+     * @param stateDTO DTO с информацией о состоянии банковского счета.
+     * @return BankAccount с обновленным состоянием.
+     */
+    private BankAccount consistencyAccountRecordWithState(BankAccountStateRequestDTO stateDTO) {
+<span class="nc" id="L157">        BankAccount account = repository.getServiceInfoByNumber(stateDTO.number()).orElseThrow(UnsuccessfulOperationException::new);</span>
+<span class="nc bnc" id="L158" title="All 5 branches missed.">        switch (stateDTO.state()) {</span>
+<span class="nc" id="L159">            case CREATED -&gt; throw new UnsupportedOperationException();</span>
+<span class="nc" id="L160">            case ACTIVE -&gt; manager.approveAccount(account);</span>
+<span class="nc" id="L161">            case STOPPED -&gt; manager.suspendAccount(account);</span>
+<span class="nc" id="L162">            case CLOSED -&gt; manager.closeAccount(account);</span>
+        }
+<span class="nc" id="L164">        return account;</span>
+    }
+
+    /**
+     * Выполнение транзакции между банковскими счетами.
+     * Транзакция выполняется с использованием цепочки обработчиков.
+     * В случае ошибки транзакция откатывается.
+     *
+     * @param transactionDTO DTO с информацией о транзакции.
+     * @return BankAccountSuccessTransactionDTO с информацией об успешной транзакции.
+     */
+    @Transactional(rollbackFor = ForbiddenTransactionException.class)
+    public BankAccountSuccessTransactionResponseDTO executeTransaction(BankAccountTransferTransactionRequestDTO transactionDTO) {
+<span class="nc" id="L177">        BankAccount senderBankAccount = transactionService.executeTransaction(transactionDTO);</span>
+
+<span class="nc" id="L179">        return BankAccountMapper.INSTANCE.toBankAccountSuccessTransactionDTO(senderBankAccount);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

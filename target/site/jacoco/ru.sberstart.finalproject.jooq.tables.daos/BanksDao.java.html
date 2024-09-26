@@ -41,7 +41,7 @@ public class BanksDao extends DAOImpl&lt;BanksRecord, ru.sberstart.finalproject.
     }
 
     /**
-     * Fetch records that have &lt;code&gt;id BETWEEN lowerInclusive AND
+     * Fetch records that have &lt;code&gt;ID BETWEEN lowerInclusive AND
      * upperInclusive&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Banks&gt; fetchRangeOfId(UUID lowerInclusive, UUID upperInclusive) {
@@ -49,28 +49,28 @@ public class BanksDao extends DAOImpl&lt;BanksRecord, ru.sberstart.finalproject.
     }
 
     /**
-     * Fetch records that have &lt;code&gt;id IN (values)&lt;/code&gt;
+     * Fetch records that have &lt;code&gt;ID IN (values)&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Banks&gt; fetchById(UUID... values) {
 <span class="nc" id="L55">        return fetch(Banks.BANKS.ID, values);</span>
     }
 
     /**
-     * Fetch a unique record that has &lt;code&gt;id = value&lt;/code&gt;
+     * Fetch a unique record that has &lt;code&gt;ID = value&lt;/code&gt;
      */
     public ru.sberstart.finalproject.jooq.tables.pojos.Banks fetchOneById(UUID value) {
 <span class="nc" id="L62">        return fetchOne(Banks.BANKS.ID, value);</span>
     }
 
     /**
-     * Fetch a unique record that has &lt;code&gt;id = value&lt;/code&gt;
+     * Fetch a unique record that has &lt;code&gt;ID = value&lt;/code&gt;
      */
     public Optional&lt;ru.sberstart.finalproject.jooq.tables.pojos.Banks&gt; fetchOptionalById(UUID value) {
 <span class="nc" id="L69">        return fetchOptional(Banks.BANKS.ID, value);</span>
     }
 
     /**
-     * Fetch records that have &lt;code&gt;name BETWEEN lowerInclusive AND
+     * Fetch records that have &lt;code&gt;NAME BETWEEN lowerInclusive AND
      * upperInclusive&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Banks&gt; fetchRangeOfName(String lowerInclusive, String upperInclusive) {
@@ -78,14 +78,14 @@ public class BanksDao extends DAOImpl&lt;BanksRecord, ru.sberstart.finalproject.
     }
 
     /**
-     * Fetch records that have &lt;code&gt;name IN (values)&lt;/code&gt;
+     * Fetch records that have &lt;code&gt;NAME IN (values)&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Banks&gt; fetchByName(String... values) {
 <span class="nc" id="L84">        return fetch(Banks.BANKS.NAME, values);</span>
     }
 
     /**
-     * Fetch records that have &lt;code&gt;identity_number BETWEEN lowerInclusive AND
+     * Fetch records that have &lt;code&gt;IDENTITY_NUMBER BETWEEN lowerInclusive AND
      * upperInclusive&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Banks&gt; fetchRangeOfIdentityNumber(String lowerInclusive, String upperInclusive) {
@@ -93,21 +93,21 @@ public class BanksDao extends DAOImpl&lt;BanksRecord, ru.sberstart.finalproject.
     }
 
     /**
-     * Fetch records that have &lt;code&gt;identity_number IN (values)&lt;/code&gt;
+     * Fetch records that have &lt;code&gt;IDENTITY_NUMBER IN (values)&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Banks&gt; fetchByIdentityNumber(String... values) {
 <span class="nc" id="L99">        return fetch(Banks.BANKS.IDENTITY_NUMBER, values);</span>
     }
 
     /**
-     * Fetch a unique record that has &lt;code&gt;identity_number = value&lt;/code&gt;
+     * Fetch a unique record that has &lt;code&gt;IDENTITY_NUMBER = value&lt;/code&gt;
      */
     public ru.sberstart.finalproject.jooq.tables.pojos.Banks fetchOneByIdentityNumber(String value) {
 <span class="nc" id="L106">        return fetchOne(Banks.BANKS.IDENTITY_NUMBER, value);</span>
     }
 
     /**
-     * Fetch a unique record that has &lt;code&gt;identity_number = value&lt;/code&gt;
+     * Fetch a unique record that has &lt;code&gt;IDENTITY_NUMBER = value&lt;/code&gt;
      */
     public Optional&lt;ru.sberstart.finalproject.jooq.tables.pojos.Banks&gt; fetchOptionalByIdentityNumber(String value) {
 <span class="nc" id="L113">        return fetchOptional(Banks.BANKS.IDENTITY_NUMBER, value);</span>

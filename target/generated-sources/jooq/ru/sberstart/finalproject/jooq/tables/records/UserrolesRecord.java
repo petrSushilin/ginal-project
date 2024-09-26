@@ -23,28 +23,28 @@ public class UserrolesRecord extends UpdatableRecordImpl<UserrolesRecord> implem
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>public.UserRoles.user_id</code>.
+     * Setter for <code>PUBLIC.USERROLES.USER_ID</code>.
      */
     public void setUserId(UUID value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>public.UserRoles.user_id</code>.
+     * Getter for <code>PUBLIC.USERROLES.USER_ID</code>.
      */
     public UUID getUserId() {
         return (UUID) get(0);
     }
 
     /**
-     * Setter for <code>public.UserRoles.role_id</code>.
+     * Setter for <code>PUBLIC.USERROLES.ROLE_ID</code>.
      */
     public void setRoleId(UUID value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>public.UserRoles.role_id</code>.
+     * Getter for <code>PUBLIC.USERROLES.ROLE_ID</code>.
      */
     public UUID getRoleId() {
         return (UUID) get(1);

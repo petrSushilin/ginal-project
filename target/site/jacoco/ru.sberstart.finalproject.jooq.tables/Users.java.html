@@ -13,6 +13,7 @@ import java.util.function.Function;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Function7;
+import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
@@ -27,6 +28,7 @@ import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 
+import ru.sberstart.finalproject.jooq.Indexes;
 import ru.sberstart.finalproject.jooq.Keys;
 import ru.sberstart.finalproject.jooq.Public;
 import ru.sberstart.finalproject.jooq.tables.records.UsersRecord;
@@ -41,114 +43,119 @@ public class Users extends TableImpl&lt;UsersRecord&gt; {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of &lt;code&gt;public.Users&lt;/code&gt;
+     * The reference instance of &lt;code&gt;PUBLIC.USERS&lt;/code&gt;
      */
-<span class="fc" id="L46">    public static final Users USERS = new Users();</span>
+<span class="fc" id="L48">    public static final Users USERS = new Users();</span>
 
     /**
      * The class holding records for this type
      */
     @Override
     public Class&lt;UsersRecord&gt; getRecordType() {
-<span class="nc" id="L53">        return UsersRecord.class;</span>
+<span class="nc" id="L55">        return UsersRecord.class;</span>
     }
 
     /**
-     * The column &lt;code&gt;public.Users.id&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.USERS.ID&lt;/code&gt;.
      */
-<span class="pc" id="L59">    public final TableField&lt;UsersRecord, UUID&gt; ID = createField(DSL.name(&quot;id&quot;), SQLDataType.UUID.nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L61">    public final TableField&lt;UsersRecord, UUID&gt; ID = createField(DSL.name(&quot;ID&quot;), SQLDataType.UUID.nullable(false).defaultValue(DSL.field(DSL.raw(&quot;RANDOM_UUID()&quot;), SQLDataType.UUID)), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.Users.name&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.USERS.NAME&lt;/code&gt;.
      */
-<span class="pc" id="L64">    public final TableField&lt;UsersRecord, String&gt; NAME = createField(DSL.name(&quot;name&quot;), SQLDataType.VARCHAR(255).nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L66">    public final TableField&lt;UsersRecord, String&gt; NAME = createField(DSL.name(&quot;NAME&quot;), SQLDataType.VARCHAR(255).nullable(false), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.Users.surname&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.USERS.SURNAME&lt;/code&gt;.
      */
-<span class="pc" id="L69">    public final TableField&lt;UsersRecord, String&gt; SURNAME = createField(DSL.name(&quot;surname&quot;), SQLDataType.VARCHAR(255).nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L71">    public final TableField&lt;UsersRecord, String&gt; SURNAME = createField(DSL.name(&quot;SURNAME&quot;), SQLDataType.VARCHAR(255).nullable(false), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.Users.birthdate&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.USERS.BIRTHDATE&lt;/code&gt;.
      */
-<span class="pc" id="L74">    public final TableField&lt;UsersRecord, LocalDate&gt; BIRTHDATE = createField(DSL.name(&quot;birthdate&quot;), SQLDataType.LOCALDATE.nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L76">    public final TableField&lt;UsersRecord, LocalDate&gt; BIRTHDATE = createField(DSL.name(&quot;BIRTHDATE&quot;), SQLDataType.LOCALDATE.nullable(false), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.Users.phone_number&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.USERS.PHONE_NUMBER&lt;/code&gt;.
      */
-<span class="pc" id="L79">    public final TableField&lt;UsersRecord, String&gt; PHONE_NUMBER = createField(DSL.name(&quot;phone_number&quot;), SQLDataType.VARCHAR(15).nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L81">    public final TableField&lt;UsersRecord, String&gt; PHONE_NUMBER = createField(DSL.name(&quot;PHONE_NUMBER&quot;), SQLDataType.VARCHAR(15).nullable(false), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.Users.passport_number&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.USERS.PASSPORT_NUMBER&lt;/code&gt;.
      */
-<span class="pc" id="L84">    public final TableField&lt;UsersRecord, String&gt; PASSPORT_NUMBER = createField(DSL.name(&quot;passport_number&quot;), SQLDataType.VARCHAR(50).nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L86">    public final TableField&lt;UsersRecord, String&gt; PASSPORT_NUMBER = createField(DSL.name(&quot;PASSPORT_NUMBER&quot;), SQLDataType.VARCHAR(50).nullable(false), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.Users.status&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.USERS.STATUS&lt;/code&gt;.
      */
-<span class="pc" id="L89">    public final TableField&lt;UsersRecord, String&gt; STATUS = createField(DSL.name(&quot;status&quot;), SQLDataType.VARCHAR(20).nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L91">    public final TableField&lt;UsersRecord, String&gt; STATUS = createField(DSL.name(&quot;STATUS&quot;), SQLDataType.VARCHAR(20).nullable(false), this, &quot;&quot;);</span>
 
     private Users(Name alias, Table&lt;UsersRecord&gt; aliased) {
-<span class="fc" id="L92">        this(alias, aliased, null);</span>
-<span class="fc" id="L93">    }</span>
+<span class="fc" id="L94">        this(alias, aliased, null);</span>
+<span class="fc" id="L95">    }</span>
 
     private Users(Name alias, Table&lt;UsersRecord&gt; aliased, Field&lt;?&gt;[] parameters) {
-<span class="fc" id="L96">        super(alias, null, aliased, parameters, DSL.comment(&quot;&quot;), TableOptions.table());</span>
-<span class="fc" id="L97">    }</span>
+<span class="fc" id="L98">        super(alias, null, aliased, parameters, DSL.comment(&quot;&quot;), TableOptions.table());</span>
+<span class="fc" id="L99">    }</span>
 
     /**
-     * Create an aliased &lt;code&gt;public.Users&lt;/code&gt; table reference
+     * Create an aliased &lt;code&gt;PUBLIC.USERS&lt;/code&gt; table reference
      */
     public Users(String alias) {
-<span class="nc" id="L103">        this(DSL.name(alias), USERS);</span>
-<span class="nc" id="L104">    }</span>
+<span class="nc" id="L105">        this(DSL.name(alias), USERS);</span>
+<span class="nc" id="L106">    }</span>
 
     /**
-     * Create an aliased &lt;code&gt;public.Users&lt;/code&gt; table reference
+     * Create an aliased &lt;code&gt;PUBLIC.USERS&lt;/code&gt; table reference
      */
     public Users(Name alias) {
-<span class="nc" id="L110">        this(alias, USERS);</span>
-<span class="nc" id="L111">    }</span>
+<span class="nc" id="L112">        this(alias, USERS);</span>
+<span class="nc" id="L113">    }</span>
 
     /**
-     * Create a &lt;code&gt;public.Users&lt;/code&gt; table reference
+     * Create a &lt;code&gt;PUBLIC.USERS&lt;/code&gt; table reference
      */
     public Users() {
-<span class="fc" id="L117">        this(DSL.name(&quot;Users&quot;), null);</span>
-<span class="fc" id="L118">    }</span>
+<span class="fc" id="L119">        this(DSL.name(&quot;USERS&quot;), null);</span>
+<span class="fc" id="L120">    }</span>
 
     public &lt;O extends Record&gt; Users(Table&lt;O&gt; child, ForeignKey&lt;O, UsersRecord&gt; key) {
-<span class="nc" id="L121">        super(child, key, USERS);</span>
-<span class="nc" id="L122">    }</span>
+<span class="nc" id="L123">        super(child, key, USERS);</span>
+<span class="nc" id="L124">    }</span>
 
     @Override
     public Schema getSchema() {
-<span class="nc bnc" id="L126" title="All 2 branches missed.">        return aliased() ? null : Public.PUBLIC;</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">        return aliased() ? null : Public.PUBLIC;</span>
+    }
+
+    @Override
+    public List&lt;Index&gt; getIndexes() {
+<span class="nc" id="L133">        return Arrays.asList(Indexes.IDX_PHONE_NUMBER);</span>
     }
 
     @Override
     public UniqueKey&lt;UsersRecord&gt; getPrimaryKey() {
-<span class="nc" id="L131">        return Keys.USERS_PKEY;</span>
+<span class="nc" id="L138">        return Keys.PK_USERS;</span>
     }
 
     @Override
     public List&lt;UniqueKey&lt;UsersRecord&gt;&gt; getUniqueKeys() {
-<span class="nc" id="L136">        return Arrays.asList(Keys.USERS_PHONE_NUMBER_KEY, Keys.USERS_PASSPORT_NUMBER_KEY);</span>
+<span class="nc" id="L143">        return Arrays.asList(Keys.CONSTRAINT_4, Keys.CONSTRAINT_4D);</span>
     }
 
     @Override
     public Users as(String alias) {
-<span class="nc" id="L141">        return new Users(DSL.name(alias), this);</span>
+<span class="nc" id="L148">        return new Users(DSL.name(alias), this);</span>
     }
 
     @Override
     public Users as(Name alias) {
-<span class="nc" id="L146">        return new Users(alias, this);</span>
+<span class="nc" id="L153">        return new Users(alias, this);</span>
     }
 
     @Override
     public Users as(Table&lt;?&gt; alias) {
-<span class="nc" id="L151">        return new Users(alias.getQualifiedName(), this);</span>
+<span class="nc" id="L158">        return new Users(alias.getQualifiedName(), this);</span>
     }
 
     /**
@@ -156,7 +163,7 @@ public class Users extends TableImpl&lt;UsersRecord&gt; {
      */
     @Override
     public Users rename(String name) {
-<span class="nc" id="L159">        return new Users(DSL.name(name), null);</span>
+<span class="nc" id="L166">        return new Users(DSL.name(name), null);</span>
     }
 
     /**
@@ -164,7 +171,7 @@ public class Users extends TableImpl&lt;UsersRecord&gt; {
      */
     @Override
     public Users rename(Name name) {
-<span class="nc" id="L167">        return new Users(name, null);</span>
+<span class="nc" id="L174">        return new Users(name, null);</span>
     }
 
     /**
@@ -172,7 +179,7 @@ public class Users extends TableImpl&lt;UsersRecord&gt; {
      */
     @Override
     public Users rename(Table&lt;?&gt; name) {
-<span class="nc" id="L175">        return new Users(name.getQualifiedName(), null);</span>
+<span class="nc" id="L182">        return new Users(name.getQualifiedName(), null);</span>
     }
 
     // -------------------------------------------------------------------------
@@ -181,14 +188,14 @@ public class Users extends TableImpl&lt;UsersRecord&gt; {
 
     @Override
     public Row7&lt;UUID, String, String, LocalDate, String, String, String&gt; fieldsRow() {
-<span class="nc" id="L184">        return (Row7) super.fieldsRow();</span>
+<span class="nc" id="L191">        return (Row7) super.fieldsRow();</span>
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
     public &lt;U&gt; SelectField&lt;U&gt; mapping(Function7&lt;? super UUID, ? super String, ? super String, ? super LocalDate, ? super String, ? super String, ? super String, ? extends U&gt; from) {
-<span class="nc" id="L191">        return convertFrom(Records.mapping(from));</span>
+<span class="nc" id="L198">        return convertFrom(Records.mapping(from));</span>
     }
 
     /**
@@ -196,7 +203,7 @@ public class Users extends TableImpl&lt;UsersRecord&gt; {
      * Function)}.
      */
     public &lt;U&gt; SelectField&lt;U&gt; mapping(Class&lt;U&gt; toType, Function7&lt;? super UUID, ? super String, ? super String, ? super LocalDate, ? super String, ? super String, ? super String, ? extends U&gt; from) {
-<span class="nc" id="L199">        return convertFrom(toType, Records.mapping(from));</span>
+<span class="nc" id="L206">        return convertFrom(toType, Records.mapping(from));</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -41,7 +41,7 @@ public class UserrolesDao extends DAOImpl&lt;UserrolesRecord, ru.sberstart.final
     }
 
     /**
-     * Fetch records that have &lt;code&gt;user_id BETWEEN lowerInclusive AND
+     * Fetch records that have &lt;code&gt;USER_ID BETWEEN lowerInclusive AND
      * upperInclusive&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Userroles&gt; fetchRangeOfUserId(UUID lowerInclusive, UUID upperInclusive) {
@@ -49,14 +49,14 @@ public class UserrolesDao extends DAOImpl&lt;UserrolesRecord, ru.sberstart.final
     }
 
     /**
-     * Fetch records that have &lt;code&gt;user_id IN (values)&lt;/code&gt;
+     * Fetch records that have &lt;code&gt;USER_ID IN (values)&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Userroles&gt; fetchByUserId(UUID... values) {
 <span class="nc" id="L55">        return fetch(Userroles.USERROLES.USER_ID, values);</span>
     }
 
     /**
-     * Fetch records that have &lt;code&gt;role_id BETWEEN lowerInclusive AND
+     * Fetch records that have &lt;code&gt;ROLE_ID BETWEEN lowerInclusive AND
      * upperInclusive&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Userroles&gt; fetchRangeOfRoleId(UUID lowerInclusive, UUID upperInclusive) {
@@ -64,7 +64,7 @@ public class UserrolesDao extends DAOImpl&lt;UserrolesRecord, ru.sberstart.final
     }
 
     /**
-     * Fetch records that have &lt;code&gt;role_id IN (values)&lt;/code&gt;
+     * Fetch records that have &lt;code&gt;ROLE_ID IN (values)&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Userroles&gt; fetchByRoleId(UUID... values) {
 <span class="nc" id="L70">        return fetch(Userroles.USERROLES.ROLE_ID, values);</span>

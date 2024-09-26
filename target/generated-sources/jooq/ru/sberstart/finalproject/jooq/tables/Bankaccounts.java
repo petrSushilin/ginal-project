@@ -44,7 +44,7 @@ public class Bankaccounts extends TableImpl<BankaccountsRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>public.BankAccounts</code>
+     * The reference instance of <code>PUBLIC.BANKACCOUNTS</code>
      */
     public static final Bankaccounts BANKACCOUNTS = new Bankaccounts();
 
@@ -57,39 +57,39 @@ public class Bankaccounts extends TableImpl<BankaccountsRecord> {
     }
 
     /**
-     * The column <code>public.BankAccounts.id</code>.
+     * The column <code>PUBLIC.BANKACCOUNTS.ID</code>.
      */
-    public final TableField<BankaccountsRecord, UUID> ID = createField(DSL.name("id"), SQLDataType.UUID.nullable(false), this, "");
+    public final TableField<BankaccountsRecord, UUID> ID = createField(DSL.name("ID"), SQLDataType.UUID.nullable(false).defaultValue(DSL.field(DSL.raw("RANDOM_UUID()"), SQLDataType.UUID)), this, "");
 
     /**
-     * The column <code>public.BankAccounts.bank_id</code>.
+     * The column <code>PUBLIC.BANKACCOUNTS.BANK_ID</code>.
      */
-    public final TableField<BankaccountsRecord, UUID> BANK_ID = createField(DSL.name("bank_id"), SQLDataType.UUID.nullable(false), this, "");
+    public final TableField<BankaccountsRecord, UUID> BANK_ID = createField(DSL.name("BANK_ID"), SQLDataType.UUID.nullable(false), this, "");
 
     /**
-     * The column <code>public.BankAccounts.user_id</code>.
+     * The column <code>PUBLIC.BANKACCOUNTS.USER_ID</code>.
      */
-    public final TableField<BankaccountsRecord, UUID> USER_ID = createField(DSL.name("user_id"), SQLDataType.UUID.nullable(false), this, "");
+    public final TableField<BankaccountsRecord, UUID> USER_ID = createField(DSL.name("USER_ID"), SQLDataType.UUID.nullable(false), this, "");
 
     /**
-     * The column <code>public.BankAccounts.registry_date</code>.
+     * The column <code>PUBLIC.BANKACCOUNTS.REGISTRY_DATE</code>.
      */
-    public final TableField<BankaccountsRecord, LocalDate> REGISTRY_DATE = createField(DSL.name("registry_date"), SQLDataType.LOCALDATE.nullable(false), this, "");
+    public final TableField<BankaccountsRecord, LocalDate> REGISTRY_DATE = createField(DSL.name("REGISTRY_DATE"), SQLDataType.LOCALDATE.nullable(false), this, "");
 
     /**
-     * The column <code>public.BankAccounts.number</code>.
+     * The column <code>PUBLIC.BANKACCOUNTS.NUMBER</code>.
      */
-    public final TableField<BankaccountsRecord, String> NUMBER = createField(DSL.name("number"), SQLDataType.VARCHAR(50).nullable(false), this, "");
+    public final TableField<BankaccountsRecord, String> NUMBER = createField(DSL.name("NUMBER"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>public.BankAccounts.balance</code>.
+     * The column <code>PUBLIC.BANKACCOUNTS.BALANCE</code>.
      */
-    public final TableField<BankaccountsRecord, BigDecimal> BALANCE = createField(DSL.name("balance"), SQLDataType.NUMERIC(20, 2).defaultValue(DSL.field(DSL.raw("0"), SQLDataType.NUMERIC)), this, "");
+    public final TableField<BankaccountsRecord, BigDecimal> BALANCE = createField(DSL.name("BALANCE"), SQLDataType.DECIMAL(20, 2).defaultValue(DSL.field(DSL.raw("0"), SQLDataType.DECIMAL)), this, "");
 
     /**
-     * The column <code>public.BankAccounts.state</code>.
+     * The column <code>PUBLIC.BANKACCOUNTS.STATE</code>.
      */
-    public final TableField<BankaccountsRecord, String> STATE = createField(DSL.name("state"), SQLDataType.VARCHAR(20).nullable(false), this, "");
+    public final TableField<BankaccountsRecord, String> STATE = createField(DSL.name("STATE"), SQLDataType.VARCHAR(20).nullable(false), this, "");
 
     private Bankaccounts(Name alias, Table<BankaccountsRecord> aliased) {
         this(alias, aliased, null);
@@ -100,24 +100,24 @@ public class Bankaccounts extends TableImpl<BankaccountsRecord> {
     }
 
     /**
-     * Create an aliased <code>public.BankAccounts</code> table reference
+     * Create an aliased <code>PUBLIC.BANKACCOUNTS</code> table reference
      */
     public Bankaccounts(String alias) {
         this(DSL.name(alias), BANKACCOUNTS);
     }
 
     /**
-     * Create an aliased <code>public.BankAccounts</code> table reference
+     * Create an aliased <code>PUBLIC.BANKACCOUNTS</code> table reference
      */
     public Bankaccounts(Name alias) {
         this(alias, BANKACCOUNTS);
     }
 
     /**
-     * Create a <code>public.BankAccounts</code> table reference
+     * Create a <code>PUBLIC.BANKACCOUNTS</code> table reference
      */
     public Bankaccounts() {
-        this(DSL.name("BankAccounts"), null);
+        this(DSL.name("BANKACCOUNTS"), null);
     }
 
     public <O extends Record> Bankaccounts(Table<O> child, ForeignKey<O, BankaccountsRecord> key) {
@@ -131,43 +131,43 @@ public class Bankaccounts extends TableImpl<BankaccountsRecord> {
 
     @Override
     public List<Index> getIndexes() {
-        return Arrays.asList(Indexes.IDX_BANKACCOUNTS_BANK_ID, Indexes.IDX_BANKACCOUNTS_USER_ID);
+        return Arrays.asList(Indexes.IDX_BANKACCOUNT_NUMBER, Indexes.IDX_BANKACCOUNTS_BANK_ID, Indexes.IDX_BANKACCOUNTS_USER_ID);
     }
 
     @Override
     public UniqueKey<BankaccountsRecord> getPrimaryKey() {
-        return Keys.BANKACCOUNTS_PKEY;
+        return Keys.PK_BANKACCOUNTS;
     }
 
     @Override
     public List<UniqueKey<BankaccountsRecord>> getUniqueKeys() {
-        return Arrays.asList(Keys.BANKACCOUNTS_NUMBER_KEY);
+        return Arrays.asList(Keys.CONSTRAINT_5);
     }
 
     @Override
     public List<ForeignKey<BankaccountsRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.BANKACCOUNTS__FK_BANKACCOUNTS_BANKS, Keys.BANKACCOUNTS__FK_BANKACCOUNTS_USERS);
+        return Arrays.asList(Keys.FK_BANKACCOUNTS_BANKS, Keys.FK_BANKACCOUNTS_USERS);
     }
 
     private transient Banks _banks;
     private transient Users _users;
 
     /**
-     * Get the implicit join path to the <code>public.Banks</code> table.
+     * Get the implicit join path to the <code>PUBLIC.BANKS</code> table.
      */
     public Banks banks() {
         if (_banks == null)
-            _banks = new Banks(this, Keys.BANKACCOUNTS__FK_BANKACCOUNTS_BANKS);
+            _banks = new Banks(this, Keys.FK_BANKACCOUNTS_BANKS);
 
         return _banks;
     }
 
     /**
-     * Get the implicit join path to the <code>public.Users</code> table.
+     * Get the implicit join path to the <code>PUBLIC.USERS</code> table.
      */
     public Users users() {
         if (_users == null)
-            _users = new Users(this, Keys.BANKACCOUNTS__FK_BANKACCOUNTS_USERS);
+            _users = new Users(this, Keys.FK_BANKACCOUNTS_USERS);
 
         return _users;
     }

@@ -75,32 +75,32 @@ import ru.sberstart.finalproject.global.exceptions.UnsuccessfulOperationExceptio
 <span class="nc" id="L75">        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(exception);</span>
     }
 
-    /**
-     * Обработка непредвиденных исключений времени выполнения.
-     *
-     * @param ex исключение RuntimeException
-     * @return ResponseEntity с информацией об ошибке
-     */
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity&lt;GlobalAppExceptionDTO&gt; handleRuntimeException(RuntimeException ex) {
-<span class="nc" id="L86">        GlobalAppExceptionDTO exception = new GlobalAppExceptionDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), &quot;Внутренняя ошибка сервера.&quot;);</span>
-        // Логирование исключения для отладки
-        // logger.error(&quot;RuntimeException:&quot;, ex);
-<span class="nc" id="L89">        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception);</span>
-    }
-
-    /**
-     * Обработка всех остальных исключений.
-     *
-     * @param ex исключение Exception
-     * @return ResponseEntity с информацией об ошибке
-     */
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity&lt;GlobalAppExceptionDTO&gt; handleException(Exception ex) {
-<span class="nc" id="L100">        GlobalAppExceptionDTO exception = new GlobalAppExceptionDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), &quot;Произошла внутренняя ошибка сервера.&quot;);</span>
-        // Логирование исключения для отладки
-        // logger.error(&quot;Exception:&quot;, ex);
-<span class="nc" id="L103">        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception);</span>
-    }
+//    /**
+//     * Обработка непредвиденных исключений времени выполнения.
+//     *
+//     * @param ex исключение RuntimeException
+//     * @return ResponseEntity с информацией об ошибке
+//     */
+//    @ExceptionHandler(RuntimeException.class)
+//    public ResponseEntity&lt;GlobalAppExceptionDTO&gt; handleRuntimeException(RuntimeException ex) {
+//        GlobalAppExceptionDTO exception = new GlobalAppExceptionDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), &quot;Внутренняя ошибка сервера.&quot;);
+//        // Логирование исключения для отладки
+//        // logger.error(&quot;RuntimeException:&quot;, ex);
+//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception);
+//    }
+//
+//    /**
+//     * Обработка всех остальных исключений.
+//     *
+//     * @param ex исключение Exception
+//     * @return ResponseEntity с информацией об ошибке
+//     */
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity&lt;GlobalAppExceptionDTO&gt; handleException(Exception ex) {
+//        GlobalAppExceptionDTO exception = new GlobalAppExceptionDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), &quot;Произошла внутренняя ошибка сервера.&quot;);
+//        // Логирование исключения для отладки
+//        // logger.error(&quot;Exception:&quot;, ex);
+//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception);
+//    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

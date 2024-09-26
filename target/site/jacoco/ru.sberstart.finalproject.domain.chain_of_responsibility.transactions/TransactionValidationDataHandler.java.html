@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TransactionValidationDataHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">final-project</a> &gt; <a href="index.source.html" class="el_package">ru.sberstart.finalproject.domain.chain_of_responsibility.transactions</a> &gt; <span class="el_source">TransactionValidationDataHandler.java</span></div><h1>TransactionValidationDataHandler.java</h1><pre class="source lang-java linenums">package ru.sberstart.finalproject.domain.chain_of_responsibility.transactions;
+
+import ru.sberstart.finalproject.application.manager.BankAccountManager;
+import ru.sberstart.finalproject.domain.enitity.bankaccount.BankAccount;
+import ru.sberstart.finalproject.global.exceptions.ForbiddenTransactionException;
+import ru.sberstart.finalproject.infrastructure.repostitory.implementation.BankAccountRepositoryImpl;
+
+import java.util.List;
+
+/**
+ * Класс TransactionValidationDataHandler отвечает за проверку данных транзакции.
+ * Он реализует интерфейс TransactionHandler и выполняет валидацию перед выполнением транзакции.
+ */
+public class TransactionValidationDataHandler implements TransactionHandler {
+    private TransactionHandler next;
+
+    private final BankAccountRepositoryImpl repository;
+    private final BankAccountManager manager;
+
+    /**
+     * Конструктор класса TransactionValidationDataHandler.
+     *
+     * @param repository Репозиторий для работы с банковскими счетами.
+     * @param manager    Менеджер для управления банковскими счетами.
+     */
+<span class="fc" id="L26">    public TransactionValidationDataHandler(BankAccountRepositoryImpl repository, BankAccountManager manager) {</span>
+<span class="fc" id="L27">        this.repository = repository;</span>
+<span class="fc" id="L28">        this.manager = manager;</span>
+<span class="fc" id="L29">    }</span>
+
+    /**
+     * Устанавливает следующий обработчик в цепочке.
+     *
+     * @param handler Следующий обработчик транзакций.
+     */
+    @Override
+    public void setNext(TransactionHandler handler) {
+<span class="nc" id="L38">        this.next = handler;</span>
+<span class="nc" id="L39">    }</span>
+
+    /**
+     * Обрабатывает контекст транзакции, выполняя валидацию данных.
+     * Если данные валидны, передает контекст следующему обработчику в цепочке.
+     *
+     * @param context Контекст транзакции.
+     * @throws UnsupportedOperationException если данные транзакции не валидны.
+     */
+    @Override
+    public void handle(TransactionContext context) {
+<span class="nc bnc" id="L50" title="All 4 branches missed.">        List&lt;String&gt; accountNumbers = switch (context.getTransactionTypes()) {</span>
+<span class="nc" id="L51">            case ADD_FUNDS -&gt; List.of(context.getReceiverBankAccountNumber());</span>
+<span class="nc" id="L52">            case WITHDRAWAL -&gt; List.of(context.getSenderBankAccountNumber());</span>
+<span class="nc" id="L53">            case TRANSFER -&gt; List.of(context.getSenderBankAccountNumber(), context.getReceiverBankAccountNumber());</span>
+        };
+
+<span class="nc" id="L56">        List&lt;BankAccount&gt; accounts = repository</span>
+<span class="nc" id="L57">                .getTransactionAccounts(accountNumbers)</span>
+<span class="nc" id="L58">                .orElseThrow(ForbiddenTransactionException::new);</span>
+
+<span class="nc" id="L60">        context.fillWithAccounts(accounts);</span>
+<span class="nc bnc" id="L61" title="All 4 branches missed.">        switch (context.getTransactionTypes()) {</span>
+            case ADD_FUNDS -&gt; {
+<span class="nc bnc" id="L63" title="All 2 branches missed.">                if (manager.reportUnavailableTransactionExecution(accounts))</span>
+<span class="nc" id="L64">                    throw new UnsupportedOperationException();</span>
+            }
+            case WITHDRAWAL -&gt; {
+<span class="nc bnc" id="L67" title="All 2 branches missed.">                if (manager.reportUnavailableTransactionExecution(accounts) ||</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">                        isEnoughMoneyForTransaction(context))</span>
+<span class="nc" id="L69">                    throw new UnsupportedOperationException();</span>
+            }
+            case TRANSFER -&gt; {
+<span class="nc bnc" id="L72" title="All 2 branches missed.">                if (manager.reportAllAvailableTransactionExecution(accounts) ||</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">                        isEnoughMoneyForTransaction(context))</span>
+<span class="nc" id="L74">                    throw new UnsupportedOperationException();</span>
+            }
+        }
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        if (next != null) next.handle(context);</span>
+<span class="nc" id="L78">    }</span>
+
+    /**
+     * Проверяет, достаточно ли средств на счете отправителя для выполнения транзакции.
+     *
+     * @param context Контекст транзакции.
+     * @return true, если средств достаточно, иначе false.
+     */
+    private boolean isEnoughMoneyForTransaction(TransactionContext context) {
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        return context.getSenderBankAccount().getBalance().compareTo(context.getAmount()) &gt;= 0;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

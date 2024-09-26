@@ -57,98 +57,98 @@ public class Bankaccounts implements Serializable {
     }
 
     /**
-     * Getter for <code>public.BankAccounts.id</code>.
+     * Getter for <code>PUBLIC.BANKACCOUNTS.ID</code>.
      */
     public UUID getId() {
         return this.id;
     }
 
     /**
-     * Setter for <code>public.BankAccounts.id</code>.
+     * Setter for <code>PUBLIC.BANKACCOUNTS.ID</code>.
      */
     public void setId(UUID id) {
         this.id = id;
     }
 
     /**
-     * Getter for <code>public.BankAccounts.bank_id</code>.
+     * Getter for <code>PUBLIC.BANKACCOUNTS.BANK_ID</code>.
      */
     public UUID getBankId() {
         return this.bankId;
     }
 
     /**
-     * Setter for <code>public.BankAccounts.bank_id</code>.
+     * Setter for <code>PUBLIC.BANKACCOUNTS.BANK_ID</code>.
      */
     public void setBankId(UUID bankId) {
         this.bankId = bankId;
     }
 
     /**
-     * Getter for <code>public.BankAccounts.user_id</code>.
+     * Getter for <code>PUBLIC.BANKACCOUNTS.USER_ID</code>.
      */
     public UUID getUserId() {
         return this.userId;
     }
 
     /**
-     * Setter for <code>public.BankAccounts.user_id</code>.
+     * Setter for <code>PUBLIC.BANKACCOUNTS.USER_ID</code>.
      */
     public void setUserId(UUID userId) {
         this.userId = userId;
     }
 
     /**
-     * Getter for <code>public.BankAccounts.registry_date</code>.
+     * Getter for <code>PUBLIC.BANKACCOUNTS.REGISTRY_DATE</code>.
      */
     public LocalDate getRegistryDate() {
         return this.registryDate;
     }
 
     /**
-     * Setter for <code>public.BankAccounts.registry_date</code>.
+     * Setter for <code>PUBLIC.BANKACCOUNTS.REGISTRY_DATE</code>.
      */
     public void setRegistryDate(LocalDate registryDate) {
         this.registryDate = registryDate;
     }
 
     /**
-     * Getter for <code>public.BankAccounts.number</code>.
+     * Getter for <code>PUBLIC.BANKACCOUNTS.NUMBER</code>.
      */
     public String getNumber() {
         return this.number;
     }
 
     /**
-     * Setter for <code>public.BankAccounts.number</code>.
+     * Setter for <code>PUBLIC.BANKACCOUNTS.NUMBER</code>.
      */
     public void setNumber(String number) {
         this.number = number;
     }
 
     /**
-     * Getter for <code>public.BankAccounts.balance</code>.
+     * Getter for <code>PUBLIC.BANKACCOUNTS.BALANCE</code>.
      */
     public BigDecimal getBalance() {
         return this.balance;
     }
 
     /**
-     * Setter for <code>public.BankAccounts.balance</code>.
+     * Setter for <code>PUBLIC.BANKACCOUNTS.BALANCE</code>.
      */
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
     /**
-     * Getter for <code>public.BankAccounts.state</code>.
+     * Getter for <code>PUBLIC.BANKACCOUNTS.STATE</code>.
      */
     public String getState() {
         return this.state;
     }
 
     /**
-     * Setter for <code>public.BankAccounts.state</code>.
+     * Setter for <code>PUBLIC.BANKACCOUNTS.STATE</code>.
      */
     public void setState(String state) {
         this.state = state;

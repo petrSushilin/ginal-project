@@ -25,98 +25,98 @@ public class UsersRecord extends UpdatableRecordImpl<UsersRecord> implements Rec
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>public.Users.id</code>.
+     * Setter for <code>PUBLIC.USERS.ID</code>.
      */
     public void setId(UUID value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>public.Users.id</code>.
+     * Getter for <code>PUBLIC.USERS.ID</code>.
      */
     public UUID getId() {
         return (UUID) get(0);
     }
 
     /**
-     * Setter for <code>public.Users.name</code>.
+     * Setter for <code>PUBLIC.USERS.NAME</code>.
      */
     public void setName(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>public.Users.name</code>.
+     * Getter for <code>PUBLIC.USERS.NAME</code>.
      */
     public String getName() {
         return (String) get(1);
     }
 
     /**
-     * Setter for <code>public.Users.surname</code>.
+     * Setter for <code>PUBLIC.USERS.SURNAME</code>.
      */
     public void setSurname(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>public.Users.surname</code>.
+     * Getter for <code>PUBLIC.USERS.SURNAME</code>.
      */
     public String getSurname() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>public.Users.birthdate</code>.
+     * Setter for <code>PUBLIC.USERS.BIRTHDATE</code>.
      */
     public void setBirthdate(LocalDate value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>public.Users.birthdate</code>.
+     * Getter for <code>PUBLIC.USERS.BIRTHDATE</code>.
      */
     public LocalDate getBirthdate() {
         return (LocalDate) get(3);
     }
 
     /**
-     * Setter for <code>public.Users.phone_number</code>.
+     * Setter for <code>PUBLIC.USERS.PHONE_NUMBER</code>.
      */
     public void setPhoneNumber(String value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>public.Users.phone_number</code>.
+     * Getter for <code>PUBLIC.USERS.PHONE_NUMBER</code>.
      */
     public String getPhoneNumber() {
         return (String) get(4);
     }
 
     /**
-     * Setter for <code>public.Users.passport_number</code>.
+     * Setter for <code>PUBLIC.USERS.PASSPORT_NUMBER</code>.
      */
     public void setPassportNumber(String value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>public.Users.passport_number</code>.
+     * Getter for <code>PUBLIC.USERS.PASSPORT_NUMBER</code>.
      */
     public String getPassportNumber() {
         return (String) get(5);
     }
 
     /**
-     * Setter for <code>public.Users.status</code>.
+     * Setter for <code>PUBLIC.USERS.STATUS</code>.
      */
     public void setStatus(String value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>public.Users.status</code>.
+     * Getter for <code>PUBLIC.USERS.STATUS</code>.
      */
     public String getStatus() {
         return (String) get(6);

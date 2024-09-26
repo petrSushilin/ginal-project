@@ -24,28 +24,28 @@ public class RolesRecord extends UpdatableRecordImpl<RolesRecord> implements Rec
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>public.Roles.id</code>.
+     * Setter for <code>PUBLIC.ROLES.ID</code>.
      */
     public void setId(UUID value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>public.Roles.id</code>.
+     * Getter for <code>PUBLIC.ROLES.ID</code>.
      */
     public UUID getId() {
         return (UUID) get(0);
     }
 
     /**
-     * Setter for <code>public.Roles.role_name</code>.
+     * Setter for <code>PUBLIC.ROLES.ROLE_NAME</code>.
      */
     public void setRoleName(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>public.Roles.role_name</code>.
+     * Getter for <code>PUBLIC.ROLES.ROLE_NAME</code>.
      */
     public String getRoleName() {
         return (String) get(1);

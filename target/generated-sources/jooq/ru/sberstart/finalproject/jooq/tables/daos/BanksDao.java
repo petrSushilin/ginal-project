@@ -41,7 +41,7 @@ public class BanksDao extends DAOImpl<BanksRecord, ru.sberstart.finalproject.joo
     }
 
     /**
-     * Fetch records that have <code>id BETWEEN lowerInclusive AND
+     * Fetch records that have <code>ID BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Banks> fetchRangeOfId(UUID lowerInclusive, UUID upperInclusive) {
@@ -49,28 +49,28 @@ public class BanksDao extends DAOImpl<BanksRecord, ru.sberstart.finalproject.joo
     }
 
     /**
-     * Fetch records that have <code>id IN (values)</code>
+     * Fetch records that have <code>ID IN (values)</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Banks> fetchById(UUID... values) {
         return fetch(Banks.BANKS.ID, values);
     }
 
     /**
-     * Fetch a unique record that has <code>id = value</code>
+     * Fetch a unique record that has <code>ID = value</code>
      */
     public ru.sberstart.finalproject.jooq.tables.pojos.Banks fetchOneById(UUID value) {
         return fetchOne(Banks.BANKS.ID, value);
     }
 
     /**
-     * Fetch a unique record that has <code>id = value</code>
+     * Fetch a unique record that has <code>ID = value</code>
      */
     public Optional<ru.sberstart.finalproject.jooq.tables.pojos.Banks> fetchOptionalById(UUID value) {
         return fetchOptional(Banks.BANKS.ID, value);
     }
 
     /**
-     * Fetch records that have <code>name BETWEEN lowerInclusive AND
+     * Fetch records that have <code>NAME BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Banks> fetchRangeOfName(String lowerInclusive, String upperInclusive) {
@@ -78,14 +78,14 @@ public class BanksDao extends DAOImpl<BanksRecord, ru.sberstart.finalproject.joo
     }
 
     /**
-     * Fetch records that have <code>name IN (values)</code>
+     * Fetch records that have <code>NAME IN (values)</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Banks> fetchByName(String... values) {
         return fetch(Banks.BANKS.NAME, values);
     }
 
     /**
-     * Fetch records that have <code>identity_number BETWEEN lowerInclusive AND
+     * Fetch records that have <code>IDENTITY_NUMBER BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Banks> fetchRangeOfIdentityNumber(String lowerInclusive, String upperInclusive) {
@@ -93,21 +93,21 @@ public class BanksDao extends DAOImpl<BanksRecord, ru.sberstart.finalproject.joo
     }
 
     /**
-     * Fetch records that have <code>identity_number IN (values)</code>
+     * Fetch records that have <code>IDENTITY_NUMBER IN (values)</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Banks> fetchByIdentityNumber(String... values) {
         return fetch(Banks.BANKS.IDENTITY_NUMBER, values);
     }
 
     /**
-     * Fetch a unique record that has <code>identity_number = value</code>
+     * Fetch a unique record that has <code>IDENTITY_NUMBER = value</code>
      */
     public ru.sberstart.finalproject.jooq.tables.pojos.Banks fetchOneByIdentityNumber(String value) {
         return fetchOne(Banks.BANKS.IDENTITY_NUMBER, value);
     }
 
     /**
-     * Fetch a unique record that has <code>identity_number = value</code>
+     * Fetch a unique record that has <code>IDENTITY_NUMBER = value</code>
      */
     public Optional<ru.sberstart.finalproject.jooq.tables.pojos.Banks> fetchOptionalByIdentityNumber(String value) {
         return fetchOptional(Banks.BANKS.IDENTITY_NUMBER, value);

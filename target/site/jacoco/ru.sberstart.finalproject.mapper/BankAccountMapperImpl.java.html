@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BankAccountMapperImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">final-project</a> &gt; <a href="index.source.html" class="el_package">ru.sberstart.finalproject.mapper</a> &gt; <span class="el_source">BankAccountMapperImpl.java</span></div><h1>BankAccountMapperImpl.java</h1><pre class="source lang-java linenums">package ru.sberstart.finalproject.mapper;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.UUID;
+import javax.annotation.processing.Generated;
+import ru.sberstart.finalproject.api.dto.bankaccount.inner.BankAccountCardIssueInformationDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.inner.BankAccountFullInformationDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.request.BankAccountCreationRequestDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.request.BankAccountStateRequestDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.response.BankAccountActiveInformationResponseDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.response.BankAccountCreationResponseDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.response.BankAccountDeactivateInformationResponseDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.response.BankAccountInformationResponseDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.response.BankAccountSuccessTransactionResponseDTO;
+import ru.sberstart.finalproject.domain.enitity.bankaccount.BankAccount;
+import ru.sberstart.finalproject.domain.enitity.bankaccount.enums.BankAccountStates;
+
+@Generated(
+    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
+    date = &quot;2024-09-26T14:51:11+0300&quot;,
+    comments = &quot;version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Amazon.com Inc.)&quot;
+)
+<span class="nc" id="L24">public class BankAccountMapperImpl implements BankAccountMapper {</span>
+
+    @Override
+    public BankAccount toEntity(BankAccountCreationRequestDTO dto) {
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        if ( dto == null ) {</span>
+<span class="nc" id="L29">            return null;</span>
+        }
+
+<span class="nc" id="L32">        UUID bankId = null;</span>
+<span class="nc" id="L33">        UUID userId = null;</span>
+
+<span class="nc" id="L35">        bankId = dto.bankId();</span>
+<span class="nc" id="L36">        userId = dto.userId();</span>
+
+<span class="nc" id="L38">        UUID id = null;</span>
+<span class="nc" id="L39">        LocalDate registryDate = null;</span>
+<span class="nc" id="L40">        String number = null;</span>
+<span class="nc" id="L41">        BigDecimal balance = null;</span>
+<span class="nc" id="L42">        BankAccountStates state = null;</span>
+
+<span class="nc" id="L44">        BankAccount bankAccount = new BankAccount( id, bankId, userId, registryDate, number, balance, state );</span>
+
+<span class="nc" id="L46">        return bankAccount;</span>
+    }
+
+    @Override
+    public BankAccount toEntity(BankAccountStateRequestDTO dto) {
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        if ( dto == null ) {</span>
+<span class="nc" id="L52">            return null;</span>
+        }
+
+<span class="nc" id="L55">        BankAccountStates state = null;</span>
+<span class="nc" id="L56">        String number = null;</span>
+
+<span class="nc" id="L58">        state = dto.state();</span>
+<span class="nc" id="L59">        number = dto.number();</span>
+
+<span class="nc" id="L61">        UUID id = null;</span>
+<span class="nc" id="L62">        UUID bankId = null;</span>
+<span class="nc" id="L63">        UUID userId = null;</span>
+<span class="nc" id="L64">        LocalDate registryDate = null;</span>
+<span class="nc" id="L65">        BigDecimal balance = null;</span>
+
+<span class="nc" id="L67">        BankAccount bankAccount = new BankAccount( id, bankId, userId, registryDate, number, balance, state );</span>
+
+<span class="nc" id="L69">        return bankAccount;</span>
+    }
+
+    @Override
+    public BankAccountCreationResponseDTO toBankAccountFullInformationResponseDTO(BankAccount bankAccount) {
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if ( bankAccount == null ) {</span>
+<span class="nc" id="L75">            return null;</span>
+        }
+
+<span class="nc" id="L78">        UUID bankId = null;</span>
+<span class="nc" id="L79">        UUID userId = null;</span>
+<span class="nc" id="L80">        LocalDate registryDate = null;</span>
+<span class="nc" id="L81">        String number = null;</span>
+<span class="nc" id="L82">        BigDecimal balance = null;</span>
+<span class="nc" id="L83">        BankAccountStates state = null;</span>
+
+<span class="nc" id="L85">        bankId = bankAccount.getBankId();</span>
+<span class="nc" id="L86">        userId = bankAccount.getUserId();</span>
+<span class="nc" id="L87">        registryDate = bankAccount.getRegistryDate();</span>
+<span class="nc" id="L88">        number = bankAccount.getNumber();</span>
+<span class="nc" id="L89">        balance = bankAccount.getBalance();</span>
+<span class="nc" id="L90">        state = bankAccount.getState();</span>
+
+<span class="nc" id="L92">        BankAccountCreationResponseDTO bankAccountCreationResponseDTO = new BankAccountCreationResponseDTO( bankId, userId, registryDate, number, balance, state );</span>
+
+<span class="nc" id="L94">        return bankAccountCreationResponseDTO;</span>
+    }
+
+    @Override
+    public BankAccountActiveInformationResponseDTO toBankAccountActiveInformationResponseDTO(BankAccount bankAccount) {
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        if ( bankAccount == null ) {</span>
+<span class="nc" id="L100">            return null;</span>
+        }
+
+<span class="nc" id="L103">        UUID bankId = null;</span>
+<span class="nc" id="L104">        UUID userId = null;</span>
+<span class="nc" id="L105">        String number = null;</span>
+<span class="nc" id="L106">        BigDecimal balance = null;</span>
+
+<span class="nc" id="L108">        bankId = bankAccount.getBankId();</span>
+<span class="nc" id="L109">        userId = bankAccount.getUserId();</span>
+<span class="nc" id="L110">        number = bankAccount.getNumber();</span>
+<span class="nc" id="L111">        balance = bankAccount.getBalance();</span>
+
+<span class="nc" id="L113">        BankAccountActiveInformationResponseDTO bankAccountActiveInformationResponseDTO = new BankAccountActiveInformationResponseDTO( bankId, userId, number, balance );</span>
+
+<span class="nc" id="L115">        return bankAccountActiveInformationResponseDTO;</span>
+    }
+
+    @Override
+    public BankAccountDeactivateInformationResponseDTO toBankAccountDeactivateInformationResponseDTO(BankAccount bankAccount) {
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        if ( bankAccount == null ) {</span>
+<span class="nc" id="L121">            return null;</span>
+        }
+
+<span class="nc" id="L124">        UUID bankId = null;</span>
+<span class="nc" id="L125">        UUID userId = null;</span>
+<span class="nc" id="L126">        String number = null;</span>
+<span class="nc" id="L127">        BankAccountStates state = null;</span>
+
+<span class="nc" id="L129">        bankId = bankAccount.getBankId();</span>
+<span class="nc" id="L130">        userId = bankAccount.getUserId();</span>
+<span class="nc" id="L131">        number = bankAccount.getNumber();</span>
+<span class="nc" id="L132">        state = bankAccount.getState();</span>
+
+<span class="nc" id="L134">        BankAccountDeactivateInformationResponseDTO bankAccountDeactivateInformationResponseDTO = new BankAccountDeactivateInformationResponseDTO( bankId, userId, number, state );</span>
+
+<span class="nc" id="L136">        return bankAccountDeactivateInformationResponseDTO;</span>
+    }
+
+    @Override
+    public BankAccountSuccessTransactionResponseDTO toBankAccountSuccessTransactionDTO(BankAccount bankAccount) {
+<span class="nc bnc" id="L141" title="All 2 branches missed.">        if ( bankAccount == null ) {</span>
+<span class="nc" id="L142">            return null;</span>
+        }
+
+<span class="nc" id="L145">        String senderBankAccountNumber = null;</span>
+<span class="nc" id="L146">        BigDecimal senderBankAccountBalance = null;</span>
+
+<span class="nc" id="L148">        BankAccountSuccessTransactionResponseDTO bankAccountSuccessTransactionResponseDTO = new BankAccountSuccessTransactionResponseDTO( senderBankAccountNumber, senderBankAccountBalance );</span>
+
+<span class="nc" id="L150">        return bankAccountSuccessTransactionResponseDTO;</span>
+    }
+
+    @Override
+    public BankAccountInformationResponseDTO toBankAccountInformationResponseDTO(BankAccountFullInformationDTO bankAccountFullInformationDTO) {
+<span class="nc bnc" id="L155" title="All 2 branches missed.">        if ( bankAccountFullInformationDTO == null ) {</span>
+<span class="nc" id="L156">            return null;</span>
+        }
+
+<span class="nc" id="L159">        String bankName = null;</span>
+<span class="nc" id="L160">        String bankIdentityNumber = null;</span>
+<span class="nc" id="L161">        String userName = null;</span>
+<span class="nc" id="L162">        String userSurname = null;</span>
+<span class="nc" id="L163">        LocalDate birthdate = null;</span>
+<span class="nc" id="L164">        String phoneNumber = null;</span>
+<span class="nc" id="L165">        String passportNumber = null;</span>
+<span class="nc" id="L166">        LocalDate registryDate = null;</span>
+<span class="nc" id="L167">        String number = null;</span>
+<span class="nc" id="L168">        BigDecimal balance = null;</span>
+<span class="nc" id="L169">        BankAccountStates state = null;</span>
+
+<span class="nc" id="L171">        bankName = bankAccountFullInformationDTO.bankName();</span>
+<span class="nc" id="L172">        bankIdentityNumber = bankAccountFullInformationDTO.bankIdentityNumber();</span>
+<span class="nc" id="L173">        userName = bankAccountFullInformationDTO.userName();</span>
+<span class="nc" id="L174">        userSurname = bankAccountFullInformationDTO.userSurname();</span>
+<span class="nc" id="L175">        birthdate = bankAccountFullInformationDTO.birthdate();</span>
+<span class="nc" id="L176">        phoneNumber = bankAccountFullInformationDTO.phoneNumber();</span>
+<span class="nc" id="L177">        passportNumber = bankAccountFullInformationDTO.passportNumber();</span>
+<span class="nc" id="L178">        registryDate = bankAccountFullInformationDTO.registryDate();</span>
+<span class="nc" id="L179">        number = bankAccountFullInformationDTO.number();</span>
+<span class="nc" id="L180">        balance = bankAccountFullInformationDTO.balance();</span>
+<span class="nc" id="L181">        state = bankAccountFullInformationDTO.state();</span>
+
+<span class="nc" id="L183">        BankAccountInformationResponseDTO bankAccountInformationResponseDTO = new BankAccountInformationResponseDTO( bankName, bankIdentityNumber, userName, userSurname, birthdate, phoneNumber, passportNumber, registryDate, number, balance, state );</span>
+
+<span class="nc" id="L185">        return bankAccountInformationResponseDTO;</span>
+    }
+
+    @Override
+    public BankAccountCardIssueInformationDTO toBankAccountCardIssueInformationDTO(BankAccountFullInformationDTO bankAccountInformation) {
+<span class="nc bnc" id="L190" title="All 2 branches missed.">        if ( bankAccountInformation == null ) {</span>
+<span class="nc" id="L191">            return null;</span>
+        }
+
+<span class="nc" id="L194">        UUID id = null;</span>
+<span class="nc" id="L195">        UUID bankId = null;</span>
+<span class="nc" id="L196">        String userName = null;</span>
+<span class="nc" id="L197">        String userSurname = null;</span>
+<span class="nc" id="L198">        BankAccountStates state = null;</span>
+
+<span class="nc" id="L200">        id = bankAccountInformation.id();</span>
+<span class="nc" id="L201">        bankId = bankAccountInformation.bankId();</span>
+<span class="nc" id="L202">        userName = bankAccountInformation.userName();</span>
+<span class="nc" id="L203">        userSurname = bankAccountInformation.userSurname();</span>
+<span class="nc" id="L204">        state = bankAccountInformation.state();</span>
+
+<span class="nc" id="L206">        BankAccountCardIssueInformationDTO bankAccountCardIssueInformationDTO = new BankAccountCardIssueInformationDTO( id, bankId, userName, userSurname, state );</span>
+
+<span class="nc" id="L208">        return bankAccountCardIssueInformationDTO;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

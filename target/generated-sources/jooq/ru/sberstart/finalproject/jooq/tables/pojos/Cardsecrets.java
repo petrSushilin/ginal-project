@@ -5,8 +5,6 @@ package ru.sberstart.finalproject.jooq.tables.pojos;
 
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.UUID;
 
 
 /**
@@ -17,101 +15,119 @@ public class Cardsecrets implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private UUID id;
+    private String cardNumber;
     private String holderName;
     private String holderSurname;
-    private LocalDate validatePeriod;
+    private String validatePeriod;
+    private String cvv;
     private String secretCode;
 
     public Cardsecrets() {}
 
     public Cardsecrets(Cardsecrets value) {
-        this.id = value.id;
+        this.cardNumber = value.cardNumber;
         this.holderName = value.holderName;
         this.holderSurname = value.holderSurname;
         this.validatePeriod = value.validatePeriod;
+        this.cvv = value.cvv;
         this.secretCode = value.secretCode;
     }
 
     public Cardsecrets(
-        UUID id,
+        String cardNumber,
         String holderName,
         String holderSurname,
-        LocalDate validatePeriod,
+        String validatePeriod,
+        String cvv,
         String secretCode
     ) {
-        this.id = id;
+        this.cardNumber = cardNumber;
         this.holderName = holderName;
         this.holderSurname = holderSurname;
         this.validatePeriod = validatePeriod;
+        this.cvv = cvv;
         this.secretCode = secretCode;
     }
 
     /**
-     * Getter for <code>public.CardSecrets.id</code>.
+     * Getter for <code>PUBLIC.CARDSECRETS.CARD_NUMBER</code>.
      */
-    public UUID getId() {
-        return this.id;
+    public String getCardNumber() {
+        return this.cardNumber;
     }
 
     /**
-     * Setter for <code>public.CardSecrets.id</code>.
+     * Setter for <code>PUBLIC.CARDSECRETS.CARD_NUMBER</code>.
      */
-    public void setId(UUID id) {
-        this.id = id;
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
     }
 
     /**
-     * Getter for <code>public.CardSecrets.holder_name</code>.
+     * Getter for <code>PUBLIC.CARDSECRETS.HOLDER_NAME</code>.
      */
     public String getHolderName() {
         return this.holderName;
     }
 
     /**
-     * Setter for <code>public.CardSecrets.holder_name</code>.
+     * Setter for <code>PUBLIC.CARDSECRETS.HOLDER_NAME</code>.
      */
     public void setHolderName(String holderName) {
         this.holderName = holderName;
     }
 
     /**
-     * Getter for <code>public.CardSecrets.holder_surname</code>.
+     * Getter for <code>PUBLIC.CARDSECRETS.HOLDER_SURNAME</code>.
      */
     public String getHolderSurname() {
         return this.holderSurname;
     }
 
     /**
-     * Setter for <code>public.CardSecrets.holder_surname</code>.
+     * Setter for <code>PUBLIC.CARDSECRETS.HOLDER_SURNAME</code>.
      */
     public void setHolderSurname(String holderSurname) {
         this.holderSurname = holderSurname;
     }
 
     /**
-     * Getter for <code>public.CardSecrets.validate_period</code>.
+     * Getter for <code>PUBLIC.CARDSECRETS.VALIDATE_PERIOD</code>.
      */
-    public LocalDate getValidatePeriod() {
+    public String getValidatePeriod() {
         return this.validatePeriod;
     }
 
     /**
-     * Setter for <code>public.CardSecrets.validate_period</code>.
+     * Setter for <code>PUBLIC.CARDSECRETS.VALIDATE_PERIOD</code>.
      */
-    public void setValidatePeriod(LocalDate validatePeriod) {
+    public void setValidatePeriod(String validatePeriod) {
         this.validatePeriod = validatePeriod;
     }
 
     /**
-     * Getter for <code>public.CardSecrets.secret_code</code>.
+     * Getter for <code>PUBLIC.CARDSECRETS.CVV</code>.
+     */
+    public String getCvv() {
+        return this.cvv;
+    }
+
+    /**
+     * Setter for <code>PUBLIC.CARDSECRETS.CVV</code>.
+     */
+    public void setCvv(String cvv) {
+        this.cvv = cvv;
+    }
+
+    /**
+     * Getter for <code>PUBLIC.CARDSECRETS.SECRET_CODE</code>.
      */
     public String getSecretCode() {
         return this.secretCode;
     }
 
     /**
-     * Setter for <code>public.CardSecrets.secret_code</code>.
+     * Setter for <code>PUBLIC.CARDSECRETS.SECRET_CODE</code>.
      */
     public void setSecretCode(String secretCode) {
         this.secretCode = secretCode;
@@ -126,11 +142,11 @@ public class Cardsecrets implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         final Cardsecrets other = (Cardsecrets) obj;
-        if (this.id == null) {
-            if (other.id != null)
+        if (this.cardNumber == null) {
+            if (other.cardNumber != null)
                 return false;
         }
-        else if (!this.id.equals(other.id))
+        else if (!this.cardNumber.equals(other.cardNumber))
             return false;
         if (this.holderName == null) {
             if (other.holderName != null)
@@ -150,6 +166,12 @@ public class Cardsecrets implements Serializable {
         }
         else if (!this.validatePeriod.equals(other.validatePeriod))
             return false;
+        if (this.cvv == null) {
+            if (other.cvv != null)
+                return false;
+        }
+        else if (!this.cvv.equals(other.cvv))
+            return false;
         if (this.secretCode == null) {
             if (other.secretCode != null)
                 return false;
@@ -163,10 +185,11 @@ public class Cardsecrets implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
+        result = prime * result + ((this.cardNumber == null) ? 0 : this.cardNumber.hashCode());
         result = prime * result + ((this.holderName == null) ? 0 : this.holderName.hashCode());
         result = prime * result + ((this.holderSurname == null) ? 0 : this.holderSurname.hashCode());
         result = prime * result + ((this.validatePeriod == null) ? 0 : this.validatePeriod.hashCode());
+        result = prime * result + ((this.cvv == null) ? 0 : this.cvv.hashCode());
         result = prime * result + ((this.secretCode == null) ? 0 : this.secretCode.hashCode());
         return result;
     }
@@ -175,10 +198,11 @@ public class Cardsecrets implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder("Cardsecrets (");
 
-        sb.append(id);
+        sb.append(cardNumber);
         sb.append(", ").append(holderName);
         sb.append(", ").append(holderSurname);
         sb.append(", ").append(validatePeriod);
+        sb.append(", ").append(cvv);
         sb.append(", ").append(secretCode);
 
         sb.append(")");

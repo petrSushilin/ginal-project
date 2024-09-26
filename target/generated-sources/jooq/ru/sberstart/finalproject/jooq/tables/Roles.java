@@ -40,7 +40,7 @@ public class Roles extends TableImpl<RolesRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>public.Roles</code>
+     * The reference instance of <code>PUBLIC.ROLES</code>
      */
     public static final Roles ROLES = new Roles();
 
@@ -53,14 +53,14 @@ public class Roles extends TableImpl<RolesRecord> {
     }
 
     /**
-     * The column <code>public.Roles.id</code>.
+     * The column <code>PUBLIC.ROLES.ID</code>.
      */
-    public final TableField<RolesRecord, UUID> ID = createField(DSL.name("id"), SQLDataType.UUID.nullable(false), this, "");
+    public final TableField<RolesRecord, UUID> ID = createField(DSL.name("ID"), SQLDataType.UUID.nullable(false).defaultValue(DSL.field(DSL.raw("RANDOM_UUID()"), SQLDataType.UUID)), this, "");
 
     /**
-     * The column <code>public.Roles.role_name</code>.
+     * The column <code>PUBLIC.ROLES.ROLE_NAME</code>.
      */
-    public final TableField<RolesRecord, String> ROLE_NAME = createField(DSL.name("role_name"), SQLDataType.VARCHAR(20).nullable(false), this, "");
+    public final TableField<RolesRecord, String> ROLE_NAME = createField(DSL.name("ROLE_NAME"), SQLDataType.VARCHAR(20).nullable(false), this, "");
 
     private Roles(Name alias, Table<RolesRecord> aliased) {
         this(alias, aliased, null);
@@ -71,24 +71,24 @@ public class Roles extends TableImpl<RolesRecord> {
     }
 
     /**
-     * Create an aliased <code>public.Roles</code> table reference
+     * Create an aliased <code>PUBLIC.ROLES</code> table reference
      */
     public Roles(String alias) {
         this(DSL.name(alias), ROLES);
     }
 
     /**
-     * Create an aliased <code>public.Roles</code> table reference
+     * Create an aliased <code>PUBLIC.ROLES</code> table reference
      */
     public Roles(Name alias) {
         this(alias, ROLES);
     }
 
     /**
-     * Create a <code>public.Roles</code> table reference
+     * Create a <code>PUBLIC.ROLES</code> table reference
      */
     public Roles() {
-        this(DSL.name("Roles"), null);
+        this(DSL.name("ROLES"), null);
     }
 
     public <O extends Record> Roles(Table<O> child, ForeignKey<O, RolesRecord> key) {
@@ -102,12 +102,12 @@ public class Roles extends TableImpl<RolesRecord> {
 
     @Override
     public UniqueKey<RolesRecord> getPrimaryKey() {
-        return Keys.ROLES_PKEY;
+        return Keys.PK_ROLES;
     }
 
     @Override
     public List<UniqueKey<RolesRecord>> getUniqueKeys() {
-        return Arrays.asList(Keys.ROLES_ROLE_NAME_KEY);
+        return Arrays.asList(Keys.CONSTRAINT_4A);
     }
 
     @Override

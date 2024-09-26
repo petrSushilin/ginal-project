@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TransactionContext.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">final-project</a> &gt; <a href="index.source.html" class="el_package">ru.sberstart.finalproject.domain.chain_of_responsibility.transactions</a> &gt; <span class="el_source">TransactionContext.java</span></div><h1>TransactionContext.java</h1><pre class="source lang-java linenums">package ru.sberstart.finalproject.domain.chain_of_responsibility.transactions;
+
+import ru.sberstart.finalproject.api.dto.bankaccount.request.BankAccountTransferTransactionRequestDTO;
+import ru.sberstart.finalproject.domain.enitity.bankaccount.BankAccount;
+import ru.sberstart.finalproject.domain.enitity.bankaccount.enums.TransactionTypes;
+
+import java.math.BigDecimal;
+import java.util.List;
+/**
+ * Класс TransactionContext представляет контекст транзакции между двумя банковскими счетами.
+ * Он содержит информацию о номерах счетов отправителя и получателя, начальных балансах этих счетов,
+ * а также о сумме транзакции.
+ */
+public class TransactionContext {
+    private final String senderBankAccountNumber;
+    private BigDecimal startSenderAccountBalance;
+    private BankAccount senderBankAccount;
+    private final String receiverBankAccountNumber;
+    private BigDecimal startReceiverAccountBalance;
+    private BankAccount receiverBankAccount;
+    private final BigDecimal amount;
+    private final TransactionTypes transactionTypes;
+
+    /**
+     * Конструктор класса TransactionContext.
+     * Инициализирует контекст транзакции на основе данных из DTO.
+     *
+     * @param transactionDTO DTO с информацией о транзакции.
+     */
+<span class="nc" id="L30">    public TransactionContext(BankAccountTransferTransactionRequestDTO transactionDTO) {</span>
+<span class="nc" id="L31">        this.senderBankAccountNumber = transactionDTO.senderBankAccountNumber();</span>
+<span class="nc" id="L32">        this.receiverBankAccountNumber = transactionDTO.receiverBankAccountNumber();</span>
+<span class="nc" id="L33">        this.amount = transactionDTO.amount();</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        if (transactionDTO.senderBankAccountNumber().isBlank()) {</span>
+<span class="nc" id="L35">            transactionTypes = TransactionTypes.ADD_FUNDS;</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">        } else if (transactionDTO.receiverBankAccountNumber().isBlank()) {</span>
+<span class="nc" id="L37">            transactionTypes = TransactionTypes.WITHDRAWAL;</span>
+        } else {
+<span class="nc" id="L39">            transactionTypes = TransactionTypes.TRANSFER;</span>
+        }
+<span class="nc" id="L41">    }</span>
+
+    /**
+     * Возвращает номер банковского счета отправителя.
+     *
+     * @return номер банковского счета отправителя.
+     */
+    public String getSenderBankAccountNumber() {
+<span class="nc" id="L49">        return senderBankAccountNumber;</span>
+    }
+
+    /**
+     * Возвращает начальный баланс счета отправителя.
+     *
+     * @return начальный баланс счета отправителя.
+     */
+    public BigDecimal getStartSenderAccountBalance() {
+<span class="nc" id="L58">        return startSenderAccountBalance;</span>
+    }
+
+    /**
+     * Устанавливает начальный баланс счета отправителя.
+     *
+     * @param startSenderAccountBalance начальный баланс счета отправителя.
+     */
+    private void setStartSenderAccountBalance(BigDecimal startSenderAccountBalance) {
+<span class="nc" id="L67">        this.startSenderAccountBalance = startSenderAccountBalance;</span>
+<span class="nc" id="L68">    }</span>
+
+    /**
+     * Возвращает объект банковского счета отправителя.
+     *
+     * @return объект банковского счета отправителя.
+     */
+    public BankAccount getSenderBankAccount() {
+<span class="nc" id="L76">        return senderBankAccount;</span>
+    }
+
+    /**
+     * Устанавливает объект банковского счета отправителя.
+     *
+     * @param senderBankAccount объект банковского счета отправителя.
+     */
+    private void setSenderBankAccount(BankAccount senderBankAccount) {
+<span class="nc" id="L85">        this.senderBankAccount = senderBankAccount;</span>
+<span class="nc" id="L86">    }</span>
+
+    /**
+     * Возвращает номер банковского счета получателя.
+     *
+     * @return номер банковского счета получателя.
+     */
+    public String getReceiverBankAccountNumber() {
+<span class="nc" id="L94">        return receiverBankAccountNumber;</span>
+    }
+
+    /**
+     * Возвращает начальный баланс счета получателя.
+     *
+     * @return начальный баланс счета получателя.
+     */
+    public BigDecimal getStartReceiverAccountBalance() {
+<span class="nc" id="L103">        return startReceiverAccountBalance;</span>
+    }
+
+    /**
+     * Устанавливает начальный баланс счета получателя.
+     *
+     * @param startReceiverAccountBalance начальный баланс счета получателя.
+     */
+    private void setStartReceiverAccountBalance(BigDecimal startReceiverAccountBalance) {
+<span class="nc" id="L112">        this.startReceiverAccountBalance = startReceiverAccountBalance;</span>
+<span class="nc" id="L113">    }</span>
+
+    /**
+     * Возвращает объект банковского счета получателя.
+     *
+     * @return объект банковского счета получателя.
+     */
+    public BankAccount getReceiverBankAccount() {
+<span class="nc" id="L121">        return receiverBankAccount;</span>
+    }
+
+    /**
+     * Устанавливает объект банковского счета получателя.
+     *
+     * @param receiverBankAccount объект банковского счета получателя.
+     */
+    private void setReceiverBankAccount(BankAccount receiverBankAccount) {
+<span class="nc" id="L130">        this.receiverBankAccount = receiverBankAccount;</span>
+<span class="nc" id="L131">    }</span>
+
+    /**
+     * Возвращает сумму транзакции.
+     *
+     * @return сумма транзакции.
+     */
+    public BigDecimal getAmount() {
+<span class="nc" id="L139">        return amount;</span>
+    }
+
+    public TransactionTypes getTransactionTypes() {
+<span class="nc" id="L143">        return transactionTypes;</span>
+    }
+
+    /**
+     * Заполняет контекст транзакции объектами банковских счетов на основе списка счетов.
+     * Устанавливает начальные балансы счетов отправителя и получателя, если они еще не установлены.
+     *
+     * @param accounts список объектов банковских счетов.
+     */
+    public void fillWithAccounts(List&lt;BankAccount&gt; accounts) {
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        if (!this.getSenderBankAccountNumber().isEmpty()) {</span>
+<span class="nc" id="L154">            accounts.stream()</span>
+<span class="nc" id="L155">                    .filter(account -&gt; account.getNumber().equals(this.getSenderBankAccountNumber()))</span>
+<span class="nc" id="L156">                    .findFirst()</span>
+<span class="nc" id="L157">                    .ifPresent(account -&gt; {</span>
+<span class="nc" id="L158">                        this.setSenderBankAccount(account);</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">                        if (this.getStartSenderAccountBalance() == null)</span>
+<span class="nc" id="L160">                            this.setStartSenderAccountBalance(account.getBalance());</span>
+<span class="nc" id="L161">                    });</span>
+        }
+<span class="nc bnc" id="L163" title="All 2 branches missed.">        if (!this.getReceiverBankAccountNumber().isEmpty()) {</span>
+<span class="nc" id="L164">            accounts.stream()</span>
+<span class="nc" id="L165">                    .filter(account -&gt; account.getNumber().equals(this.getReceiverBankAccountNumber()))</span>
+<span class="nc" id="L166">                    .findFirst()</span>
+<span class="nc" id="L167">                    .ifPresent(account -&gt; {</span>
+<span class="nc" id="L168">                        this.setReceiverBankAccount(account);</span>
+<span class="nc bnc" id="L169" title="All 2 branches missed.">                        if (this.getStartReceiverAccountBalance() == null)</span>
+<span class="nc" id="L170">                            this.setStartReceiverAccountBalance(account.getBalance());</span>
+<span class="nc" id="L171">                    });</span>
+        }
+<span class="nc" id="L173">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -43,7 +43,7 @@ public class BankaccountsDao extends DAOImpl<BankaccountsRecord, ru.sberstart.fi
     }
 
     /**
-     * Fetch records that have <code>id BETWEEN lowerInclusive AND
+     * Fetch records that have <code>ID BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Bankaccounts> fetchRangeOfId(UUID lowerInclusive, UUID upperInclusive) {
@@ -51,28 +51,28 @@ public class BankaccountsDao extends DAOImpl<BankaccountsRecord, ru.sberstart.fi
     }
 
     /**
-     * Fetch records that have <code>id IN (values)</code>
+     * Fetch records that have <code>ID IN (values)</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Bankaccounts> fetchById(UUID... values) {
         return fetch(Bankaccounts.BANKACCOUNTS.ID, values);
     }
 
     /**
-     * Fetch a unique record that has <code>id = value</code>
+     * Fetch a unique record that has <code>ID = value</code>
      */
     public ru.sberstart.finalproject.jooq.tables.pojos.Bankaccounts fetchOneById(UUID value) {
         return fetchOne(Bankaccounts.BANKACCOUNTS.ID, value);
     }
 
     /**
-     * Fetch a unique record that has <code>id = value</code>
+     * Fetch a unique record that has <code>ID = value</code>
      */
     public Optional<ru.sberstart.finalproject.jooq.tables.pojos.Bankaccounts> fetchOptionalById(UUID value) {
         return fetchOptional(Bankaccounts.BANKACCOUNTS.ID, value);
     }
 
     /**
-     * Fetch records that have <code>bank_id BETWEEN lowerInclusive AND
+     * Fetch records that have <code>BANK_ID BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Bankaccounts> fetchRangeOfBankId(UUID lowerInclusive, UUID upperInclusive) {
@@ -80,14 +80,14 @@ public class BankaccountsDao extends DAOImpl<BankaccountsRecord, ru.sberstart.fi
     }
 
     /**
-     * Fetch records that have <code>bank_id IN (values)</code>
+     * Fetch records that have <code>BANK_ID IN (values)</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Bankaccounts> fetchByBankId(UUID... values) {
         return fetch(Bankaccounts.BANKACCOUNTS.BANK_ID, values);
     }
 
     /**
-     * Fetch records that have <code>user_id BETWEEN lowerInclusive AND
+     * Fetch records that have <code>USER_ID BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Bankaccounts> fetchRangeOfUserId(UUID lowerInclusive, UUID upperInclusive) {
@@ -95,14 +95,14 @@ public class BankaccountsDao extends DAOImpl<BankaccountsRecord, ru.sberstart.fi
     }
 
     /**
-     * Fetch records that have <code>user_id IN (values)</code>
+     * Fetch records that have <code>USER_ID IN (values)</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Bankaccounts> fetchByUserId(UUID... values) {
         return fetch(Bankaccounts.BANKACCOUNTS.USER_ID, values);
     }
 
     /**
-     * Fetch records that have <code>registry_date BETWEEN lowerInclusive AND
+     * Fetch records that have <code>REGISTRY_DATE BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Bankaccounts> fetchRangeOfRegistryDate(LocalDate lowerInclusive, LocalDate upperInclusive) {
@@ -110,14 +110,14 @@ public class BankaccountsDao extends DAOImpl<BankaccountsRecord, ru.sberstart.fi
     }
 
     /**
-     * Fetch records that have <code>registry_date IN (values)</code>
+     * Fetch records that have <code>REGISTRY_DATE IN (values)</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Bankaccounts> fetchByRegistryDate(LocalDate... values) {
         return fetch(Bankaccounts.BANKACCOUNTS.REGISTRY_DATE, values);
     }
 
     /**
-     * Fetch records that have <code>number BETWEEN lowerInclusive AND
+     * Fetch records that have <code>NUMBER BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Bankaccounts> fetchRangeOfNumber(String lowerInclusive, String upperInclusive) {
@@ -125,28 +125,28 @@ public class BankaccountsDao extends DAOImpl<BankaccountsRecord, ru.sberstart.fi
     }
 
     /**
-     * Fetch records that have <code>number IN (values)</code>
+     * Fetch records that have <code>NUMBER IN (values)</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Bankaccounts> fetchByNumber(String... values) {
         return fetch(Bankaccounts.BANKACCOUNTS.NUMBER, values);
     }
 
     /**
-     * Fetch a unique record that has <code>number = value</code>
+     * Fetch a unique record that has <code>NUMBER = value</code>
      */
     public ru.sberstart.finalproject.jooq.tables.pojos.Bankaccounts fetchOneByNumber(String value) {
         return fetchOne(Bankaccounts.BANKACCOUNTS.NUMBER, value);
     }
 
     /**
-     * Fetch a unique record that has <code>number = value</code>
+     * Fetch a unique record that has <code>NUMBER = value</code>
      */
     public Optional<ru.sberstart.finalproject.jooq.tables.pojos.Bankaccounts> fetchOptionalByNumber(String value) {
         return fetchOptional(Bankaccounts.BANKACCOUNTS.NUMBER, value);
     }
 
     /**
-     * Fetch records that have <code>balance BETWEEN lowerInclusive AND
+     * Fetch records that have <code>BALANCE BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Bankaccounts> fetchRangeOfBalance(BigDecimal lowerInclusive, BigDecimal upperInclusive) {
@@ -154,14 +154,14 @@ public class BankaccountsDao extends DAOImpl<BankaccountsRecord, ru.sberstart.fi
     }
 
     /**
-     * Fetch records that have <code>balance IN (values)</code>
+     * Fetch records that have <code>BALANCE IN (values)</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Bankaccounts> fetchByBalance(BigDecimal... values) {
         return fetch(Bankaccounts.BANKACCOUNTS.BALANCE, values);
     }
 
     /**
-     * Fetch records that have <code>state BETWEEN lowerInclusive AND
+     * Fetch records that have <code>STATE BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Bankaccounts> fetchRangeOfState(String lowerInclusive, String upperInclusive) {
@@ -169,7 +169,7 @@ public class BankaccountsDao extends DAOImpl<BankaccountsRecord, ru.sberstart.fi
     }
 
     /**
-     * Fetch records that have <code>state IN (values)</code>
+     * Fetch records that have <code>STATE IN (values)</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Bankaccounts> fetchByState(String... values) {
         return fetch(Bankaccounts.BANKACCOUNTS.STATE, values);

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TransactionProviderHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">final-project</a> &gt; <a href="index.source.html" class="el_package">ru.sberstart.finalproject.domain.chain_of_responsibility.transactions</a> &gt; <span class="el_source">TransactionProviderHandler.java</span></div><h1>TransactionProviderHandler.java</h1><pre class="source lang-java linenums">package ru.sberstart.finalproject.domain.chain_of_responsibility.transactions;
+
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import ru.sberstart.finalproject.domain.enitity.bankaccount.BankAccount;
+import ru.sberstart.finalproject.domain.enitity.bankaccount.enums.TransactionTypes;
+import ru.sberstart.finalproject.infrastructure.repostitory.implementation.BankAccountRepositoryImpl;
+import ru.sberstart.finalproject.global.exceptions.ForbiddenTransactionException;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * Класс TransactionProviderHandler реализует интерфейс TransactionHandler и отвечает за выполнение транзакций
+ * между банковскими счетами. Он использует репозиторий BankAccountRepositoryImpl для взаимодействия с базой данных.
+ */
+@Component
+public class TransactionProviderHandler implements TransactionHandler {
+    private TransactionHandler next;
+
+    private final BankAccountRepositoryImpl repository;
+
+    /**
+     * Конструктор класса TransactionProviderHandler.
+     *
+     * @param repository Репозиторий для работы с банковскими счетами.
+     */
+<span class="fc" id="L30">    public TransactionProviderHandler(BankAccountRepositoryImpl repository) {</span>
+<span class="fc" id="L31">        this.repository = repository;</span>
+<span class="fc" id="L32">    }</span>
+
+    /**
+     * Устанавливает следующий обработчик в цепочке.
+     *
+     * @param handler Следующий обработчик транзакций.
+     */
+    @Override
+    public void setNext(TransactionHandler handler) {
+<span class="nc" id="L41">        this.next = handler;</span>
+<span class="nc" id="L42">    }</span>
+
+    /**
+     * Обрабатывает транзакцию между банковскими счетами. Метод аннотирован @Transactional для обеспечения
+     * атомарности операции. В случае ошибки ввода-вывода выбрасывается ForbiddenTransactionException.
+     *
+     * @param context Контекст транзакции, содержащий информацию о счетах и сумме транзакции.
+     */
+    @Transactional(rollbackFor = ForbiddenTransactionException.class)
+    @Override
+    public void handle(TransactionContext context) {
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if (context.getTransactionTypes() == TransactionTypes.TRANSFER) {</span>
+<span class="nc" id="L54">            processTransfer(context);</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        } else if (next != null) {</span>
+<span class="nc" id="L56">            next.handle(context);</span>
+        }
+<span class="nc" id="L58">    }</span>
+
+    public void processTransfer(TransactionContext context) {
+        try {
+<span class="nc" id="L62">            List&lt;BankAccount&gt; bankAccounts = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L63">            bankAccounts.add(context.getSenderBankAccount());</span>
+<span class="nc" id="L64">            bankAccounts.add(context.getReceiverBankAccount());</span>
+<span class="nc" id="L65">            List&lt;BankAccount&gt; accountsAfterTransaction = repository</span>
+<span class="nc" id="L66">                    .provideTransaction(bankAccounts)</span>
+<span class="nc" id="L67">                    .orElseThrow(ForbiddenTransactionException::new);</span>
+<span class="nc" id="L68">            context.fillWithAccounts(accountsAfterTransaction);</span>
+<span class="nc" id="L69">        } catch (IOException e) {</span>
+<span class="nc" id="L70">            throw new ForbiddenTransactionException();</span>
+<span class="nc" id="L71">        }</span>
+<span class="nc" id="L72">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

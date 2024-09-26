@@ -40,7 +40,7 @@ public class Userroles extends TableImpl<UserrolesRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>public.UserRoles</code>
+     * The reference instance of <code>PUBLIC.USERROLES</code>
      */
     public static final Userroles USERROLES = new Userroles();
 
@@ -53,14 +53,14 @@ public class Userroles extends TableImpl<UserrolesRecord> {
     }
 
     /**
-     * The column <code>public.UserRoles.user_id</code>.
+     * The column <code>PUBLIC.USERROLES.USER_ID</code>.
      */
-    public final TableField<UserrolesRecord, UUID> USER_ID = createField(DSL.name("user_id"), SQLDataType.UUID.nullable(false), this, "");
+    public final TableField<UserrolesRecord, UUID> USER_ID = createField(DSL.name("USER_ID"), SQLDataType.UUID.nullable(false), this, "");
 
     /**
-     * The column <code>public.UserRoles.role_id</code>.
+     * The column <code>PUBLIC.USERROLES.ROLE_ID</code>.
      */
-    public final TableField<UserrolesRecord, UUID> ROLE_ID = createField(DSL.name("role_id"), SQLDataType.UUID.nullable(false), this, "");
+    public final TableField<UserrolesRecord, UUID> ROLE_ID = createField(DSL.name("ROLE_ID"), SQLDataType.UUID.nullable(false), this, "");
 
     private Userroles(Name alias, Table<UserrolesRecord> aliased) {
         this(alias, aliased, null);
@@ -71,24 +71,24 @@ public class Userroles extends TableImpl<UserrolesRecord> {
     }
 
     /**
-     * Create an aliased <code>public.UserRoles</code> table reference
+     * Create an aliased <code>PUBLIC.USERROLES</code> table reference
      */
     public Userroles(String alias) {
         this(DSL.name(alias), USERROLES);
     }
 
     /**
-     * Create an aliased <code>public.UserRoles</code> table reference
+     * Create an aliased <code>PUBLIC.USERROLES</code> table reference
      */
     public Userroles(Name alias) {
         this(alias, USERROLES);
     }
 
     /**
-     * Create a <code>public.UserRoles</code> table reference
+     * Create a <code>PUBLIC.USERROLES</code> table reference
      */
     public Userroles() {
-        this(DSL.name("UserRoles"), null);
+        this(DSL.name("USERROLES"), null);
     }
 
     public <O extends Record> Userroles(Table<O> child, ForeignKey<O, UserrolesRecord> key) {
@@ -102,33 +102,33 @@ public class Userroles extends TableImpl<UserrolesRecord> {
 
     @Override
     public UniqueKey<UserrolesRecord> getPrimaryKey() {
-        return Keys.USERROLES_PKEY;
+        return Keys.CONSTRAINT_BB;
     }
 
     @Override
     public List<ForeignKey<UserrolesRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.USERROLES__FK_USER_ROLES_USERS, Keys.USERROLES__FK_USER_ROLES_ROLES);
+        return Arrays.asList(Keys.FK_USER_ROLES_USERS, Keys.FK_USER_ROLES_ROLES);
     }
 
     private transient Users _users;
     private transient Roles _roles;
 
     /**
-     * Get the implicit join path to the <code>public.Users</code> table.
+     * Get the implicit join path to the <code>PUBLIC.USERS</code> table.
      */
     public Users users() {
         if (_users == null)
-            _users = new Users(this, Keys.USERROLES__FK_USER_ROLES_USERS);
+            _users = new Users(this, Keys.FK_USER_ROLES_USERS);
 
         return _users;
     }
 
     /**
-     * Get the implicit join path to the <code>public.Roles</code> table.
+     * Get the implicit join path to the <code>PUBLIC.ROLES</code> table.
      */
     public Roles roles() {
         if (_roles == null)
-            _roles = new Roles(this, Keys.USERROLES__FK_USER_ROLES_ROLES);
+            _roles = new Roles(this, Keys.FK_USER_ROLES_ROLES);
 
         return _roles;
     }

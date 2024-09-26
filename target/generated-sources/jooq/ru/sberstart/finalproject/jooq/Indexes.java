@@ -10,11 +10,13 @@ import org.jooq.impl.DSL;
 import org.jooq.impl.Internal;
 
 import ru.sberstart.finalproject.jooq.tables.Bankaccounts;
+import ru.sberstart.finalproject.jooq.tables.Banks;
 import ru.sberstart.finalproject.jooq.tables.Cards;
+import ru.sberstart.finalproject.jooq.tables.Users;
 
 
 /**
- * A class modelling indexes of tables in public.
+ * A class modelling indexes of tables in PUBLIC.
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Indexes {
@@ -23,8 +25,11 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
-    public static final Index IDX_BANKACCOUNTS_BANK_ID = Internal.createIndex(DSL.name("idx_bankaccounts_bank_id"), Bankaccounts.BANKACCOUNTS, new OrderField[] { Bankaccounts.BANKACCOUNTS.BANK_ID }, false);
-    public static final Index IDX_BANKACCOUNTS_USER_ID = Internal.createIndex(DSL.name("idx_bankaccounts_user_id"), Bankaccounts.BANKACCOUNTS, new OrderField[] { Bankaccounts.BANKACCOUNTS.USER_ID }, false);
-    public static final Index IDX_CARDS_BANKACCOUNT_ID = Internal.createIndex(DSL.name("idx_cards_bankaccount_id"), Cards.CARDS, new OrderField[] { Cards.CARDS.BANKACCOUNT_ID }, false);
-    public static final Index IDX_CARDS_CARD_SECRET_ID = Internal.createIndex(DSL.name("idx_cards_card_secret_id"), Cards.CARDS, new OrderField[] { Cards.CARDS.CARD_SECRET_ID }, false);
+    public static final Index IDX_BANKACCOUNT_NUMBER = Internal.createIndex(DSL.name("IDX_BANKACCOUNT_NUMBER"), Bankaccounts.BANKACCOUNTS, new OrderField[] { Bankaccounts.BANKACCOUNTS.NUMBER }, false);
+    public static final Index IDX_BANKACCOUNTS_BANK_ID = Internal.createIndex(DSL.name("IDX_BANKACCOUNTS_BANK_ID"), Bankaccounts.BANKACCOUNTS, new OrderField[] { Bankaccounts.BANKACCOUNTS.BANK_ID }, false);
+    public static final Index IDX_BANKACCOUNTS_USER_ID = Internal.createIndex(DSL.name("IDX_BANKACCOUNTS_USER_ID"), Bankaccounts.BANKACCOUNTS, new OrderField[] { Bankaccounts.BANKACCOUNTS.USER_ID }, false);
+    public static final Index IDX_CARD_NUMBER = Internal.createIndex(DSL.name("IDX_CARD_NUMBER"), Cards.CARDS, new OrderField[] { Cards.CARDS.NUMBER }, false);
+    public static final Index IDX_CARDS_BANKACCOUNT_ID = Internal.createIndex(DSL.name("IDX_CARDS_BANKACCOUNT_ID"), Cards.CARDS, new OrderField[] { Cards.CARDS.BANKACCOUNT_ID }, false);
+    public static final Index IDX_IDENTITY_NUMBER = Internal.createIndex(DSL.name("IDX_IDENTITY_NUMBER"), Banks.BANKS, new OrderField[] { Banks.BANKS.IDENTITY_NUMBER }, false);
+    public static final Index IDX_PHONE_NUMBER = Internal.createIndex(DSL.name("IDX_PHONE_NUMBER"), Users.USERS, new OrderField[] { Users.USERS.PHONE_NUMBER }, false);
 }

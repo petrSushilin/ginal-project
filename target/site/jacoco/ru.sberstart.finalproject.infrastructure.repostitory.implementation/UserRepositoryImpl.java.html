@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserRepositoryImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">final-project</a> &gt; <a href="index.source.html" class="el_package">ru.sberstart.finalproject.infrastructure.repostitory.implementation</a> &gt; <span class="el_source">UserRepositoryImpl.java</span></div><h1>UserRepositoryImpl.java</h1><pre class="source lang-java linenums">package ru.sberstart.finalproject.infrastructure.repostitory.implementation;
+
+import org.jooq.DSLContext;
+import org.jooq.Field;
+import org.jooq.Record;
+import org.jooq.Result;
+import ru.sberstart.finalproject.domain.enitity.user.User;
+import ru.sberstart.finalproject.domain.enitity.user.enums.UserRoles;
+import ru.sberstart.finalproject.domain.enitity.user.enums.UserStatus;
+import ru.sberstart.finalproject.infrastructure.repostitory.interfaces.UserRepository;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+import static ru.sberstart.finalproject.jooq.Tables.ROLES;
+import static ru.sberstart.finalproject.jooq.Tables.USERROLES;
+import static ru.sberstart.finalproject.jooq.Tables.USERS;
+
+public class UserRepositoryImpl implements UserRepository {
+    private DSLContext context;
+
+<span class="fc" id="L26">    public UserRepositoryImpl(DSLContext context) {</span>
+<span class="fc" id="L27">        this.context = context;</span>
+<span class="fc" id="L28">    }</span>
+
+<span class="fc" id="L30">    private final List&lt;Field&lt;?&gt;&gt; USER_FIELDS = List.of(</span>
+            USERS.ID,
+            USERS.NAME,
+            USERS.SURNAME,
+            USERS.BIRTHDATE,
+            USERS.PHONE_NUMBER,
+            USERS.PASSPORT_NUMBER,
+            ROLES.ROLE_NAME,
+            USERS.STATUS
+    );
+
+    private static User buildUser(Result&lt;Record&gt; records) {
+<span class="nc" id="L42">        Record record = records.get(0);</span>
+
+<span class="nc" id="L44">        Set&lt;UserRoles&gt; roles = records.stream()</span>
+<span class="nc" id="L45">                .map(r -&gt; UserRoles.valueOf(r.get(ROLES.ROLE_NAME)))</span>
+<span class="nc" id="L46">                .collect(Collectors.toSet());</span>
+
+<span class="nc" id="L48">        return new User.Builder()</span>
+<span class="nc" id="L49">                .withId(record.get(USERS.ID))</span>
+<span class="nc" id="L50">                .withName(record.get(USERS.NAME))</span>
+<span class="nc" id="L51">                .withSurname(record.get(USERS.SURNAME))</span>
+<span class="nc" id="L52">                .withPhoneNumber(record.get(USERS.PHONE_NUMBER))</span>
+<span class="nc" id="L53">                .withPassportNumber(record.get(USERS.PASSPORT_NUMBER))</span>
+<span class="nc" id="L54">                .withRoles(roles)</span>
+<span class="nc" id="L55">                .withStatus(UserStatus.valueOf(record.get(USERS.STATUS)))</span>
+<span class="nc" id="L56">                .build();</span>
+    }
+
+    @Override
+    public Optional&lt;User&gt; createUser(User user) {
+<span class="nc" id="L61">        context.insertInto(USERS)</span>
+<span class="nc" id="L62">                .set(context.newRecord(USERS, user))</span>
+<span class="nc" id="L63">                .execute();</span>
+
+<span class="nc" id="L65">        setUpUserId(user);</span>
+<span class="nc" id="L66">        setUpUserRoles(user);</span>
+
+<span class="nc" id="L68">        return selectAfterExecute(user);</span>
+    }
+
+    @Override
+    public Optional&lt;User&gt; updateUserFields(User user) {
+<span class="nc" id="L73">        int affectedRows = context</span>
+<span class="nc" id="L74">                .update(USERS)</span>
+<span class="nc" id="L75">                .set(context.newRecord(USERS, user))</span>
+<span class="nc" id="L76">                .where(USERS.PHONE_NUMBER.eq(user.getPhoneNumber()))</span>
+<span class="nc" id="L77">                .execute();</span>
+
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        if (affectedRows == 0) return Optional.empty();</span>
+
+<span class="nc" id="L81">        setUpUserId(user);</span>
+
+<span class="nc" id="L83">        return selectAfterExecute(user);</span>
+    }
+
+    @Override
+    public Optional&lt;User&gt; updateUserRoles(User user) {
+<span class="nc" id="L88">        setUpUserId(user);</span>
+
+<span class="nc" id="L90">        context.deleteFrom(USERROLES)</span>
+<span class="nc" id="L91">                .where(USERROLES.USER_ID.eq(user.getId()))</span>
+<span class="nc" id="L92">                .execute();</span>
+
+<span class="nc" id="L94">        setUpUserRoles(user);</span>
+
+<span class="nc" id="L96">        return selectAfterExecute(user);</span>
+    }
+
+    @Override
+    public Optional&lt;User&gt; getUserWithRoles(String userPhoneNumber) {
+<span class="nc" id="L101">        return context.select(USER_FIELDS)</span>
+<span class="nc" id="L102">                .from(USERS)</span>
+<span class="nc" id="L103">                .leftJoin(USERROLES)</span>
+<span class="nc" id="L104">                .on(USERS.ID.eq(USERROLES.USER_ID))</span>
+<span class="nc" id="L105">                .leftJoin(ROLES)</span>
+<span class="nc" id="L106">                .on(USERROLES.ROLE_ID.eq(ROLES.ID))</span>
+<span class="nc" id="L107">                .where(USERS.PHONE_NUMBER.eq(userPhoneNumber))</span>
+<span class="nc" id="L108">                .fetchGroups(USERS.ID)</span>
+<span class="nc" id="L109">                .values().stream()</span>
+<span class="nc" id="L110">                .map(UserRepositoryImpl::buildUser)</span>
+<span class="nc" id="L111">                .findFirst();</span>
+    }
+
+    private void setUpUserRoles(User user) {
+<span class="nc" id="L115">        Map&lt;String, UUID&gt; roleIds = context.select(ROLES.ROLE_NAME, ROLES.ID)</span>
+<span class="nc" id="L116">                .from(ROLES)</span>
+<span class="nc" id="L117">                .where(ROLES.ROLE_NAME.in(user.getRoles().stream().map(UserRoles::name).collect(Collectors.toList())))</span>
+<span class="nc" id="L118">                .fetchMap(ROLES.ROLE_NAME, ROLES.ID);</span>
+
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        if (!roleIds.isEmpty()) {</span>
+<span class="nc" id="L121">            context.batchInsert(</span>
+<span class="nc" id="L122">                    user.getRoles().stream()</span>
+<span class="nc" id="L123">                            .map(role -&gt; context.newRecord(USERROLES)</span>
+<span class="nc" id="L124">                                    .values(user.getId(), roleIds.get(role.name())))</span>
+<span class="nc" id="L125">                            .collect(Collectors.toList())</span>
+<span class="nc" id="L126">            ).execute();</span>
+        }
+<span class="nc" id="L128">    }</span>
+
+    private void setUpUserId(User user) {
+<span class="nc" id="L131">        UUID userId = context.fetchOne(&quot;SELECT ID FROM USERS WHERE PHONE_NUMBER = ? &quot;, user.getPhoneNumber())</span>
+<span class="nc" id="L132">                .get(USERS.ID);</span>
+<span class="nc" id="L133">        user.setId(userId);</span>
+<span class="nc" id="L134">    }</span>
+
+    private Optional&lt;User&gt; selectAfterExecute(User user) {
+<span class="nc" id="L137">        return context.select(USER_FIELDS)</span>
+<span class="nc" id="L138">                .from(USERS)</span>
+<span class="nc" id="L139">                .leftJoin(USERROLES).on(USERS.ID.eq(USERROLES.USER_ID))</span>
+<span class="nc" id="L140">                .leftJoin(ROLES).on(USERROLES.ROLE_ID.eq(ROLES.ID))</span>
+<span class="nc" id="L141">                .where(USERS.ID.eq(user.getId()))</span>
+<span class="nc" id="L142">                .fetchGroups(USERS.ID)</span>
+<span class="nc" id="L143">                .values().stream()</span>
+<span class="nc" id="L144">                .map(UserRepositoryImpl::buildUser)</span>
+<span class="nc" id="L145">                .findFirst();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

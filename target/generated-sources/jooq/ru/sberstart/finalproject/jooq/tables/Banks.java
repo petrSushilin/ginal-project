@@ -12,6 +12,7 @@ import java.util.function.Function;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Function3;
+import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
@@ -26,6 +27,7 @@ import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 
+import ru.sberstart.finalproject.jooq.Indexes;
 import ru.sberstart.finalproject.jooq.Keys;
 import ru.sberstart.finalproject.jooq.Public;
 import ru.sberstart.finalproject.jooq.tables.records.BanksRecord;
@@ -40,7 +42,7 @@ public class Banks extends TableImpl<BanksRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>public.Banks</code>
+     * The reference instance of <code>PUBLIC.BANKS</code>
      */
     public static final Banks BANKS = new Banks();
 
@@ -53,19 +55,19 @@ public class Banks extends TableImpl<BanksRecord> {
     }
 
     /**
-     * The column <code>public.Banks.id</code>.
+     * The column <code>PUBLIC.BANKS.ID</code>.
      */
-    public final TableField<BanksRecord, UUID> ID = createField(DSL.name("id"), SQLDataType.UUID.nullable(false), this, "");
+    public final TableField<BanksRecord, UUID> ID = createField(DSL.name("ID"), SQLDataType.UUID.nullable(false).defaultValue(DSL.field(DSL.raw("RANDOM_UUID()"), SQLDataType.UUID)), this, "");
 
     /**
-     * The column <code>public.Banks.name</code>.
+     * The column <code>PUBLIC.BANKS.NAME</code>.
      */
-    public final TableField<BanksRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(255).nullable(false), this, "");
+    public final TableField<BanksRecord, String> NAME = createField(DSL.name("NAME"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
-     * The column <code>public.Banks.identity_number</code>.
+     * The column <code>PUBLIC.BANKS.IDENTITY_NUMBER</code>.
      */
-    public final TableField<BanksRecord, String> IDENTITY_NUMBER = createField(DSL.name("identity_number"), SQLDataType.VARCHAR(50).nullable(false), this, "");
+    public final TableField<BanksRecord, String> IDENTITY_NUMBER = createField(DSL.name("IDENTITY_NUMBER"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     private Banks(Name alias, Table<BanksRecord> aliased) {
         this(alias, aliased, null);
@@ -76,24 +78,24 @@ public class Banks extends TableImpl<BanksRecord> {
     }
 
     /**
-     * Create an aliased <code>public.Banks</code> table reference
+     * Create an aliased <code>PUBLIC.BANKS</code> table reference
      */
     public Banks(String alias) {
         this(DSL.name(alias), BANKS);
     }
 
     /**
-     * Create an aliased <code>public.Banks</code> table reference
+     * Create an aliased <code>PUBLIC.BANKS</code> table reference
      */
     public Banks(Name alias) {
         this(alias, BANKS);
     }
 
     /**
-     * Create a <code>public.Banks</code> table reference
+     * Create a <code>PUBLIC.BANKS</code> table reference
      */
     public Banks() {
-        this(DSL.name("Banks"), null);
+        this(DSL.name("BANKS"), null);
     }
 
     public <O extends Record> Banks(Table<O> child, ForeignKey<O, BanksRecord> key) {
@@ -106,13 +108,18 @@ public class Banks extends TableImpl<BanksRecord> {
     }
 
     @Override
+    public List<Index> getIndexes() {
+        return Arrays.asList(Indexes.IDX_IDENTITY_NUMBER);
+    }
+
+    @Override
     public UniqueKey<BanksRecord> getPrimaryKey() {
-        return Keys.BANKS_PKEY;
+        return Keys.PK_BANKS;
     }
 
     @Override
     public List<UniqueKey<BanksRecord>> getUniqueKeys() {
-        return Arrays.asList(Keys.BANKS_IDENTITY_NUMBER_KEY);
+        return Arrays.asList(Keys.CONSTRAINT_3);
     }
 
     @Override

@@ -41,7 +41,7 @@ public class RolesDao extends DAOImpl<RolesRecord, ru.sberstart.finalproject.joo
     }
 
     /**
-     * Fetch records that have <code>id BETWEEN lowerInclusive AND
+     * Fetch records that have <code>ID BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Roles> fetchRangeOfId(UUID lowerInclusive, UUID upperInclusive) {
@@ -49,28 +49,28 @@ public class RolesDao extends DAOImpl<RolesRecord, ru.sberstart.finalproject.joo
     }
 
     /**
-     * Fetch records that have <code>id IN (values)</code>
+     * Fetch records that have <code>ID IN (values)</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Roles> fetchById(UUID... values) {
         return fetch(Roles.ROLES.ID, values);
     }
 
     /**
-     * Fetch a unique record that has <code>id = value</code>
+     * Fetch a unique record that has <code>ID = value</code>
      */
     public ru.sberstart.finalproject.jooq.tables.pojos.Roles fetchOneById(UUID value) {
         return fetchOne(Roles.ROLES.ID, value);
     }
 
     /**
-     * Fetch a unique record that has <code>id = value</code>
+     * Fetch a unique record that has <code>ID = value</code>
      */
     public Optional<ru.sberstart.finalproject.jooq.tables.pojos.Roles> fetchOptionalById(UUID value) {
         return fetchOptional(Roles.ROLES.ID, value);
     }
 
     /**
-     * Fetch records that have <code>role_name BETWEEN lowerInclusive AND
+     * Fetch records that have <code>ROLE_NAME BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Roles> fetchRangeOfRoleName(String lowerInclusive, String upperInclusive) {
@@ -78,21 +78,21 @@ public class RolesDao extends DAOImpl<RolesRecord, ru.sberstart.finalproject.joo
     }
 
     /**
-     * Fetch records that have <code>role_name IN (values)</code>
+     * Fetch records that have <code>ROLE_NAME IN (values)</code>
      */
     public List<ru.sberstart.finalproject.jooq.tables.pojos.Roles> fetchByRoleName(String... values) {
         return fetch(Roles.ROLES.ROLE_NAME, values);
     }
 
     /**
-     * Fetch a unique record that has <code>role_name = value</code>
+     * Fetch a unique record that has <code>ROLE_NAME = value</code>
      */
     public ru.sberstart.finalproject.jooq.tables.pojos.Roles fetchOneByRoleName(String value) {
         return fetchOne(Roles.ROLES.ROLE_NAME, value);
     }
 
     /**
-     * Fetch a unique record that has <code>role_name = value</code>
+     * Fetch a unique record that has <code>ROLE_NAME = value</code>
      */
     public Optional<ru.sberstart.finalproject.jooq.tables.pojos.Roles> fetchOptionalByRoleName(String value) {
         return fetchOptional(Roles.ROLES.ROLE_NAME, value);

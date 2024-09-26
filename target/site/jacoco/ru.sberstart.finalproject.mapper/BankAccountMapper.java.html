@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BankAccountMapper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">final-project</a> &gt; <a href="index.source.html" class="el_package">ru.sberstart.finalproject.mapper</a> &gt; <span class="el_source">BankAccountMapper.java</span></div><h1>BankAccountMapper.java</h1><pre class="source lang-java linenums">package ru.sberstart.finalproject.mapper;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
+import org.mapstruct.factory.Mappers;
+import ru.sberstart.finalproject.api.dto.bankaccount.inner.BankAccountCardIssueInformationDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.inner.BankAccountFullInformationDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.request.BankAccountCreationRequestDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.response.BankAccountActiveInformationResponseDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.response.BankAccountDeactivateInformationResponseDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.response.BankAccountCreationResponseDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.response.BankAccountInformationResponseDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.request.BankAccountStateRequestDTO;
+import ru.sberstart.finalproject.api.dto.bankaccount.response.BankAccountSuccessTransactionResponseDTO;
+import ru.sberstart.finalproject.domain.enitity.bankaccount.BankAccount;
+import ru.sberstart.finalproject.domain.enitity.bankaccount.enums.BankAccountStates;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.UUID;
+
+@Mapper(componentModel = &quot;default&quot;, unmappedSourcePolicy = ReportingPolicy.IGNORE, unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface BankAccountMapper {
+<span class="nc" id="L25">    BankAccountMapper INSTANCE = Mappers.getMapper(BankAccountMapper.class);</span>
+
+    BankAccount toEntity(BankAccountCreationRequestDTO dto);
+
+    BankAccount toEntity(BankAccountStateRequestDTO dto);
+
+    BankAccountCreationResponseDTO toBankAccountFullInformationResponseDTO(BankAccount bankAccount);
+
+    BankAccountActiveInformationResponseDTO toBankAccountActiveInformationResponseDTO(BankAccount bankAccount);
+
+    BankAccountDeactivateInformationResponseDTO toBankAccountDeactivateInformationResponseDTO(BankAccount bankAccount);
+
+    BankAccountSuccessTransactionResponseDTO toBankAccountSuccessTransactionDTO(BankAccount bankAccount);
+
+    BankAccountInformationResponseDTO toBankAccountInformationResponseDTO(BankAccountFullInformationDTO bankAccountFullInformationDTO);
+
+    BankAccountCardIssueInformationDTO toBankAccountCardIssueInformationDTO(BankAccountFullInformationDTO bankAccountInformation);
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

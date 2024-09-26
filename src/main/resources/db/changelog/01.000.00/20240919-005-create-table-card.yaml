@@ -9,6 +9,7 @@ databaseChangeLog:
               - column:
                   name: id
                   type: UUID
+                  defaultValueComputed: "RANDOM_UUID()"
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -18,13 +19,8 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: card_secret_id
-                  type: UUID
-                  constraints:
-                    unique: true
-              - column:
                   name: number
-                  type: VARCHAR(50)
+                  type: VARCHAR(255)
                   constraints:
                     nullable: false
                     unique: true
@@ -42,20 +38,20 @@ databaseChangeLog:
             constraintName: fk_cards_bankaccounts
         - addForeignKeyConstraint:
             baseTableName: Cards
-            baseColumnNames: card_secret_id
+            baseColumnNames: number
             referencedTableName: CardSecrets
-            referencedColumnNames: id
+            referencedColumnNames: card_number
             onDelete: CASCADE
-            constraintName: fk_cards_cardsecrets
+            constraintName: fk_cardsecrets_cards_card_number
         - createIndex:
-            indexName: idx_cards_bankaccount_id
             tableName: Cards
             columns:
               - column:
                   name: bankaccount_id
+            indexName: idx_cards_bankaccount_id
         - createIndex:
-            indexName: idx_cards_card_secret_id
             tableName: Cards
             columns:
               - column:
-                  name: card_secret_id
+                  name: number
+            indexName: idx_card_number

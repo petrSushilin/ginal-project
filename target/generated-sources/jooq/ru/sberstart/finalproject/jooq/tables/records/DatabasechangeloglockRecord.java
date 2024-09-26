@@ -24,56 +24,56 @@ public class DatabasechangeloglockRecord extends UpdatableRecordImpl<Databasecha
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>public.databasechangeloglock.id</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOGLOCK.ID</code>.
      */
     public void setId(Integer value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>public.databasechangeloglock.id</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOGLOCK.ID</code>.
      */
     public Integer getId() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>public.databasechangeloglock.locked</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOGLOCK.LOCKED</code>.
      */
     public void setLocked(Boolean value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>public.databasechangeloglock.locked</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOGLOCK.LOCKED</code>.
      */
     public Boolean getLocked() {
         return (Boolean) get(1);
     }
 
     /**
-     * Setter for <code>public.databasechangeloglock.lockgranted</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOGLOCK.LOCKGRANTED</code>.
      */
     public void setLockgranted(LocalDateTime value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>public.databasechangeloglock.lockgranted</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOGLOCK.LOCKGRANTED</code>.
      */
     public LocalDateTime getLockgranted() {
         return (LocalDateTime) get(2);
     }
 
     /**
-     * Setter for <code>public.databasechangeloglock.lockedby</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOGLOCK.LOCKEDBY</code>.
      */
     public void setLockedby(String value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>public.databasechangeloglock.lockedby</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOGLOCK.LOCKEDBY</code>.
      */
     public String getLockedby() {
         return (String) get(3);

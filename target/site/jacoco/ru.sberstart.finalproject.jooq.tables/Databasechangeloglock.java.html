@@ -38,7 +38,7 @@ public class Databasechangeloglock extends TableImpl&lt;DatabasechangeloglockRec
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of &lt;code&gt;public.databasechangeloglock&lt;/code&gt;
+     * The reference instance of &lt;code&gt;PUBLIC.DATABASECHANGELOGLOCK&lt;/code&gt;
      */
 <span class="fc" id="L43">    public static final Databasechangeloglock DATABASECHANGELOGLOCK = new Databasechangeloglock();</span>
 
@@ -51,24 +51,24 @@ public class Databasechangeloglock extends TableImpl&lt;DatabasechangeloglockRec
     }
 
     /**
-     * The column &lt;code&gt;public.databasechangeloglock.id&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.DATABASECHANGELOGLOCK.ID&lt;/code&gt;.
      */
-<span class="pc" id="L56">    public final TableField&lt;DatabasechangeloglockRecord, Integer&gt; ID = createField(DSL.name(&quot;id&quot;), SQLDataType.INTEGER.nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L56">    public final TableField&lt;DatabasechangeloglockRecord, Integer&gt; ID = createField(DSL.name(&quot;ID&quot;), SQLDataType.INTEGER.nullable(false), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.databasechangeloglock.locked&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.DATABASECHANGELOGLOCK.LOCKED&lt;/code&gt;.
      */
-<span class="pc" id="L61">    public final TableField&lt;DatabasechangeloglockRecord, Boolean&gt; LOCKED = createField(DSL.name(&quot;locked&quot;), SQLDataType.BOOLEAN.nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L61">    public final TableField&lt;DatabasechangeloglockRecord, Boolean&gt; LOCKED = createField(DSL.name(&quot;LOCKED&quot;), SQLDataType.BOOLEAN.nullable(false), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.databasechangeloglock.lockgranted&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.DATABASECHANGELOGLOCK.LOCKGRANTED&lt;/code&gt;.
      */
-<span class="pc" id="L66">    public final TableField&lt;DatabasechangeloglockRecord, LocalDateTime&gt; LOCKGRANTED = createField(DSL.name(&quot;lockgranted&quot;), SQLDataType.LOCALDATETIME(6), this, &quot;&quot;);</span>
+<span class="pc" id="L66">    public final TableField&lt;DatabasechangeloglockRecord, LocalDateTime&gt; LOCKGRANTED = createField(DSL.name(&quot;LOCKGRANTED&quot;), SQLDataType.LOCALDATETIME(6), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.databasechangeloglock.lockedby&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.DATABASECHANGELOGLOCK.LOCKEDBY&lt;/code&gt;.
      */
-<span class="pc" id="L71">    public final TableField&lt;DatabasechangeloglockRecord, String&gt; LOCKEDBY = createField(DSL.name(&quot;lockedby&quot;), SQLDataType.VARCHAR(255), this, &quot;&quot;);</span>
+<span class="pc" id="L71">    public final TableField&lt;DatabasechangeloglockRecord, String&gt; LOCKEDBY = createField(DSL.name(&quot;LOCKEDBY&quot;), SQLDataType.VARCHAR(255), this, &quot;&quot;);</span>
 
     private Databasechangeloglock(Name alias, Table&lt;DatabasechangeloglockRecord&gt; aliased) {
 <span class="fc" id="L74">        this(alias, aliased, null);</span>
@@ -79,7 +79,7 @@ public class Databasechangeloglock extends TableImpl&lt;DatabasechangeloglockRec
 <span class="fc" id="L79">    }</span>
 
     /**
-     * Create an aliased &lt;code&gt;public.databasechangeloglock&lt;/code&gt; table
+     * Create an aliased &lt;code&gt;PUBLIC.DATABASECHANGELOGLOCK&lt;/code&gt; table
      * reference
      */
     public Databasechangeloglock(String alias) {
@@ -87,7 +87,7 @@ public class Databasechangeloglock extends TableImpl&lt;DatabasechangeloglockRec
 <span class="nc" id="L87">    }</span>
 
     /**
-     * Create an aliased &lt;code&gt;public.databasechangeloglock&lt;/code&gt; table
+     * Create an aliased &lt;code&gt;PUBLIC.DATABASECHANGELOGLOCK&lt;/code&gt; table
      * reference
      */
     public Databasechangeloglock(Name alias) {
@@ -95,10 +95,10 @@ public class Databasechangeloglock extends TableImpl&lt;DatabasechangeloglockRec
 <span class="nc" id="L95">    }</span>
 
     /**
-     * Create a &lt;code&gt;public.databasechangeloglock&lt;/code&gt; table reference
+     * Create a &lt;code&gt;PUBLIC.DATABASECHANGELOGLOCK&lt;/code&gt; table reference
      */
     public Databasechangeloglock() {
-<span class="fc" id="L101">        this(DSL.name(&quot;databasechangeloglock&quot;), null);</span>
+<span class="fc" id="L101">        this(DSL.name(&quot;DATABASECHANGELOGLOCK&quot;), null);</span>
 <span class="fc" id="L102">    }</span>
 
     public &lt;O extends Record&gt; Databasechangeloglock(Table&lt;O&gt; child, ForeignKey&lt;O, DatabasechangeloglockRecord&gt; key) {
@@ -112,7 +112,7 @@ public class Databasechangeloglock extends TableImpl&lt;DatabasechangeloglockRec
 
     @Override
     public UniqueKey&lt;DatabasechangeloglockRecord&gt; getPrimaryKey() {
-<span class="nc" id="L115">        return Keys.DATABASECHANGELOGLOCK_PKEY;</span>
+<span class="nc" id="L115">        return Keys.PK_DATABASECHANGELOGLOCK;</span>
     }
 
     @Override

@@ -26,98 +26,98 @@ public class BankaccountsRecord extends UpdatableRecordImpl<BankaccountsRecord> 
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>public.BankAccounts.id</code>.
+     * Setter for <code>PUBLIC.BANKACCOUNTS.ID</code>.
      */
     public void setId(UUID value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>public.BankAccounts.id</code>.
+     * Getter for <code>PUBLIC.BANKACCOUNTS.ID</code>.
      */
     public UUID getId() {
         return (UUID) get(0);
     }
 
     /**
-     * Setter for <code>public.BankAccounts.bank_id</code>.
+     * Setter for <code>PUBLIC.BANKACCOUNTS.BANK_ID</code>.
      */
     public void setBankId(UUID value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>public.BankAccounts.bank_id</code>.
+     * Getter for <code>PUBLIC.BANKACCOUNTS.BANK_ID</code>.
      */
     public UUID getBankId() {
         return (UUID) get(1);
     }
 
     /**
-     * Setter for <code>public.BankAccounts.user_id</code>.
+     * Setter for <code>PUBLIC.BANKACCOUNTS.USER_ID</code>.
      */
     public void setUserId(UUID value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>public.BankAccounts.user_id</code>.
+     * Getter for <code>PUBLIC.BANKACCOUNTS.USER_ID</code>.
      */
     public UUID getUserId() {
         return (UUID) get(2);
     }
 
     /**
-     * Setter for <code>public.BankAccounts.registry_date</code>.
+     * Setter for <code>PUBLIC.BANKACCOUNTS.REGISTRY_DATE</code>.
      */
     public void setRegistryDate(LocalDate value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>public.BankAccounts.registry_date</code>.
+     * Getter for <code>PUBLIC.BANKACCOUNTS.REGISTRY_DATE</code>.
      */
     public LocalDate getRegistryDate() {
         return (LocalDate) get(3);
     }
 
     /**
-     * Setter for <code>public.BankAccounts.number</code>.
+     * Setter for <code>PUBLIC.BANKACCOUNTS.NUMBER</code>.
      */
     public void setNumber(String value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>public.BankAccounts.number</code>.
+     * Getter for <code>PUBLIC.BANKACCOUNTS.NUMBER</code>.
      */
     public String getNumber() {
         return (String) get(4);
     }
 
     /**
-     * Setter for <code>public.BankAccounts.balance</code>.
+     * Setter for <code>PUBLIC.BANKACCOUNTS.BALANCE</code>.
      */
     public void setBalance(BigDecimal value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>public.BankAccounts.balance</code>.
+     * Getter for <code>PUBLIC.BANKACCOUNTS.BALANCE</code>.
      */
     public BigDecimal getBalance() {
         return (BigDecimal) get(5);
     }
 
     /**
-     * Setter for <code>public.BankAccounts.state</code>.
+     * Setter for <code>PUBLIC.BANKACCOUNTS.STATE</code>.
      */
     public void setState(String value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>public.BankAccounts.state</code>.
+     * Getter for <code>PUBLIC.BANKACCOUNTS.STATE</code>.
      */
     public String getState() {
         return (String) get(6);

@@ -83,196 +83,196 @@ public class Databasechangelog implements Serializable {
     }
 
     /**
-     * Getter for <code>public.databasechangelog.id</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOG.ID</code>.
      */
     public String getId() {
         return this.id;
     }
 
     /**
-     * Setter for <code>public.databasechangelog.id</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOG.ID</code>.
      */
     public void setId(String id) {
         this.id = id;
     }
 
     /**
-     * Getter for <code>public.databasechangelog.author</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOG.AUTHOR</code>.
      */
     public String getAuthor() {
         return this.author;
     }
 
     /**
-     * Setter for <code>public.databasechangelog.author</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOG.AUTHOR</code>.
      */
     public void setAuthor(String author) {
         this.author = author;
     }
 
     /**
-     * Getter for <code>public.databasechangelog.filename</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOG.FILENAME</code>.
      */
     public String getFilename() {
         return this.filename;
     }
 
     /**
-     * Setter for <code>public.databasechangelog.filename</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOG.FILENAME</code>.
      */
     public void setFilename(String filename) {
         this.filename = filename;
     }
 
     /**
-     * Getter for <code>public.databasechangelog.dateexecuted</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOG.DATEEXECUTED</code>.
      */
     public LocalDateTime getDateexecuted() {
         return this.dateexecuted;
     }
 
     /**
-     * Setter for <code>public.databasechangelog.dateexecuted</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOG.DATEEXECUTED</code>.
      */
     public void setDateexecuted(LocalDateTime dateexecuted) {
         this.dateexecuted = dateexecuted;
     }
 
     /**
-     * Getter for <code>public.databasechangelog.orderexecuted</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOG.ORDEREXECUTED</code>.
      */
     public Integer getOrderexecuted() {
         return this.orderexecuted;
     }
 
     /**
-     * Setter for <code>public.databasechangelog.orderexecuted</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOG.ORDEREXECUTED</code>.
      */
     public void setOrderexecuted(Integer orderexecuted) {
         this.orderexecuted = orderexecuted;
     }
 
     /**
-     * Getter for <code>public.databasechangelog.exectype</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOG.EXECTYPE</code>.
      */
     public String getExectype() {
         return this.exectype;
     }
 
     /**
-     * Setter for <code>public.databasechangelog.exectype</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOG.EXECTYPE</code>.
      */
     public void setExectype(String exectype) {
         this.exectype = exectype;
     }
 
     /**
-     * Getter for <code>public.databasechangelog.md5sum</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOG.MD5SUM</code>.
      */
     public String getMd5sum() {
         return this.md5sum;
     }
 
     /**
-     * Setter for <code>public.databasechangelog.md5sum</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOG.MD5SUM</code>.
      */
     public void setMd5sum(String md5sum) {
         this.md5sum = md5sum;
     }
 
     /**
-     * Getter for <code>public.databasechangelog.description</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOG.DESCRIPTION</code>.
      */
     public String getDescription() {
         return this.description;
     }
 
     /**
-     * Setter for <code>public.databasechangelog.description</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOG.DESCRIPTION</code>.
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     * Getter for <code>public.databasechangelog.comments</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOG.COMMENTS</code>.
      */
     public String getComments() {
         return this.comments;
     }
 
     /**
-     * Setter for <code>public.databasechangelog.comments</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOG.COMMENTS</code>.
      */
     public void setComments(String comments) {
         this.comments = comments;
     }
 
     /**
-     * Getter for <code>public.databasechangelog.tag</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOG.TAG</code>.
      */
     public String getTag() {
         return this.tag;
     }
 
     /**
-     * Setter for <code>public.databasechangelog.tag</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOG.TAG</code>.
      */
     public void setTag(String tag) {
         this.tag = tag;
     }
 
     /**
-     * Getter for <code>public.databasechangelog.liquibase</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOG.LIQUIBASE</code>.
      */
     public String getLiquibase() {
         return this.liquibase;
     }
 
     /**
-     * Setter for <code>public.databasechangelog.liquibase</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOG.LIQUIBASE</code>.
      */
     public void setLiquibase(String liquibase) {
         this.liquibase = liquibase;
     }
 
     /**
-     * Getter for <code>public.databasechangelog.contexts</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOG.CONTEXTS</code>.
      */
     public String getContexts() {
         return this.contexts;
     }
 
     /**
-     * Setter for <code>public.databasechangelog.contexts</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOG.CONTEXTS</code>.
      */
     public void setContexts(String contexts) {
         this.contexts = contexts;
     }
 
     /**
-     * Getter for <code>public.databasechangelog.labels</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOG.LABELS</code>.
      */
     public String getLabels() {
         return this.labels;
     }
 
     /**
-     * Setter for <code>public.databasechangelog.labels</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOG.LABELS</code>.
      */
     public void setLabels(String labels) {
         this.labels = labels;
     }
 
     /**
-     * Getter for <code>public.databasechangelog.deployment_id</code>.
+     * Getter for <code>PUBLIC.DATABASECHANGELOG.DEPLOYMENT_ID</code>.
      */
     public String getDeploymentId() {
         return this.deploymentId;
     }
 
     /**
-     * Setter for <code>public.databasechangelog.deployment_id</code>.
+     * Setter for <code>PUBLIC.DATABASECHANGELOG.DEPLOYMENT_ID</code>.
      */
     public void setDeploymentId(String deploymentId) {
         this.deploymentId = deploymentId;

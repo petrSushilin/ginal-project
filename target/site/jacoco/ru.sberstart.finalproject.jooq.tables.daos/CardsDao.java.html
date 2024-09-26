@@ -41,7 +41,7 @@ public class CardsDao extends DAOImpl&lt;CardsRecord, ru.sberstart.finalproject.
     }
 
     /**
-     * Fetch records that have &lt;code&gt;id BETWEEN lowerInclusive AND
+     * Fetch records that have &lt;code&gt;ID BETWEEN lowerInclusive AND
      * upperInclusive&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Cards&gt; fetchRangeOfId(UUID lowerInclusive, UUID upperInclusive) {
@@ -49,28 +49,28 @@ public class CardsDao extends DAOImpl&lt;CardsRecord, ru.sberstart.finalproject.
     }
 
     /**
-     * Fetch records that have &lt;code&gt;id IN (values)&lt;/code&gt;
+     * Fetch records that have &lt;code&gt;ID IN (values)&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Cards&gt; fetchById(UUID... values) {
 <span class="nc" id="L55">        return fetch(Cards.CARDS.ID, values);</span>
     }
 
     /**
-     * Fetch a unique record that has &lt;code&gt;id = value&lt;/code&gt;
+     * Fetch a unique record that has &lt;code&gt;ID = value&lt;/code&gt;
      */
     public ru.sberstart.finalproject.jooq.tables.pojos.Cards fetchOneById(UUID value) {
 <span class="nc" id="L62">        return fetchOne(Cards.CARDS.ID, value);</span>
     }
 
     /**
-     * Fetch a unique record that has &lt;code&gt;id = value&lt;/code&gt;
+     * Fetch a unique record that has &lt;code&gt;ID = value&lt;/code&gt;
      */
     public Optional&lt;ru.sberstart.finalproject.jooq.tables.pojos.Cards&gt; fetchOptionalById(UUID value) {
 <span class="nc" id="L69">        return fetchOptional(Cards.CARDS.ID, value);</span>
     }
 
     /**
-     * Fetch records that have &lt;code&gt;bankaccount_id BETWEEN lowerInclusive AND
+     * Fetch records that have &lt;code&gt;BANKACCOUNT_ID BETWEEN lowerInclusive AND
      * upperInclusive&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Cards&gt; fetchRangeOfBankaccountId(UUID lowerInclusive, UUID upperInclusive) {
@@ -78,83 +78,54 @@ public class CardsDao extends DAOImpl&lt;CardsRecord, ru.sberstart.finalproject.
     }
 
     /**
-     * Fetch records that have &lt;code&gt;bankaccount_id IN (values)&lt;/code&gt;
+     * Fetch records that have &lt;code&gt;BANKACCOUNT_ID IN (values)&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Cards&gt; fetchByBankaccountId(UUID... values) {
 <span class="nc" id="L84">        return fetch(Cards.CARDS.BANKACCOUNT_ID, values);</span>
     }
 
     /**
-     * Fetch records that have &lt;code&gt;card_secret_id BETWEEN lowerInclusive AND
-     * upperInclusive&lt;/code&gt;
-     */
-    public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Cards&gt; fetchRangeOfCardSecretId(UUID lowerInclusive, UUID upperInclusive) {
-<span class="nc" id="L92">        return fetchRange(Cards.CARDS.CARD_SECRET_ID, lowerInclusive, upperInclusive);</span>
-    }
-
-    /**
-     * Fetch records that have &lt;code&gt;card_secret_id IN (values)&lt;/code&gt;
-     */
-    public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Cards&gt; fetchByCardSecretId(UUID... values) {
-<span class="nc" id="L99">        return fetch(Cards.CARDS.CARD_SECRET_ID, values);</span>
-    }
-
-    /**
-     * Fetch a unique record that has &lt;code&gt;card_secret_id = value&lt;/code&gt;
-     */
-    public ru.sberstart.finalproject.jooq.tables.pojos.Cards fetchOneByCardSecretId(UUID value) {
-<span class="nc" id="L106">        return fetchOne(Cards.CARDS.CARD_SECRET_ID, value);</span>
-    }
-
-    /**
-     * Fetch a unique record that has &lt;code&gt;card_secret_id = value&lt;/code&gt;
-     */
-    public Optional&lt;ru.sberstart.finalproject.jooq.tables.pojos.Cards&gt; fetchOptionalByCardSecretId(UUID value) {
-<span class="nc" id="L113">        return fetchOptional(Cards.CARDS.CARD_SECRET_ID, value);</span>
-    }
-
-    /**
-     * Fetch records that have &lt;code&gt;number BETWEEN lowerInclusive AND
+     * Fetch records that have &lt;code&gt;NUMBER BETWEEN lowerInclusive AND
      * upperInclusive&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Cards&gt; fetchRangeOfNumber(String lowerInclusive, String upperInclusive) {
-<span class="nc" id="L121">        return fetchRange(Cards.CARDS.NUMBER, lowerInclusive, upperInclusive);</span>
+<span class="nc" id="L92">        return fetchRange(Cards.CARDS.NUMBER, lowerInclusive, upperInclusive);</span>
     }
 
     /**
-     * Fetch records that have &lt;code&gt;number IN (values)&lt;/code&gt;
+     * Fetch records that have &lt;code&gt;NUMBER IN (values)&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Cards&gt; fetchByNumber(String... values) {
-<span class="nc" id="L128">        return fetch(Cards.CARDS.NUMBER, values);</span>
+<span class="nc" id="L99">        return fetch(Cards.CARDS.NUMBER, values);</span>
     }
 
     /**
-     * Fetch a unique record that has &lt;code&gt;number = value&lt;/code&gt;
+     * Fetch a unique record that has &lt;code&gt;NUMBER = value&lt;/code&gt;
      */
     public ru.sberstart.finalproject.jooq.tables.pojos.Cards fetchOneByNumber(String value) {
-<span class="nc" id="L135">        return fetchOne(Cards.CARDS.NUMBER, value);</span>
+<span class="nc" id="L106">        return fetchOne(Cards.CARDS.NUMBER, value);</span>
     }
 
     /**
-     * Fetch a unique record that has &lt;code&gt;number = value&lt;/code&gt;
+     * Fetch a unique record that has &lt;code&gt;NUMBER = value&lt;/code&gt;
      */
     public Optional&lt;ru.sberstart.finalproject.jooq.tables.pojos.Cards&gt; fetchOptionalByNumber(String value) {
-<span class="nc" id="L142">        return fetchOptional(Cards.CARDS.NUMBER, value);</span>
+<span class="nc" id="L113">        return fetchOptional(Cards.CARDS.NUMBER, value);</span>
     }
 
     /**
-     * Fetch records that have &lt;code&gt;state BETWEEN lowerInclusive AND
+     * Fetch records that have &lt;code&gt;STATE BETWEEN lowerInclusive AND
      * upperInclusive&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Cards&gt; fetchRangeOfState(String lowerInclusive, String upperInclusive) {
-<span class="nc" id="L150">        return fetchRange(Cards.CARDS.STATE, lowerInclusive, upperInclusive);</span>
+<span class="nc" id="L121">        return fetchRange(Cards.CARDS.STATE, lowerInclusive, upperInclusive);</span>
     }
 
     /**
-     * Fetch records that have &lt;code&gt;state IN (values)&lt;/code&gt;
+     * Fetch records that have &lt;code&gt;STATE IN (values)&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Cards&gt; fetchByState(String... values) {
-<span class="nc" id="L157">        return fetch(Cards.CARDS.STATE, values);</span>
+<span class="nc" id="L128">        return fetch(Cards.CARDS.STATE, values);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

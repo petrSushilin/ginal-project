@@ -42,7 +42,7 @@ public class UsersDao extends DAOImpl&lt;UsersRecord, ru.sberstart.finalproject.
     }
 
     /**
-     * Fetch records that have &lt;code&gt;id BETWEEN lowerInclusive AND
+     * Fetch records that have &lt;code&gt;ID BETWEEN lowerInclusive AND
      * upperInclusive&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Users&gt; fetchRangeOfId(UUID lowerInclusive, UUID upperInclusive) {
@@ -50,28 +50,28 @@ public class UsersDao extends DAOImpl&lt;UsersRecord, ru.sberstart.finalproject.
     }
 
     /**
-     * Fetch records that have &lt;code&gt;id IN (values)&lt;/code&gt;
+     * Fetch records that have &lt;code&gt;ID IN (values)&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Users&gt; fetchById(UUID... values) {
 <span class="nc" id="L56">        return fetch(Users.USERS.ID, values);</span>
     }
 
     /**
-     * Fetch a unique record that has &lt;code&gt;id = value&lt;/code&gt;
+     * Fetch a unique record that has &lt;code&gt;ID = value&lt;/code&gt;
      */
     public ru.sberstart.finalproject.jooq.tables.pojos.Users fetchOneById(UUID value) {
 <span class="nc" id="L63">        return fetchOne(Users.USERS.ID, value);</span>
     }
 
     /**
-     * Fetch a unique record that has &lt;code&gt;id = value&lt;/code&gt;
+     * Fetch a unique record that has &lt;code&gt;ID = value&lt;/code&gt;
      */
     public Optional&lt;ru.sberstart.finalproject.jooq.tables.pojos.Users&gt; fetchOptionalById(UUID value) {
 <span class="nc" id="L70">        return fetchOptional(Users.USERS.ID, value);</span>
     }
 
     /**
-     * Fetch records that have &lt;code&gt;name BETWEEN lowerInclusive AND
+     * Fetch records that have &lt;code&gt;NAME BETWEEN lowerInclusive AND
      * upperInclusive&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Users&gt; fetchRangeOfName(String lowerInclusive, String upperInclusive) {
@@ -79,14 +79,14 @@ public class UsersDao extends DAOImpl&lt;UsersRecord, ru.sberstart.finalproject.
     }
 
     /**
-     * Fetch records that have &lt;code&gt;name IN (values)&lt;/code&gt;
+     * Fetch records that have &lt;code&gt;NAME IN (values)&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Users&gt; fetchByName(String... values) {
 <span class="nc" id="L85">        return fetch(Users.USERS.NAME, values);</span>
     }
 
     /**
-     * Fetch records that have &lt;code&gt;surname BETWEEN lowerInclusive AND
+     * Fetch records that have &lt;code&gt;SURNAME BETWEEN lowerInclusive AND
      * upperInclusive&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Users&gt; fetchRangeOfSurname(String lowerInclusive, String upperInclusive) {
@@ -94,14 +94,14 @@ public class UsersDao extends DAOImpl&lt;UsersRecord, ru.sberstart.finalproject.
     }
 
     /**
-     * Fetch records that have &lt;code&gt;surname IN (values)&lt;/code&gt;
+     * Fetch records that have &lt;code&gt;SURNAME IN (values)&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Users&gt; fetchBySurname(String... values) {
 <span class="nc" id="L100">        return fetch(Users.USERS.SURNAME, values);</span>
     }
 
     /**
-     * Fetch records that have &lt;code&gt;birthdate BETWEEN lowerInclusive AND
+     * Fetch records that have &lt;code&gt;BIRTHDATE BETWEEN lowerInclusive AND
      * upperInclusive&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Users&gt; fetchRangeOfBirthdate(LocalDate lowerInclusive, LocalDate upperInclusive) {
@@ -109,14 +109,14 @@ public class UsersDao extends DAOImpl&lt;UsersRecord, ru.sberstart.finalproject.
     }
 
     /**
-     * Fetch records that have &lt;code&gt;birthdate IN (values)&lt;/code&gt;
+     * Fetch records that have &lt;code&gt;BIRTHDATE IN (values)&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Users&gt; fetchByBirthdate(LocalDate... values) {
 <span class="nc" id="L115">        return fetch(Users.USERS.BIRTHDATE, values);</span>
     }
 
     /**
-     * Fetch records that have &lt;code&gt;phone_number BETWEEN lowerInclusive AND
+     * Fetch records that have &lt;code&gt;PHONE_NUMBER BETWEEN lowerInclusive AND
      * upperInclusive&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Users&gt; fetchRangeOfPhoneNumber(String lowerInclusive, String upperInclusive) {
@@ -124,28 +124,28 @@ public class UsersDao extends DAOImpl&lt;UsersRecord, ru.sberstart.finalproject.
     }
 
     /**
-     * Fetch records that have &lt;code&gt;phone_number IN (values)&lt;/code&gt;
+     * Fetch records that have &lt;code&gt;PHONE_NUMBER IN (values)&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Users&gt; fetchByPhoneNumber(String... values) {
 <span class="nc" id="L130">        return fetch(Users.USERS.PHONE_NUMBER, values);</span>
     }
 
     /**
-     * Fetch a unique record that has &lt;code&gt;phone_number = value&lt;/code&gt;
+     * Fetch a unique record that has &lt;code&gt;PHONE_NUMBER = value&lt;/code&gt;
      */
     public ru.sberstart.finalproject.jooq.tables.pojos.Users fetchOneByPhoneNumber(String value) {
 <span class="nc" id="L137">        return fetchOne(Users.USERS.PHONE_NUMBER, value);</span>
     }
 
     /**
-     * Fetch a unique record that has &lt;code&gt;phone_number = value&lt;/code&gt;
+     * Fetch a unique record that has &lt;code&gt;PHONE_NUMBER = value&lt;/code&gt;
      */
     public Optional&lt;ru.sberstart.finalproject.jooq.tables.pojos.Users&gt; fetchOptionalByPhoneNumber(String value) {
 <span class="nc" id="L144">        return fetchOptional(Users.USERS.PHONE_NUMBER, value);</span>
     }
 
     /**
-     * Fetch records that have &lt;code&gt;passport_number BETWEEN lowerInclusive AND
+     * Fetch records that have &lt;code&gt;PASSPORT_NUMBER BETWEEN lowerInclusive AND
      * upperInclusive&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Users&gt; fetchRangeOfPassportNumber(String lowerInclusive, String upperInclusive) {
@@ -153,28 +153,28 @@ public class UsersDao extends DAOImpl&lt;UsersRecord, ru.sberstart.finalproject.
     }
 
     /**
-     * Fetch records that have &lt;code&gt;passport_number IN (values)&lt;/code&gt;
+     * Fetch records that have &lt;code&gt;PASSPORT_NUMBER IN (values)&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Users&gt; fetchByPassportNumber(String... values) {
 <span class="nc" id="L159">        return fetch(Users.USERS.PASSPORT_NUMBER, values);</span>
     }
 
     /**
-     * Fetch a unique record that has &lt;code&gt;passport_number = value&lt;/code&gt;
+     * Fetch a unique record that has &lt;code&gt;PASSPORT_NUMBER = value&lt;/code&gt;
      */
     public ru.sberstart.finalproject.jooq.tables.pojos.Users fetchOneByPassportNumber(String value) {
 <span class="nc" id="L166">        return fetchOne(Users.USERS.PASSPORT_NUMBER, value);</span>
     }
 
     /**
-     * Fetch a unique record that has &lt;code&gt;passport_number = value&lt;/code&gt;
+     * Fetch a unique record that has &lt;code&gt;PASSPORT_NUMBER = value&lt;/code&gt;
      */
     public Optional&lt;ru.sberstart.finalproject.jooq.tables.pojos.Users&gt; fetchOptionalByPassportNumber(String value) {
 <span class="nc" id="L173">        return fetchOptional(Users.USERS.PASSPORT_NUMBER, value);</span>
     }
 
     /**
-     * Fetch records that have &lt;code&gt;status BETWEEN lowerInclusive AND
+     * Fetch records that have &lt;code&gt;STATUS BETWEEN lowerInclusive AND
      * upperInclusive&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Users&gt; fetchRangeOfStatus(String lowerInclusive, String upperInclusive) {
@@ -182,7 +182,7 @@ public class UsersDao extends DAOImpl&lt;UsersRecord, ru.sberstart.finalproject.
     }
 
     /**
-     * Fetch records that have &lt;code&gt;status IN (values)&lt;/code&gt;
+     * Fetch records that have &lt;code&gt;STATUS IN (values)&lt;/code&gt;
      */
     public List&lt;ru.sberstart.finalproject.jooq.tables.pojos.Users&gt; fetchByStatus(String... values) {
 <span class="nc" id="L188">        return fetch(Users.USERS.STATUS, values);</span>

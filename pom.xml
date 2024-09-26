@@ -92,7 +92,6 @@
             <scope>test</scope>
         </dependency>
 
-
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
@@ -100,15 +99,16 @@
         </dependency>
 
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgres.version}</version>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${mapstruct.version}</version>
+            <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -160,6 +160,13 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
@@ -194,15 +201,15 @@
                 </executions>
                 <configuration>
                     <jdbc>
-                        <driver>org.postgresql.Driver</driver>
-                        <url>jdbc:postgresql://localhost:5432/postgres</url>
-                        <user>postgres</user>
+                        <driver>org.h2.Driver</driver>
+                        <url>jdbc:h2:file:./data/testdb;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1</url>
+                        <user>sa</user>
                         <password>password</password>
                     </jdbc>
                     <generator>
                         <database>
-                            <name>org.jooq.meta.postgres.PostgresDatabase</name>
-                            <inputSchema>public</inputSchema>
+                            <name>org.jooq.meta.h2.H2Database</name>
+                            <inputSchema>PUBLIC</inputSchema>
                         </database>
                         <generate>
                             <daos>true</daos>

@@ -9,6 +9,7 @@ databaseChangeLog:
               - column:
                   name: id
                   type: UUID
+                  defaultValueComputed: "RANDOM_UUID()"
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -23,3 +24,9 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     unique: true
+        - createIndex:
+            tableName: Banks
+            columns:
+              - column:
+                  name: identity_number
+            indexName: idx_identity_number

@@ -40,7 +40,7 @@ public class Userroles extends TableImpl&lt;UserrolesRecord&gt; {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of &lt;code&gt;public.UserRoles&lt;/code&gt;
+     * The reference instance of &lt;code&gt;PUBLIC.USERROLES&lt;/code&gt;
      */
 <span class="fc" id="L45">    public static final Userroles USERROLES = new Userroles();</span>
 
@@ -53,14 +53,14 @@ public class Userroles extends TableImpl&lt;UserrolesRecord&gt; {
     }
 
     /**
-     * The column &lt;code&gt;public.UserRoles.user_id&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.USERROLES.USER_ID&lt;/code&gt;.
      */
-<span class="pc" id="L58">    public final TableField&lt;UserrolesRecord, UUID&gt; USER_ID = createField(DSL.name(&quot;user_id&quot;), SQLDataType.UUID.nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L58">    public final TableField&lt;UserrolesRecord, UUID&gt; USER_ID = createField(DSL.name(&quot;USER_ID&quot;), SQLDataType.UUID.nullable(false), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.UserRoles.role_id&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.USERROLES.ROLE_ID&lt;/code&gt;.
      */
-<span class="pc" id="L63">    public final TableField&lt;UserrolesRecord, UUID&gt; ROLE_ID = createField(DSL.name(&quot;role_id&quot;), SQLDataType.UUID.nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L63">    public final TableField&lt;UserrolesRecord, UUID&gt; ROLE_ID = createField(DSL.name(&quot;ROLE_ID&quot;), SQLDataType.UUID.nullable(false), this, &quot;&quot;);</span>
 
     private Userroles(Name alias, Table&lt;UserrolesRecord&gt; aliased) {
 <span class="fc" id="L66">        this(alias, aliased, null);</span>
@@ -71,24 +71,24 @@ public class Userroles extends TableImpl&lt;UserrolesRecord&gt; {
 <span class="fc" id="L71">    }</span>
 
     /**
-     * Create an aliased &lt;code&gt;public.UserRoles&lt;/code&gt; table reference
+     * Create an aliased &lt;code&gt;PUBLIC.USERROLES&lt;/code&gt; table reference
      */
     public Userroles(String alias) {
 <span class="nc" id="L77">        this(DSL.name(alias), USERROLES);</span>
 <span class="nc" id="L78">    }</span>
 
     /**
-     * Create an aliased &lt;code&gt;public.UserRoles&lt;/code&gt; table reference
+     * Create an aliased &lt;code&gt;PUBLIC.USERROLES&lt;/code&gt; table reference
      */
     public Userroles(Name alias) {
 <span class="nc" id="L84">        this(alias, USERROLES);</span>
 <span class="nc" id="L85">    }</span>
 
     /**
-     * Create a &lt;code&gt;public.UserRoles&lt;/code&gt; table reference
+     * Create a &lt;code&gt;PUBLIC.USERROLES&lt;/code&gt; table reference
      */
     public Userroles() {
-<span class="fc" id="L91">        this(DSL.name(&quot;UserRoles&quot;), null);</span>
+<span class="fc" id="L91">        this(DSL.name(&quot;USERROLES&quot;), null);</span>
 <span class="fc" id="L92">    }</span>
 
     public &lt;O extends Record&gt; Userroles(Table&lt;O&gt; child, ForeignKey&lt;O, UserrolesRecord&gt; key) {
@@ -102,33 +102,33 @@ public class Userroles extends TableImpl&lt;UserrolesRecord&gt; {
 
     @Override
     public UniqueKey&lt;UserrolesRecord&gt; getPrimaryKey() {
-<span class="nc" id="L105">        return Keys.USERROLES_PKEY;</span>
+<span class="nc" id="L105">        return Keys.CONSTRAINT_BB;</span>
     }
 
     @Override
     public List&lt;ForeignKey&lt;UserrolesRecord, ?&gt;&gt; getReferences() {
-<span class="nc" id="L110">        return Arrays.asList(Keys.USERROLES__FK_USER_ROLES_USERS, Keys.USERROLES__FK_USER_ROLES_ROLES);</span>
+<span class="nc" id="L110">        return Arrays.asList(Keys.FK_USER_ROLES_USERS, Keys.FK_USER_ROLES_ROLES);</span>
     }
 
     private transient Users _users;
     private transient Roles _roles;
 
     /**
-     * Get the implicit join path to the &lt;code&gt;public.Users&lt;/code&gt; table.
+     * Get the implicit join path to the &lt;code&gt;PUBLIC.USERS&lt;/code&gt; table.
      */
     public Users users() {
 <span class="nc bnc" id="L120" title="All 2 branches missed.">        if (_users == null)</span>
-<span class="nc" id="L121">            _users = new Users(this, Keys.USERROLES__FK_USER_ROLES_USERS);</span>
+<span class="nc" id="L121">            _users = new Users(this, Keys.FK_USER_ROLES_USERS);</span>
 
 <span class="nc" id="L123">        return _users;</span>
     }
 
     /**
-     * Get the implicit join path to the &lt;code&gt;public.Roles&lt;/code&gt; table.
+     * Get the implicit join path to the &lt;code&gt;PUBLIC.ROLES&lt;/code&gt; table.
      */
     public Roles roles() {
 <span class="nc bnc" id="L130" title="All 2 branches missed.">        if (_roles == null)</span>
-<span class="nc" id="L131">            _roles = new Roles(this, Keys.USERROLES__FK_USER_ROLES_ROLES);</span>
+<span class="nc" id="L131">            _roles = new Roles(this, Keys.FK_USER_ROLES_ROLES);</span>
 
 <span class="nc" id="L133">        return _roles;</span>
     }

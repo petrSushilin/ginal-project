@@ -16,53 +16,53 @@ import ru.sberstart.finalproject.jooq.tables.Users;
 
 
 /**
- * Convenience access to all tables in public.
+ * Convenience access to all tables in PUBLIC.
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
 
     /**
-     * The table <code>public.BankAccounts</code>.
+     * The table <code>PUBLIC.BANKACCOUNTS</code>.
      */
     public static final Bankaccounts BANKACCOUNTS = Bankaccounts.BANKACCOUNTS;
 
     /**
-     * The table <code>public.Banks</code>.
+     * The table <code>PUBLIC.BANKS</code>.
      */
     public static final Banks BANKS = Banks.BANKS;
 
     /**
-     * The table <code>public.Cards</code>.
+     * The table <code>PUBLIC.CARDS</code>.
      */
     public static final Cards CARDS = Cards.CARDS;
 
     /**
-     * The table <code>public.CardSecrets</code>.
+     * The table <code>PUBLIC.CARDSECRETS</code>.
      */
     public static final Cardsecrets CARDSECRETS = Cardsecrets.CARDSECRETS;
 
     /**
-     * The table <code>public.databasechangelog</code>.
+     * The table <code>PUBLIC.DATABASECHANGELOG</code>.
      */
     public static final Databasechangelog DATABASECHANGELOG = Databasechangelog.DATABASECHANGELOG;
 
     /**
-     * The table <code>public.databasechangeloglock</code>.
+     * The table <code>PUBLIC.DATABASECHANGELOGLOCK</code>.
      */
     public static final Databasechangeloglock DATABASECHANGELOGLOCK = Databasechangeloglock.DATABASECHANGELOGLOCK;
 
     /**
-     * The table <code>public.Roles</code>.
+     * The table <code>PUBLIC.ROLES</code>.
      */
     public static final Roles ROLES = Roles.ROLES;
 
     /**
-     * The table <code>public.UserRoles</code>.
+     * The table <code>PUBLIC.USERROLES</code>.
      */
     public static final Userroles USERROLES = Userroles.USERROLES;
 
     /**
-     * The table <code>public.Users</code>.
+     * The table <code>PUBLIC.USERS</code>.
      */
     public static final Users USERS = Users.USERS;
 }

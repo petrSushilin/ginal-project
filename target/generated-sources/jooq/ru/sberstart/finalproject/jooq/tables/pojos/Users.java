@@ -56,98 +56,98 @@ public class Users implements Serializable {
     }
 
     /**
-     * Getter for <code>public.Users.id</code>.
+     * Getter for <code>PUBLIC.USERS.ID</code>.
      */
     public UUID getId() {
         return this.id;
     }
 
     /**
-     * Setter for <code>public.Users.id</code>.
+     * Setter for <code>PUBLIC.USERS.ID</code>.
      */
     public void setId(UUID id) {
         this.id = id;
     }
 
     /**
-     * Getter for <code>public.Users.name</code>.
+     * Getter for <code>PUBLIC.USERS.NAME</code>.
      */
     public String getName() {
         return this.name;
     }
 
     /**
-     * Setter for <code>public.Users.name</code>.
+     * Setter for <code>PUBLIC.USERS.NAME</code>.
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * Getter for <code>public.Users.surname</code>.
+     * Getter for <code>PUBLIC.USERS.SURNAME</code>.
      */
     public String getSurname() {
         return this.surname;
     }
 
     /**
-     * Setter for <code>public.Users.surname</code>.
+     * Setter for <code>PUBLIC.USERS.SURNAME</code>.
      */
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
     /**
-     * Getter for <code>public.Users.birthdate</code>.
+     * Getter for <code>PUBLIC.USERS.BIRTHDATE</code>.
      */
     public LocalDate getBirthdate() {
         return this.birthdate;
     }
 
     /**
-     * Setter for <code>public.Users.birthdate</code>.
+     * Setter for <code>PUBLIC.USERS.BIRTHDATE</code>.
      */
     public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
 
     /**
-     * Getter for <code>public.Users.phone_number</code>.
+     * Getter for <code>PUBLIC.USERS.PHONE_NUMBER</code>.
      */
     public String getPhoneNumber() {
         return this.phoneNumber;
     }
 
     /**
-     * Setter for <code>public.Users.phone_number</code>.
+     * Setter for <code>PUBLIC.USERS.PHONE_NUMBER</code>.
      */
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
     /**
-     * Getter for <code>public.Users.passport_number</code>.
+     * Getter for <code>PUBLIC.USERS.PASSPORT_NUMBER</code>.
      */
     public String getPassportNumber() {
         return this.passportNumber;
     }
 
     /**
-     * Setter for <code>public.Users.passport_number</code>.
+     * Setter for <code>PUBLIC.USERS.PASSPORT_NUMBER</code>.
      */
     public void setPassportNumber(String passportNumber) {
         this.passportNumber = passportNumber;
     }
 
     /**
-     * Getter for <code>public.Users.status</code>.
+     * Getter for <code>PUBLIC.USERS.STATUS</code>.
      */
     public String getStatus() {
         return this.status;
     }
 
     /**
-     * Setter for <code>public.Users.status</code>.
+     * Setter for <code>PUBLIC.USERS.STATUS</code>.
      */
     public void setStatus(String status) {
         this.status = status;

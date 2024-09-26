@@ -12,6 +12,7 @@ import java.util.function.Function;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Function3;
+import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
@@ -26,6 +27,7 @@ import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 
+import ru.sberstart.finalproject.jooq.Indexes;
 import ru.sberstart.finalproject.jooq.Keys;
 import ru.sberstart.finalproject.jooq.Public;
 import ru.sberstart.finalproject.jooq.tables.records.BanksRecord;
@@ -40,94 +42,99 @@ public class Banks extends TableImpl&lt;BanksRecord&gt; {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of &lt;code&gt;public.Banks&lt;/code&gt;
+     * The reference instance of &lt;code&gt;PUBLIC.BANKS&lt;/code&gt;
      */
-<span class="fc" id="L45">    public static final Banks BANKS = new Banks();</span>
+<span class="fc" id="L47">    public static final Banks BANKS = new Banks();</span>
 
     /**
      * The class holding records for this type
      */
     @Override
     public Class&lt;BanksRecord&gt; getRecordType() {
-<span class="nc" id="L52">        return BanksRecord.class;</span>
+<span class="nc" id="L54">        return BanksRecord.class;</span>
     }
 
     /**
-     * The column &lt;code&gt;public.Banks.id&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.BANKS.ID&lt;/code&gt;.
      */
-<span class="pc" id="L58">    public final TableField&lt;BanksRecord, UUID&gt; ID = createField(DSL.name(&quot;id&quot;), SQLDataType.UUID.nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L60">    public final TableField&lt;BanksRecord, UUID&gt; ID = createField(DSL.name(&quot;ID&quot;), SQLDataType.UUID.nullable(false).defaultValue(DSL.field(DSL.raw(&quot;RANDOM_UUID()&quot;), SQLDataType.UUID)), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.Banks.name&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.BANKS.NAME&lt;/code&gt;.
      */
-<span class="pc" id="L63">    public final TableField&lt;BanksRecord, String&gt; NAME = createField(DSL.name(&quot;name&quot;), SQLDataType.VARCHAR(255).nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L65">    public final TableField&lt;BanksRecord, String&gt; NAME = createField(DSL.name(&quot;NAME&quot;), SQLDataType.VARCHAR(255).nullable(false), this, &quot;&quot;);</span>
 
     /**
-     * The column &lt;code&gt;public.Banks.identity_number&lt;/code&gt;.
+     * The column &lt;code&gt;PUBLIC.BANKS.IDENTITY_NUMBER&lt;/code&gt;.
      */
-<span class="pc" id="L68">    public final TableField&lt;BanksRecord, String&gt; IDENTITY_NUMBER = createField(DSL.name(&quot;identity_number&quot;), SQLDataType.VARCHAR(50).nullable(false), this, &quot;&quot;);</span>
+<span class="pc" id="L70">    public final TableField&lt;BanksRecord, String&gt; IDENTITY_NUMBER = createField(DSL.name(&quot;IDENTITY_NUMBER&quot;), SQLDataType.VARCHAR(50).nullable(false), this, &quot;&quot;);</span>
 
     private Banks(Name alias, Table&lt;BanksRecord&gt; aliased) {
-<span class="fc" id="L71">        this(alias, aliased, null);</span>
-<span class="fc" id="L72">    }</span>
+<span class="fc" id="L73">        this(alias, aliased, null);</span>
+<span class="fc" id="L74">    }</span>
 
     private Banks(Name alias, Table&lt;BanksRecord&gt; aliased, Field&lt;?&gt;[] parameters) {
-<span class="fc" id="L75">        super(alias, null, aliased, parameters, DSL.comment(&quot;&quot;), TableOptions.table());</span>
-<span class="fc" id="L76">    }</span>
+<span class="fc" id="L77">        super(alias, null, aliased, parameters, DSL.comment(&quot;&quot;), TableOptions.table());</span>
+<span class="fc" id="L78">    }</span>
 
     /**
-     * Create an aliased &lt;code&gt;public.Banks&lt;/code&gt; table reference
+     * Create an aliased &lt;code&gt;PUBLIC.BANKS&lt;/code&gt; table reference
      */
     public Banks(String alias) {
-<span class="nc" id="L82">        this(DSL.name(alias), BANKS);</span>
-<span class="nc" id="L83">    }</span>
+<span class="nc" id="L84">        this(DSL.name(alias), BANKS);</span>
+<span class="nc" id="L85">    }</span>
 
     /**
-     * Create an aliased &lt;code&gt;public.Banks&lt;/code&gt; table reference
+     * Create an aliased &lt;code&gt;PUBLIC.BANKS&lt;/code&gt; table reference
      */
     public Banks(Name alias) {
-<span class="nc" id="L89">        this(alias, BANKS);</span>
-<span class="nc" id="L90">    }</span>
+<span class="nc" id="L91">        this(alias, BANKS);</span>
+<span class="nc" id="L92">    }</span>
 
     /**
-     * Create a &lt;code&gt;public.Banks&lt;/code&gt; table reference
+     * Create a &lt;code&gt;PUBLIC.BANKS&lt;/code&gt; table reference
      */
     public Banks() {
-<span class="fc" id="L96">        this(DSL.name(&quot;Banks&quot;), null);</span>
-<span class="fc" id="L97">    }</span>
+<span class="fc" id="L98">        this(DSL.name(&quot;BANKS&quot;), null);</span>
+<span class="fc" id="L99">    }</span>
 
     public &lt;O extends Record&gt; Banks(Table&lt;O&gt; child, ForeignKey&lt;O, BanksRecord&gt; key) {
-<span class="nc" id="L100">        super(child, key, BANKS);</span>
-<span class="nc" id="L101">    }</span>
+<span class="nc" id="L102">        super(child, key, BANKS);</span>
+<span class="nc" id="L103">    }</span>
 
     @Override
     public Schema getSchema() {
-<span class="nc bnc" id="L105" title="All 2 branches missed.">        return aliased() ? null : Public.PUBLIC;</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        return aliased() ? null : Public.PUBLIC;</span>
+    }
+
+    @Override
+    public List&lt;Index&gt; getIndexes() {
+<span class="nc" id="L112">        return Arrays.asList(Indexes.IDX_IDENTITY_NUMBER);</span>
     }
 
     @Override
     public UniqueKey&lt;BanksRecord&gt; getPrimaryKey() {
-<span class="nc" id="L110">        return Keys.BANKS_PKEY;</span>
+<span class="nc" id="L117">        return Keys.PK_BANKS;</span>
     }
 
     @Override
     public List&lt;UniqueKey&lt;BanksRecord&gt;&gt; getUniqueKeys() {
-<span class="nc" id="L115">        return Arrays.asList(Keys.BANKS_IDENTITY_NUMBER_KEY);</span>
+<span class="nc" id="L122">        return Arrays.asList(Keys.CONSTRAINT_3);</span>
     }
 
     @Override
     public Banks as(String alias) {
-<span class="nc" id="L120">        return new Banks(DSL.name(alias), this);</span>
+<span class="nc" id="L127">        return new Banks(DSL.name(alias), this);</span>
     }
 
     @Override
     public Banks as(Name alias) {
-<span class="nc" id="L125">        return new Banks(alias, this);</span>
+<span class="nc" id="L132">        return new Banks(alias, this);</span>
     }
 
     @Override
     public Banks as(Table&lt;?&gt; alias) {
-<span class="nc" id="L130">        return new Banks(alias.getQualifiedName(), this);</span>
+<span class="nc" id="L137">        return new Banks(alias.getQualifiedName(), this);</span>
     }
 
     /**
@@ -135,7 +142,7 @@ public class Banks extends TableImpl&lt;BanksRecord&gt; {
      */
     @Override
     public Banks rename(String name) {
-<span class="nc" id="L138">        return new Banks(DSL.name(name), null);</span>
+<span class="nc" id="L145">        return new Banks(DSL.name(name), null);</span>
     }
 
     /**
@@ -143,7 +150,7 @@ public class Banks extends TableImpl&lt;BanksRecord&gt; {
      */
     @Override
     public Banks rename(Name name) {
-<span class="nc" id="L146">        return new Banks(name, null);</span>
+<span class="nc" id="L153">        return new Banks(name, null);</span>
     }
 
     /**
@@ -151,7 +158,7 @@ public class Banks extends TableImpl&lt;BanksRecord&gt; {
      */
     @Override
     public Banks rename(Table&lt;?&gt; name) {
-<span class="nc" id="L154">        return new Banks(name.getQualifiedName(), null);</span>
+<span class="nc" id="L161">        return new Banks(name.getQualifiedName(), null);</span>
     }
 
     // -------------------------------------------------------------------------
@@ -160,14 +167,14 @@ public class Banks extends TableImpl&lt;BanksRecord&gt; {
 
     @Override
     public Row3&lt;UUID, String, String&gt; fieldsRow() {
-<span class="nc" id="L163">        return (Row3) super.fieldsRow();</span>
+<span class="nc" id="L170">        return (Row3) super.fieldsRow();</span>
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
     public &lt;U&gt; SelectField&lt;U&gt; mapping(Function3&lt;? super UUID, ? super String, ? super String, ? extends U&gt; from) {
-<span class="nc" id="L170">        return convertFrom(Records.mapping(from));</span>
+<span class="nc" id="L177">        return convertFrom(Records.mapping(from));</span>
     }
 
     /**
@@ -175,7 +182,7 @@ public class Banks extends TableImpl&lt;BanksRecord&gt; {
      * Function)}.
      */
     public &lt;U&gt; SelectField&lt;U&gt; mapping(Class&lt;U&gt; toType, Function3&lt;? super UUID, ? super String, ? super String, ? extends U&gt; from) {
-<span class="nc" id="L178">        return convertFrom(toType, Records.mapping(from));</span>
+<span class="nc" id="L185">        return convertFrom(toType, Records.mapping(from));</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
