@@ -1,6 +1,8 @@
 package ru.sberstart.finalproject.domain.enitity.card.enums;
 
-public enum CardStates {
+import ru.sberstart.finalproject.domain.enitity.interfaces.State;
+
+public enum CardStates implements State {
     ORDERED,
     ACTIVE,
     APPROVED,

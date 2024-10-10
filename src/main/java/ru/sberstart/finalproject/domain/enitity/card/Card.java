@@ -2,11 +2,13 @@ package ru.sberstart.finalproject.domain.enitity.card;
 
 
 import ru.sberstart.finalproject.domain.enitity.card.enums.CardStates;
+import ru.sberstart.finalproject.domain.enitity.interfaces.State;
+import ru.sberstart.finalproject.domain.enitity.interfaces.Stateful;
 
 import java.util.Objects;
 import java.util.UUID;
 
-public class Card {
+public class Card implements Stateful {
     private UUID id;
     private UUID bankaccountId;
     private String number;

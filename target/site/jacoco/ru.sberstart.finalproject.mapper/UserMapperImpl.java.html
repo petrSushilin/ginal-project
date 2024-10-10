@@ -18,7 +18,7 @@ import ru.sberstart.finalproject.domain.enitity.user.enums.UserStatus;
 
 @Generated(
     value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
-    date = &quot;2024-09-26T14:51:11+0300&quot;,
+    date = &quot;2024-10-10T08:54:23+0300&quot;,
     comments = &quot;version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Amazon.com Inc.)&quot;
 )
 <span class="nc" id="L24">public class UserMapperImpl implements UserMapper {</span>
@@ -32,16 +32,16 @@ import ru.sberstart.finalproject.domain.enitity.user.enums.UserStatus;
 <span class="nc" id="L32">        String name = null;</span>
 <span class="nc" id="L33">        String surname = null;</span>
 <span class="nc" id="L34">        LocalDate birthdate = null;</span>
-<span class="nc" id="L35">        String phoneNumber = null;</span>
-<span class="nc" id="L36">        String passportNumber = null;</span>
+<span class="nc" id="L35">        String passportNumber = null;</span>
+<span class="nc" id="L36">        String phoneNumber = null;</span>
 
 <span class="nc" id="L38">        name = userCreationDTO.name();</span>
 <span class="nc" id="L39">        surname = userCreationDTO.surname();</span>
 <span class="nc bnc" id="L40" title="All 2 branches missed.">        if ( userCreationDTO.birthdate() != null ) {</span>
 <span class="nc" id="L41">            birthdate = LocalDate.parse( userCreationDTO.birthdate() );</span>
         }
-<span class="nc" id="L43">        phoneNumber = userCreationDTO.phoneNumber();</span>
-<span class="nc" id="L44">        passportNumber = userCreationDTO.passportNumber();</span>
+<span class="nc" id="L43">        passportNumber = userCreationDTO.passportNumber();</span>
+<span class="nc" id="L44">        phoneNumber = userCreationDTO.phoneNumber();</span>
 
 <span class="nc" id="L46">        UUID id = null;</span>
 <span class="nc" id="L47">        Set&lt;UserRoles&gt; roles = null;</span>
@@ -58,11 +58,11 @@ import ru.sberstart.finalproject.domain.enitity.user.enums.UserStatus;
 <span class="nc" id="L58">            return null;</span>
         }
 
-<span class="nc" id="L61">        String phoneNumber = null;</span>
-<span class="nc" id="L62">        UserStatus status = null;</span>
+<span class="nc" id="L61">        UserStatus status = null;</span>
+<span class="nc" id="L62">        String phoneNumber = null;</span>
 
-<span class="nc" id="L64">        phoneNumber = userStatusDTO.phoneNumber();</span>
-<span class="nc" id="L65">        status = userStatusDTO.status();</span>
+<span class="nc" id="L64">        status = userStatusDTO.status();</span>
+<span class="nc" id="L65">        phoneNumber = userStatusDTO.phoneNumber();</span>
 
 <span class="nc" id="L67">        UUID id = null;</span>
 <span class="nc" id="L68">        String name = null;</span>
@@ -82,14 +82,14 @@ import ru.sberstart.finalproject.domain.enitity.user.enums.UserStatus;
 <span class="nc" id="L82">            return null;</span>
         }
 
-<span class="nc" id="L85">        String phoneNumber = null;</span>
-<span class="nc" id="L86">        Set&lt;UserRoles&gt; roles = null;</span>
+<span class="nc" id="L85">        Set&lt;UserRoles&gt; roles = null;</span>
+<span class="nc" id="L86">        String phoneNumber = null;</span>
 
-<span class="nc" id="L88">        phoneNumber = userRolesDTO.phoneNumber();</span>
-<span class="nc" id="L89">        Set&lt;UserRoles&gt; set = userRolesDTO.roles();</span>
-<span class="nc bnc" id="L90" title="All 2 branches missed.">        if ( set != null ) {</span>
-<span class="nc" id="L91">            roles = new LinkedHashSet&lt;UserRoles&gt;( set );</span>
+<span class="nc" id="L88">        Set&lt;UserRoles&gt; set = userRolesDTO.roles();</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        if ( set != null ) {</span>
+<span class="nc" id="L90">            roles = new LinkedHashSet&lt;UserRoles&gt;( set );</span>
         }
+<span class="nc" id="L92">        phoneNumber = userRolesDTO.phoneNumber();</span>
 
 <span class="nc" id="L94">        UUID id = null;</span>
 <span class="nc" id="L95">        String name = null;</span>

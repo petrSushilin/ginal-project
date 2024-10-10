@@ -11,7 +11,7 @@ import ru.sberstart.finalproject.domain.enitity.card.Card;
 import ru.sberstart.finalproject.domain.enitity.card.CardSecret;
 import ru.sberstart.finalproject.domain.enitity.card.enums.CardStates;
 import ru.sberstart.finalproject.global.exceptions.NotAvailableActionsException;
-import ru.sberstart.finalproject.infrastructure.repostitory.implementation.CardRepositoryImpl;
+import ru.sberstart.finalproject.infrastructure.repostitory.CardRepositoryImpl;
 import ru.sberstart.finalproject.mapper.CardMapper;
 import ru.sberstart.finalproject.global.exceptions.UnsuccessfulOperationException;
 

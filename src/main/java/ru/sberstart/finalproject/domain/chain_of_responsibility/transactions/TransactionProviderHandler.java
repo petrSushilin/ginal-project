@@ -4,13 +4,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.sberstart.finalproject.domain.enitity.bankaccount.BankAccount;
 import ru.sberstart.finalproject.domain.enitity.bankaccount.enums.TransactionTypes;
-import ru.sberstart.finalproject.infrastructure.repostitory.implementation.BankAccountRepositoryImpl;
+import ru.sberstart.finalproject.infrastructure.repostitory.BankAccountRepositoryImpl;
 import ru.sberstart.finalproject.global.exceptions.ForbiddenTransactionException;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Класс TransactionProviderHandler реализует интерфейс TransactionHandler и отвечает за выполнение транзакций

@@ -1,6 +1,6 @@
 package ru.sberstart.finalproject.api.dto.user.request;
 
-import ru.sberstart.finalproject.domain.enitity.user.enums.UserStatus;
+import ru.sberstart.finalproject.domain.enitity.user.enums.UserState;
 
-public record UserStatusRequestDTO (String phoneNumber, UserStatus status) {
+public record UserStatusRequestDTO (String phoneNumber, UserState status) {
 }

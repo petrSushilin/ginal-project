@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BankRepositoryImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">final-project</a> &gt; <a href="index.source.html" class="el_package">ru.sberstart.finalproject.infrastructure.repostitory</a> &gt; <span class="el_source">BankRepositoryImpl.java</span></div><h1>BankRepositoryImpl.java</h1><pre class="source lang-java linenums">package ru.sberstart.finalproject.infrastructure.repostitory;
+
+import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.TableField;
+import ru.sberstart.finalproject.domain.enitity.bank.Bank;
+import ru.sberstart.finalproject.infrastructure.repostitory.interfaces.BankRepository;
+import ru.sberstart.finalproject.jooq.tables.records.BanksRecord;
+
+import java.util.List;
+import java.util.Optional;
+
+import static ru.sberstart.finalproject.jooq.Tables.BANKS;
+
+/**
+ * Реализация интерфейса BankRepository с использованием jOOQ для операций с базой данных.
+ * Основные функциональные особенности: создание нового банка в базе данных; получение банка по идентификационному номеру;
+ * обновление существующего банка в базе данных; методы возвращают Optional, что означает, что результат может быть пустым,
+ * если операция не удалась.
+ *
+ */
+public class BankRepositoryImpl implements BankRepository {
+    private final DSLContext context;
+
+    /**
+     * Конструктор для создания нового экземпляра BankRepositoryImpl с заданным DSLContext.
+     *
+     * @param context DSLContext для выполнения операций с базой данных
+     */
+<span class="fc" id="L30">    public BankRepositoryImpl(DSLContext context) {</span>
+<span class="fc" id="L31">        this.context = context;</span>
+<span class="fc" id="L32">    }</span>
+
+<span class="fc" id="L34">    private final List&lt;TableField&lt;BanksRecord, ?&gt;&gt; BANK_FIELDS = List.of(</span>
+            BANKS.ID,
+            BANKS.NAME,
+            BANKS.IDENTITY_NUMBER
+    );
+
+    /**
+     * Создает сущность Bank из записи базы данных.
+     *
+     * @param record запись базы данных
+     * @return созданная сущность Bank
+     */
+    private static Bank buildBankAccount(Record record) {
+<span class="nc" id="L47">        return new Bank.Builder()</span>
+<span class="nc" id="L48">                .withId(record.get(BANKS.ID))</span>
+<span class="nc" id="L49">                .withName(record.get(BANKS.NAME))</span>
+<span class="nc" id="L50">                .withIdentityNumber(record.get(BANKS.IDENTITY_NUMBER))</span>
+<span class="nc" id="L51">                .build();</span>
+    }
+
+    /**
+     * Создает новую сущность Bank в базе данных.
+     *
+     * @param bank сущность Bank для создания
+     * @return Optional, содержащий созданную сущность Bank, или пустой, если создание не удалось
+     */
+    @Override
+    public Optional&lt;Bank&gt; create(Bank bank) {
+<span class="nc" id="L62">        context.insertInto(BANKS)</span>
+<span class="nc" id="L63">                .set(BANKS.NAME, bank.getName())</span>
+<span class="nc" id="L64">                .set(BANKS.IDENTITY_NUMBER, bank.getIdentityNumber())</span>
+<span class="nc" id="L65">                .execute();</span>
+<span class="nc" id="L66">        Record record = context.select(BANK_FIELDS)</span>
+<span class="nc" id="L67">                .from(BANKS)</span>
+<span class="nc" id="L68">                .where(BANKS.NAME.eq(bank.getName()))</span>
+<span class="nc" id="L69">                .fetchOne();</span>
+<span class="nc" id="L70">        return Optional.ofNullable(record).map(BankRepositoryImpl::buildBankAccount);</span>
+    }
+
+    /**
+     * Получает сущность Bank по идентификационному номеру.
+     *
+     * @param number идентификационный номер сущности Bank для получения
+     * @return Optional, содержащий найденную сущность Bank, или пустой, если не найдено
+     */
+    @Override
+    public Optional&lt;Bank&gt; getByIdentityNumber(String number) {
+<span class="nc" id="L81">        Record record = context</span>
+<span class="nc" id="L82">                .select(BANK_FIELDS)</span>
+<span class="nc" id="L83">                .from(BANKS)</span>
+<span class="nc" id="L84">                .where(BANKS.IDENTITY_NUMBER.eq(number))</span>
+<span class="nc" id="L85">                .fetchOne();</span>
+<span class="nc" id="L86">        return Optional.ofNullable(record).map(BankRepositoryImpl::buildBankAccount);</span>
+    }
+
+    /**
+     * Обновляет существующую сущность Bank в базе данных.
+     *
+     * @param bank сущность Bank для обновления
+     * @return Optional, содержащий обновленную сущность Bank, или пустой, если обновление не удалось
+     */
+    @Override
+    public Optional&lt;Bank&gt; update(Bank bank) {
+<span class="nc" id="L97">        context.update(BANKS)</span>
+<span class="nc" id="L98">                .set(context.newRecord(BANKS, bank))</span>
+<span class="nc" id="L99">                .where(BANKS.IDENTITY_NUMBER.eq(bank.getIdentityNumber()))</span>
+<span class="nc" id="L100">                .execute();</span>
+<span class="nc" id="L101">        Record record = context.select(BANK_FIELDS)</span>
+<span class="nc" id="L102">                .from(BANKS)</span>
+<span class="nc" id="L103">                .where(BANKS.NAME.eq(bank.getName()))</span>
+<span class="nc" id="L104">                .fetchOne();</span>
+<span class="nc" id="L105">        return Optional.ofNullable(record).map(BankRepositoryImpl::buildBankAccount);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

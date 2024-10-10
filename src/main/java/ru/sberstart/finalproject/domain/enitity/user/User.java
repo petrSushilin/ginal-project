@@ -1,14 +1,18 @@
 package ru.sberstart.finalproject.domain.enitity.user;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import ru.sberstart.finalproject.domain.enitity.interfaces.Stateful;
 import ru.sberstart.finalproject.domain.enitity.user.enums.UserRoles;
-import ru.sberstart.finalproject.domain.enitity.user.enums.UserStatus;
+import ru.sberstart.finalproject.domain.enitity.user.enums.UserState;
 
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
-public class User {
+import static ru.sberstart.finalproject.domain.enitity.user.enums.UserRoles.USER;
+
+public class User implements Stateful {
      private UUID id;
      private String name;
      private String surname;
@@ -16,7 +20,9 @@ public class User {
      private String phoneNumber;
      private String passportNumber;
      private Set<UserRoles> roles;
-     private UserStatus status;
+
+     @JsonProperty(defaultValue = "REGISTERED")
+     private UserState state;
 
     public UUID getId() {
         return id;
@@ -54,10 +60,6 @@ public class User {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String getPassportNumber() {
         return passportNumber;
     }
@@ -71,26 +73,28 @@ public class User {
     }
 
     public void setRoles(Set<UserRoles> roles) {
-        this.roles = roles;
+        if (roles == null) this.roles = Set.of(USER);
+        else this.roles = roles;
     }
 
-    public UserStatus getStatus() {
-        return status;
+    public UserState getState() {
+        return state;
     }
 
-    public void setStatus(UserStatus status) {
-        this.status = status;
+    public void setState(UserState state) {
+        if (state == null) this.state = UserState.REGISTERED;
+        else this.state = state;
     }
 
-    public User(UUID id, String name, String surname, LocalDate birthdate, String phoneNumber, String passportNumber, Set<UserRoles> roles, UserStatus status) {
+    public User(UUID id, String name, String surname, LocalDate birthdate, String phoneNumber, String passportNumber, Set<UserRoles> roles, UserState status) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.birthdate = birthdate;
         this.phoneNumber = phoneNumber;
         this.passportNumber = passportNumber;
-        this.roles = roles;
-        this.status = status;
+        setRoles(roles);
+        setState(status);
     }
 
     public static class Builder {
@@ -101,10 +105,10 @@ public class User {
         private String phoneNumber;
         private String passportNumber;
         private Set<UserRoles> roles;
-        private UserStatus status;
+        private UserState state;
 
         public User build() {
-            return new User(id, name, surname, birthdate, phoneNumber, passportNumber, roles, status);
+            return new User(id, name, surname, birthdate, phoneNumber, passportNumber, roles, state);
         }
 
         public Builder withId(UUID id) {
@@ -142,8 +146,8 @@ public class User {
             return this;
         }
 
-        public Builder withStatus(UserStatus status) {
-            this.status = status;
+        public Builder withState(UserState state) {
+            this.state = state;
             return this;
         }
     }
@@ -172,7 +176,7 @@ public class User {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", passportNumber='" + passportNumber + '\'' +
                 ", roles=" + roles +
-                ", status=" + status +
+                ", status=" + state +
                 '}';
     }
 }

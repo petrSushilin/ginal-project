@@ -51,7 +51,7 @@ public class Cards extends TableImpl&lt;CardsRecord&gt; {
      */
     @Override
     public Class&lt;CardsRecord&gt; getRecordType() {
-<span class="nc" id="L54">        return CardsRecord.class;</span>
+<span class="fc" id="L54">        return CardsRecord.class;</span>
     }
 
     /**
@@ -109,7 +109,7 @@ public class Cards extends TableImpl&lt;CardsRecord&gt; {
 
     @Override
     public Schema getSchema() {
-<span class="nc bnc" id="L112" title="All 2 branches missed.">        return aliased() ? null : Public.PUBLIC;</span>
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">        return aliased() ? null : Public.PUBLIC;</span>
     }
 
     @Override
@@ -119,7 +119,7 @@ public class Cards extends TableImpl&lt;CardsRecord&gt; {
 
     @Override
     public UniqueKey&lt;CardsRecord&gt; getPrimaryKey() {
-<span class="nc" id="L122">        return Keys.PK_CARDS;</span>
+<span class="fc" id="L122">        return Keys.PK_CARDS;</span>
     }
 
     @Override
@@ -200,7 +200,7 @@ public class Cards extends TableImpl&lt;CardsRecord&gt; {
 
     @Override
     public Row4&lt;UUID, UUID, String, String&gt; fieldsRow() {
-<span class="nc" id="L203">        return (Row4) super.fieldsRow();</span>
+<span class="fc" id="L203">        return (Row4) super.fieldsRow();</span>
     }
 
     /**

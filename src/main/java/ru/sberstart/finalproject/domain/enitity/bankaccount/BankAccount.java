@@ -1,6 +1,7 @@
 package ru.sberstart.finalproject.domain.enitity.bankaccount;
 
 import ru.sberstart.finalproject.domain.enitity.bankaccount.enums.BankAccountStates;
+import ru.sberstart.finalproject.domain.enitity.interfaces.Stateful;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -10,7 +11,7 @@ import java.util.UUID;
 /**
  * Сущность записи банковского счета.
  */
-public class BankAccount {
+public class BankAccount implements Stateful {
     private UUID id;
     private UUID bankId;
     private UUID userId;

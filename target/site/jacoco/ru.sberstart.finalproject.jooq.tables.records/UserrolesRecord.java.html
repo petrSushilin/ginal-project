@@ -26,8 +26,8 @@ public class UserrolesRecord extends UpdatableRecordImpl&lt;UserrolesRecord&gt; 
      * Setter for &lt;code&gt;PUBLIC.USERROLES.USER_ID&lt;/code&gt;.
      */
     public void setUserId(UUID value) {
-<span class="nc" id="L29">        set(0, value);</span>
-<span class="nc" id="L30">    }</span>
+<span class="fc" id="L29">        set(0, value);</span>
+<span class="fc" id="L30">    }</span>
 
     /**
      * Getter for &lt;code&gt;PUBLIC.USERROLES.USER_ID&lt;/code&gt;.
@@ -40,8 +40,8 @@ public class UserrolesRecord extends UpdatableRecordImpl&lt;UserrolesRecord&gt; 
      * Setter for &lt;code&gt;PUBLIC.USERROLES.ROLE_ID&lt;/code&gt;.
      */
     public void setRoleId(UUID value) {
-<span class="nc" id="L43">        set(1, value);</span>
-<span class="nc" id="L44">    }</span>
+<span class="fc" id="L43">        set(1, value);</span>
+<span class="fc" id="L44">    }</span>
 
     /**
      * Getter for &lt;code&gt;PUBLIC.USERROLES.ROLE_ID&lt;/code&gt;.
@@ -105,21 +105,21 @@ public class UserrolesRecord extends UpdatableRecordImpl&lt;UserrolesRecord&gt; 
 
     @Override
     public UserrolesRecord value1(UUID value) {
-<span class="nc" id="L108">        setUserId(value);</span>
-<span class="nc" id="L109">        return this;</span>
+<span class="fc" id="L108">        setUserId(value);</span>
+<span class="fc" id="L109">        return this;</span>
     }
 
     @Override
     public UserrolesRecord value2(UUID value) {
-<span class="nc" id="L114">        setRoleId(value);</span>
-<span class="nc" id="L115">        return this;</span>
+<span class="fc" id="L114">        setRoleId(value);</span>
+<span class="fc" id="L115">        return this;</span>
     }
 
     @Override
     public UserrolesRecord values(UUID value1, UUID value2) {
-<span class="nc" id="L120">        value1(value1);</span>
-<span class="nc" id="L121">        value2(value2);</span>
-<span class="nc" id="L122">        return this;</span>
+<span class="fc" id="L120">        value1(value1);</span>
+<span class="fc" id="L121">        value2(value2);</span>
+<span class="fc" id="L122">        return this;</span>
     }
 
     // -------------------------------------------------------------------------
@@ -130,8 +130,8 @@ public class UserrolesRecord extends UpdatableRecordImpl&lt;UserrolesRecord&gt; 
      * Create a detached UserrolesRecord
      */
     public UserrolesRecord() {
-<span class="nc" id="L133">        super(Userroles.USERROLES);</span>
-<span class="nc" id="L134">    }</span>
+<span class="fc" id="L133">        super(Userroles.USERROLES);</span>
+<span class="fc" id="L134">    }</span>
 
     /**
      * Create a detached, initialised UserrolesRecord

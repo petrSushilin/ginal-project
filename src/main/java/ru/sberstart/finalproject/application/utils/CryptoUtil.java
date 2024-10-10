@@ -1,7 +1,6 @@
 package ru.sberstart.finalproject.application.utils;
 
 import ru.sberstart.finalproject.api.dto.card.inner.CardSecretInformationDTO;
-import ru.sberstart.finalproject.api.dto.card.inner.CardSecretRecord;
 import ru.sberstart.finalproject.domain.enitity.card.CardSecret;
 import ru.sberstart.finalproject.global.exceptions.CryptoCodingException;
 

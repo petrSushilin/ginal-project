@@ -53,7 +53,7 @@ public class Bankaccounts extends TableImpl&lt;BankaccountsRecord&gt; {
      */
     @Override
     public Class&lt;BankaccountsRecord&gt; getRecordType() {
-<span class="nc" id="L56">        return BankaccountsRecord.class;</span>
+<span class="fc" id="L56">        return BankaccountsRecord.class;</span>
     }
 
     /**
@@ -126,7 +126,7 @@ public class Bankaccounts extends TableImpl&lt;BankaccountsRecord&gt; {
 
     @Override
     public Schema getSchema() {
-<span class="nc bnc" id="L129" title="All 2 branches missed.">        return aliased() ? null : Public.PUBLIC;</span>
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">        return aliased() ? null : Public.PUBLIC;</span>
     }
 
     @Override
@@ -136,7 +136,7 @@ public class Bankaccounts extends TableImpl&lt;BankaccountsRecord&gt; {
 
     @Override
     public UniqueKey&lt;BankaccountsRecord&gt; getPrimaryKey() {
-<span class="nc" id="L139">        return Keys.PK_BANKACCOUNTS;</span>
+<span class="fc" id="L139">        return Keys.PK_BANKACCOUNTS;</span>
     }
 
     @Override
@@ -217,7 +217,7 @@ public class Bankaccounts extends TableImpl&lt;BankaccountsRecord&gt; {
 
     @Override
     public Row7&lt;UUID, UUID, UUID, LocalDate, String, BigDecimal, String&gt; fieldsRow() {
-<span class="nc" id="L220">        return (Row7) super.fieldsRow();</span>
+<span class="fc" id="L220">        return (Row7) super.fieldsRow();</span>
     }
 
     /**

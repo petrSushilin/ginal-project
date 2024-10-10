@@ -3,7 +3,7 @@ package ru.sberstart.finalproject.domain.chain_of_responsibility.transactions;
 import ru.sberstart.finalproject.api.dto.bankaccount.request.BankAccountTransferTransactionRequestDTO;
 import ru.sberstart.finalproject.domain.enitity.bankaccount.BankAccount;
 import ru.sberstart.finalproject.domain.enitity.bankaccount.enums.TransactionTypes;
-import ru.sberstart.finalproject.infrastructure.repostitory.implementation.BankAccountRepositoryImpl;
+import ru.sberstart.finalproject.infrastructure.repostitory.BankAccountRepositoryImpl;
 
 import java.io.IOException;
 import java.util.ArrayList;

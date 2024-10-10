@@ -1,1 +1,5 @@
+ru\sberstart\finalproject\DatabaseInitializer.class
+ru\sberstart\finalproject\api\controller\UserControllerTest.class
 ru\sberstart\finalproject\FinalProjectApplicationTests.class
+ru\sberstart\finalproject\infrastructure\repostitory\BankAccountRepositoryImplTest.class
+ru\sberstart\finalproject\infrastructure\repostitory\UserRepositoryImplIntegrationTest.class

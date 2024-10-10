@@ -9,12 +9,8 @@ import ru.sberstart.finalproject.api.dto.user.request.UserRolesRequestDTO;
 import ru.sberstart.finalproject.api.dto.user.response.UserRolesResponseDTO;
 import ru.sberstart.finalproject.api.dto.user.request.UserStatusRequestDTO;
 import ru.sberstart.finalproject.domain.enitity.user.User;
-import ru.sberstart.finalproject.domain.enitity.user.enums.UserRoles;
-import ru.sberstart.finalproject.domain.enitity.user.enums.UserStatus;
-import ru.sberstart.finalproject.infrastructure.repostitory.implementation.UserRepositoryImpl;
+import ru.sberstart.finalproject.infrastructure.repostitory.UserRepositoryImpl;
 import ru.sberstart.finalproject.mapper.UserMapper;
-
-import java.util.Set;
 
 public class UserService {
     private final UserRepositoryImpl repository;
@@ -24,10 +20,10 @@ public class UserService {
     }
 
     public UserCreationResponseDTO createUser(UserCreationRequestDTO userCreationDTO) {
-        User userRecord = UserMapper.INSTANCE.toEntity(userCreationDTO);
-        userRecord.setStatus(UserStatus.REGISTERED);
-        userRecord.setRoles(Set.of(UserRoles.USER));
-        User user = repository.createUser(userRecord).orElseThrow(UnsuccessfulOperationException::new);
+//        User userRecord = ;
+//        userRecord.setStatus(UserStatus.REGISTERED);
+//        userRecord.setRoles(Set.of(UserRoles.USER));
+        User user = repository.createUser(UserMapper.INSTANCE.toEntity(userCreationDTO)).orElseThrow(UnsuccessfulOperationException::new);
         return UserMapper.INSTANCE.toCreationResponseDTO(user);
     }
 

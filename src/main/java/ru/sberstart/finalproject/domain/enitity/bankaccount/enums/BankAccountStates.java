@@ -1,6 +1,8 @@
 package ru.sberstart.finalproject.domain.enitity.bankaccount.enums;
 
-public enum BankAccountStates {
+import ru.sberstart.finalproject.domain.enitity.interfaces.State;
+
+public enum BankAccountStates implements State {
     CREATED,
     ACTIVE,
     STOPPED,

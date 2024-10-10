@@ -52,7 +52,7 @@ public class Users extends TableImpl&lt;UsersRecord&gt; {
      */
     @Override
     public Class&lt;UsersRecord&gt; getRecordType() {
-<span class="nc" id="L55">        return UsersRecord.class;</span>
+<span class="fc" id="L55">        return UsersRecord.class;</span>
     }
 
     /**
@@ -125,7 +125,7 @@ public class Users extends TableImpl&lt;UsersRecord&gt; {
 
     @Override
     public Schema getSchema() {
-<span class="nc bnc" id="L128" title="All 2 branches missed.">        return aliased() ? null : Public.PUBLIC;</span>
+<span class="pc bpc" id="L128" title="1 of 2 branches missed.">        return aliased() ? null : Public.PUBLIC;</span>
     }
 
     @Override
@@ -135,7 +135,7 @@ public class Users extends TableImpl&lt;UsersRecord&gt; {
 
     @Override
     public UniqueKey&lt;UsersRecord&gt; getPrimaryKey() {
-<span class="nc" id="L138">        return Keys.PK_USERS;</span>
+<span class="fc" id="L138">        return Keys.PK_USERS;</span>
     }
 
     @Override
@@ -188,7 +188,7 @@ public class Users extends TableImpl&lt;UsersRecord&gt; {
 
     @Override
     public Row7&lt;UUID, String, String, LocalDate, String, String, String&gt; fieldsRow() {
-<span class="nc" id="L191">        return (Row7) super.fieldsRow();</span>
+<span class="fc" id="L191">        return (Row7) super.fieldsRow();</span>
     }
 
     /**

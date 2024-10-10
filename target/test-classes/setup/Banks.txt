@@ -1,0 +1,15 @@
+{"id":"b2a3b28c-df7a-4c49-bfa3-53ff4e0e6a92","name":"ПАО Сбербанк","identityNumber":"104395867"}
+{"id":"9ac627f8-6f6a-4c4b-8183-bd07d6c0b9e6","name":"АО Альфа Банк","identityNumber":"958374620"}
+{"id":"3c637348-0cd0-4f56-a569-40ef4ccbb648","name":"АО ВТБ","identityNumber":"837920561"}
+{"id":"17dbf82d-7fd9-4a5c-83f1-e946d609a42c","name":"АО Россельхозбанк","identityNumber":"203957184"}
+{"id":"f382026a-2acb-45d9-b720-567d3af72935","name":"ПАО Газпромбанк","identityNumber":"509274836"}
+{"id":"7b3dc27c-7e70-4d85-b6b5-9b85fa3343cc","name":"ПАО МКБ","identityNumber":"832947615"}
+{"id":"e4be2d13-d837-4893-94d9-83874034586b","name":"АО Ренессанс Кредит","identityNumber":"637920458"}
+{"id":"77ff3b5e-2dd4-4d28-b519-40859c40f4f2","name":"АО Промсвязьбанк","identityNumber":"905732648"}
+{"id":"9b6756c7-6e71-46ff-a924-7e4e74e3fa19","name":"ПАО Банк Санкт-Петербург","identityNumber":"123405678"}
+{"id":"5c3825f1-babc-4028-a5c6-61d6758ffb60","name":"ООО Райффайзенбанк","identityNumber":"984362570"}
+{"id":"ed0d6d2f-869b-4f93-a703-6a34e4578a92","name":"АО ЮниКредит Банк","identityNumber":"302945671"}
+{"id":"2c356f80-e576-4d98-8519-b8e72e023bf0","name":"ПАО Совкомбанк","identityNumber":"937204658"}
+{"id":"f8cde45b-c60f-41c5-88a7-13ae9d6db2d8","name":"ПАО Открытие","identityNumber":"592847103"}
+{"id":"b9b87f44-bde8-4b1d-8bc3-03f12d24cc63","name":"ООО Москоммерцбанк","identityNumber":"284791530"}
+{"id":"f15c5d5e-3894-450d-bc39-8b60a5a4b32e","name":"АО Тинькофф Банк","identityNumber":"375926408"}

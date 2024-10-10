@@ -5,7 +5,7 @@ import ru.sberstart.finalproject.api.dto.bank.BankCreationDTO;
 import ru.sberstart.finalproject.api.dto.bank.BankFullInformationDTO;
 import ru.sberstart.finalproject.api.dto.bank.BankInformationDTO;
 import ru.sberstart.finalproject.domain.enitity.bank.Bank;
-import ru.sberstart.finalproject.infrastructure.repostitory.implementation.BankRepositoryImpl;
+import ru.sberstart.finalproject.infrastructure.repostitory.BankRepositoryImpl;
 import ru.sberstart.finalproject.global.exceptions.UnsuccessfulOperationException;
 
 

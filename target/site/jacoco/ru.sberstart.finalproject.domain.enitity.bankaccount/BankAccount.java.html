@@ -19,42 +19,42 @@ public class BankAccount {
     private BigDecimal balance;
     private BankAccountStates state;
 
-<span class="nc" id="L22">    public BankAccount(UUID id, UUID bankId, UUID userId, LocalDate registryDate, String number, BigDecimal balance, BankAccountStates state) {</span>
-<span class="nc" id="L23">        this.id = id;</span>
-<span class="nc" id="L24">        this.bankId = bankId;</span>
-<span class="nc" id="L25">        this.userId = userId;</span>
-<span class="nc" id="L26">        this.registryDate = registryDate;</span>
-<span class="nc" id="L27">        this.number = number;</span>
-<span class="nc" id="L28">        this.balance = balance;</span>
-<span class="nc" id="L29">        this.state = state;</span>
-<span class="nc" id="L30">    }</span>
+<span class="fc" id="L22">    public BankAccount(UUID id, UUID bankId, UUID userId, LocalDate registryDate, String number, BigDecimal balance, BankAccountStates state) {</span>
+<span class="fc" id="L23">        this.id = id;</span>
+<span class="fc" id="L24">        this.bankId = bankId;</span>
+<span class="fc" id="L25">        this.userId = userId;</span>
+<span class="fc" id="L26">        this.registryDate = registryDate;</span>
+<span class="fc" id="L27">        this.number = number;</span>
+<span class="fc" id="L28">        this.balance = balance;</span>
+<span class="fc" id="L29">        this.state = state;</span>
+<span class="fc" id="L30">    }</span>
 
     public UUID getId() {
-<span class="nc" id="L33">        return id;</span>
+<span class="fc" id="L33">        return id;</span>
     }
 
     public UUID getBankId() {
-<span class="nc" id="L37">        return bankId;</span>
+<span class="fc" id="L37">        return bankId;</span>
     }
 
     public UUID getUserId() {
-<span class="nc" id="L41">        return userId;</span>
+<span class="fc" id="L41">        return userId;</span>
     }
 
     public LocalDate getRegistryDate() {
-<span class="nc" id="L45">        return registryDate;</span>
+<span class="fc" id="L45">        return registryDate;</span>
     }
 
     public String getNumber() {
-<span class="nc" id="L49">        return number;</span>
+<span class="fc" id="L49">        return number;</span>
     }
 
     public BigDecimal getBalance() {
-<span class="nc" id="L53">        return balance;</span>
+<span class="fc" id="L53">        return balance;</span>
     }
 
     public BankAccountStates getState() {
-<span class="nc" id="L57">        return state;</span>
+<span class="fc" id="L57">        return state;</span>
     }
 
     public void setState(BankAccountStates state) {
@@ -129,7 +129,7 @@ public class BankAccount {
 
     @Override
     public String toString() {
-<span class="nc" id="L132">        return &quot;BankAccount{&quot; +</span>
+<span class="fc" id="L132">        return &quot;BankAccount{&quot; +</span>
                 &quot;id=&quot; + id +
                 &quot;, bankId=&quot; + bankId +
                 &quot;, userId=&quot; + userId +

@@ -17,25 +17,10 @@ import ru.sberstart.finalproject.domain.enitity.user.User;
 public interface UserMapper {
 <span class="nc" id="L18">    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);</span>
 
-//    @Mapping(target = &quot;id&quot;, ignore = true)
-//    @Mapping(target = &quot;roles&quot;, ignore = true)
-//    @Mapping(target = &quot;status&quot;, ignore = true)
     User toEntity(UserCreationRequestDTO userCreationDTO);
 
-//    @Mapping(target = &quot;id&quot;, ignore = true)
-//    @Mapping(target = &quot;name&quot;, ignore = true)
-//    @Mapping(target = &quot;surname&quot;, ignore = true)
-//    @Mapping(target = &quot;birthdate&quot;, ignore = true)
-//    @Mapping(target = &quot;passportNumber&quot;, ignore = true)
-//    @Mapping(target = &quot;roles&quot;, ignore = true)
     User toEntity(UserStatusRequestDTO userStatusDTO);
 
-//    @Mapping(target = &quot;id&quot;, ignore = true)
-//    @Mapping(target = &quot;name&quot;, ignore = true)
-//    @Mapping(target = &quot;surname&quot;, ignore = true)
-//    @Mapping(target = &quot;birthdate&quot;, ignore = true)
-//    @Mapping(target = &quot;passportNumber&quot;, ignore = true)
-//    @Mapping(target = &quot;status&quot;, ignore = true)
     User toEntity(UserRolesRequestDTO userRolesDTO);
 
     UserActiveResponseDTO toUserActiveResponseDTO(User user);

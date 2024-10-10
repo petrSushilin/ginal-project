@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.sberstart.finalproject.api.dto.card.inner.CardGeneralInformationDTO;
 import ru.sberstart.finalproject.api.dto.card.inner.CardSecretInformationDTO;
@@ -27,37 +28,37 @@ import java.util.List;
 public class CardController {
     CardService service;
 
-<span class="fc" id="L30">    public CardController(CardService service) {</span>
-<span class="fc" id="L31">        this.service = service;</span>
-<span class="fc" id="L32">    }</span>
+<span class="fc" id="L31">    public CardController(CardService service) {</span>
+<span class="fc" id="L32">        this.service = service;</span>
+<span class="fc" id="L33">    }</span>
 
 //    @PreAuthorize(&quot;hasRole('USER')&quot;)
     @PostMapping(&quot;/new&quot;)
     public ResponseEntity&lt;CardStateResponseDTO&gt; issueCard(
             @Parameter(description = &quot;DTO с информацией для выпуска карты для банковского счета&quot;, required = true)
             @RequestBody CardIssueRequestDTO cardIssueDTO) {
-<span class="nc" id="L39">        CardStateResponseDTO issuedCard = service.issueCard(cardIssueDTO);</span>
-<span class="nc" id="L40">        return new ResponseEntity&lt;&gt;(issuedCard, HttpStatus.OK);</span>
+<span class="nc" id="L40">        CardStateResponseDTO issuedCard = service.issueCard(cardIssueDTO);</span>
+<span class="nc" id="L41">        return new ResponseEntity&lt;&gt;(issuedCard, HttpStatus.OK);</span>
     }
 
 //    @PreAuthorize(&quot;hasAnyRole('USER', 'MANAGER')&quot;)
-    @GetMapping(&quot;/{cardNumber}&quot;)
-    public ResponseEntity&lt;CardGeneralInformationDTO&gt; getGeneralInformationByNumber(@PathVariable String cardNumber) {
-<span class="nc" id="L46">        CardGeneralInformationDTO informationDTO = service.getGeneralInformationByNumber(cardNumber);</span>
-<span class="nc" id="L47">        return new ResponseEntity&lt;&gt;(informationDTO, HttpStatus.OK);</span>
+    @GetMapping(&quot;/info&quot;)
+    public ResponseEntity&lt;CardGeneralInformationDTO&gt; getGeneralInformationByNumber(@RequestParam String cardNumber) {
+<span class="nc" id="L47">        CardGeneralInformationDTO informationDTO = service.getGeneralInformationByNumber(cardNumber);</span>
+<span class="nc" id="L48">        return new ResponseEntity&lt;&gt;(informationDTO, HttpStatus.OK);</span>
     }
 
-    @GetMapping(&quot;/secret:{cardNumber}&quot;)
-    public ResponseEntity&lt;CardSecretInformationDTO&gt; getCardSecretInformation(@PathVariable String cardNumber) {
-<span class="nc" id="L52">        CardSecretInformationDTO cardSecretInformationDTO = service.getSecretInformation(cardNumber);</span>
-<span class="nc" id="L53">        return new ResponseEntity&lt;&gt;(cardSecretInformationDTO, HttpStatus.OK);</span>
+    @GetMapping(&quot;/secret&quot;)
+    public ResponseEntity&lt;CardSecretInformationDTO&gt; getCardSecretInformation(@RequestParam String cardNumber) {
+<span class="nc" id="L53">        CardSecretInformationDTO cardSecretInformationDTO = service.getSecretInformation(cardNumber);</span>
+<span class="nc" id="L54">        return new ResponseEntity&lt;&gt;(cardSecretInformationDTO, HttpStatus.OK);</span>
     }
 
 //    @PreAuthorize(&quot;hasAnyRole('USER', 'MANAGER')&quot;)
     @GetMapping(&quot;/user:{userPhoneNumber}&quot;)
     public ResponseEntity&lt;List&lt;CardGeneralInformationDTO&gt;&gt; getListCardsByUserPhoneNumber(@PathVariable String userPhoneNumber) {
-<span class="nc" id="L59">        List&lt;CardGeneralInformationDTO&gt; listCards = service.getListCardsByUserPhoneNumber(userPhoneNumber);</span>
-<span class="nc" id="L60">        return new ResponseEntity&lt;&gt;(listCards, HttpStatus.OK);</span>
+<span class="nc" id="L60">        List&lt;CardGeneralInformationDTO&gt; listCards = service.getListCardsByUserPhoneNumber(userPhoneNumber);</span>
+<span class="nc" id="L61">        return new ResponseEntity&lt;&gt;(listCards, HttpStatus.OK);</span>
     }
 
 //    @PreAuthorize(&quot;hasRole('MANAGER')&quot;)
@@ -65,8 +66,8 @@ public class CardController {
     public ResponseEntity&lt;CardStateResponseDTO&gt; approveCard(
             @Parameter(description = &quot;DTO с информацией для подтверждения выпуска карты&quot;, required = true)
             @RequestBody CardStateRequestDTO cardPatchStateDTO) {
-<span class="nc" id="L68">        CardStateResponseDTO approvedCard = service.approveCard(cardPatchStateDTO);</span>
-<span class="nc" id="L69">        return new ResponseEntity&lt;&gt;(approvedCard, HttpStatus.OK);</span>
+<span class="nc" id="L69">        CardStateResponseDTO approvedCard = service.approveCard(cardPatchStateDTO);</span>
+<span class="nc" id="L70">        return new ResponseEntity&lt;&gt;(approvedCard, HttpStatus.OK);</span>
     }
 
 //    @PreAuthorize(&quot;hasRole('MANAGER')&quot;)
@@ -74,8 +75,8 @@ public class CardController {
     public ResponseEntity&lt;CardStateResponseDTO&gt; activateCard(
             @Parameter(description = &quot;DTO с информацией для подтверждения выдачи и активации карты&quot;, required = true)
             @RequestBody CardStateRequestDTO cardPatchStateDTO) {
-<span class="nc" id="L77">        CardStateResponseDTO approvedCard = service.activateCard(cardPatchStateDTO);</span>
-<span class="nc" id="L78">        return new ResponseEntity&lt;&gt;(approvedCard, HttpStatus.OK);</span>
+<span class="nc" id="L78">        CardStateResponseDTO approvedCard = service.activateCard(cardPatchStateDTO);</span>
+<span class="nc" id="L79">        return new ResponseEntity&lt;&gt;(approvedCard, HttpStatus.OK);</span>
     }
 
 //    @PreAuthorize(&quot;hasAnyRole('USER', 'MANAGER')&quot;)
@@ -83,8 +84,8 @@ public class CardController {
     public ResponseEntity&lt;CardStateResponseDTO&gt; suspendCard(
             @Parameter(description = &quot;DTO с информацией для подтверждения приостановки&quot;, required = true)
             @RequestBody CardStateRequestDTO cardPatchStateDTO) {
-<span class="nc" id="L86">        CardStateResponseDTO approvedCard = service.suspendCard(cardPatchStateDTO);</span>
-<span class="nc" id="L87">        return new ResponseEntity&lt;&gt;(approvedCard, HttpStatus.OK);</span>
+<span class="nc" id="L87">        CardStateResponseDTO approvedCard = service.suspendCard(cardPatchStateDTO);</span>
+<span class="nc" id="L88">        return new ResponseEntity&lt;&gt;(approvedCard, HttpStatus.OK);</span>
     }
 
 //    @PreAuthorize(&quot;hasRole('ADMIN')&quot;)
@@ -92,8 +93,8 @@ public class CardController {
     public ResponseEntity&lt;CardStateResponseDTO&gt; blockExpiredCard(
             @Parameter(description = &quot;DTO с информацией для подтверждения истечения срока действия карты&quot;, required = true)
             @RequestBody CardStateRequestDTO cardPatchStateDTO) {
-<span class="nc" id="L95">        CardStateResponseDTO approvedCard = service.blockExpireCard(cardPatchStateDTO);</span>
-<span class="nc" id="L96">        return new ResponseEntity&lt;&gt;(approvedCard, HttpStatus.OK);</span>
+<span class="nc" id="L96">        CardStateResponseDTO approvedCard = service.blockExpireCard(cardPatchStateDTO);</span>
+<span class="nc" id="L97">        return new ResponseEntity&lt;&gt;(approvedCard, HttpStatus.OK);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

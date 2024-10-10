@@ -10,7 +10,7 @@ import ru.sberstart.finalproject.application.service.BankAccountService;
 import ru.sberstart.finalproject.application.service.TransactionService;
 import ru.sberstart.finalproject.domain.chain_of_responsibility.transactions.TransactionAddFundsHandler;
 import ru.sberstart.finalproject.domain.chain_of_responsibility.transactions.TransactionFundsValidationHandler;
-import ru.sberstart.finalproject.infrastructure.repostitory.implementation.BankAccountRepositoryImpl;
+import ru.sberstart.finalproject.infrastructure.repostitory.BankAccountRepositoryImpl;
 import ru.sberstart.finalproject.domain.chain_of_responsibility.transactions.TransactionHandlerFactory;
 import ru.sberstart.finalproject.domain.chain_of_responsibility.transactions.TransactionParamsCustomizerHandler;
 import ru.sberstart.finalproject.domain.chain_of_responsibility.transactions.TransactionProviderHandler;

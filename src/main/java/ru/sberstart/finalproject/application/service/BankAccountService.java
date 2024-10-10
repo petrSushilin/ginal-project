@@ -14,14 +14,12 @@ import ru.sberstart.finalproject.api.dto.bankaccount.request.BankAccountTransfer
 import ru.sberstart.finalproject.domain.enitity.bankaccount.enums.BankAccountStates;
 import ru.sberstart.finalproject.global.exceptions.NotAvailableActionsException;
 import ru.sberstart.finalproject.mapper.BankAccountMapper;
-import ru.sberstart.finalproject.infrastructure.repostitory.implementation.BankAccountRepositoryImpl;
+import ru.sberstart.finalproject.infrastructure.repostitory.BankAccountRepositoryImpl;
 import ru.sberstart.finalproject.application.manager.BankAccountManager;
 import ru.sberstart.finalproject.domain.enitity.bankaccount.BankAccount;
 import ru.sberstart.finalproject.global.exceptions.ForbiddenTransactionException;
 import ru.sberstart.finalproject.global.exceptions.RecordNotFoundException;
 import ru.sberstart.finalproject.global.exceptions.UnsuccessfulOperationException;
-
-import java.math.BigDecimal;
 
 /**
  * Класс управления бизнес-логикой при работе с банковскими счетами.

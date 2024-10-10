@@ -49,7 +49,7 @@ public class Userroles extends TableImpl&lt;UserrolesRecord&gt; {
      */
     @Override
     public Class&lt;UserrolesRecord&gt; getRecordType() {
-<span class="nc" id="L52">        return UserrolesRecord.class;</span>
+<span class="fc" id="L52">        return UserrolesRecord.class;</span>
     }
 
     /**
@@ -97,12 +97,12 @@ public class Userroles extends TableImpl&lt;UserrolesRecord&gt; {
 
     @Override
     public Schema getSchema() {
-<span class="nc bnc" id="L100" title="All 2 branches missed.">        return aliased() ? null : Public.PUBLIC;</span>
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">        return aliased() ? null : Public.PUBLIC;</span>
     }
 
     @Override
     public UniqueKey&lt;UserrolesRecord&gt; getPrimaryKey() {
-<span class="nc" id="L105">        return Keys.CONSTRAINT_BB;</span>
+<span class="fc" id="L105">        return Keys.CONSTRAINT_BB;</span>
     }
 
     @Override
@@ -178,7 +178,7 @@ public class Userroles extends TableImpl&lt;UserrolesRecord&gt; {
 
     @Override
     public Row2&lt;UUID, UUID&gt; fieldsRow() {
-<span class="nc" id="L181">        return (Row2) super.fieldsRow();</span>
+<span class="fc" id="L181">        return (Row2) super.fieldsRow();</span>
     }
 
     /**

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.sberstart.finalproject.api.dto.card.inner.CardGeneralInformationDTO;
 import ru.sberstart.finalproject.api.dto.card.inner.CardSecretInformationDTO;
@@ -41,14 +42,14 @@ public class CardController {
     }
 
 //    @PreAuthorize("hasAnyRole('USER', 'MANAGER')")
-    @GetMapping("/{cardNumber}")
-    public ResponseEntity<CardGeneralInformationDTO> getGeneralInformationByNumber(@PathVariable String cardNumber) {
+    @GetMapping("/info")
+    public ResponseEntity<CardGeneralInformationDTO> getGeneralInformationByNumber(@RequestParam String cardNumber) {
         CardGeneralInformationDTO informationDTO = service.getGeneralInformationByNumber(cardNumber);
         return new ResponseEntity<>(informationDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/secret:{cardNumber}")
-    public ResponseEntity<CardSecretInformationDTO> getCardSecretInformation(@PathVariable String cardNumber) {
+    @GetMapping("/secret")
+    public ResponseEntity<CardSecretInformationDTO> getCardSecretInformation(@RequestParam String cardNumber) {
         CardSecretInformationDTO cardSecretInformationDTO = service.getSecretInformation(cardNumber);
         return new ResponseEntity<>(cardSecretInformationDTO, HttpStatus.OK);
     }

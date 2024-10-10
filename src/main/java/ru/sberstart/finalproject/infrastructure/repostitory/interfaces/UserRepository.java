@@ -11,5 +11,5 @@ public interface UserRepository {
 
     Optional<User> updateUserRoles(User user);
 
-    Optional<User> getUserWithRoles(String userPhoneNumber);
+    Optional<User> getFullUserInfoByPhoneNumber(String userPhoneNumber);
 }

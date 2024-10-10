@@ -14,14 +14,12 @@ import ru.sberstart.finalproject.api.dto.bankaccount.request.BankAccountTransfer
 import ru.sberstart.finalproject.domain.enitity.bankaccount.enums.BankAccountStates;
 import ru.sberstart.finalproject.global.exceptions.NotAvailableActionsException;
 import ru.sberstart.finalproject.mapper.BankAccountMapper;
-import ru.sberstart.finalproject.infrastructure.repostitory.implementation.BankAccountRepositoryImpl;
+import ru.sberstart.finalproject.infrastructure.repostitory.BankAccountRepositoryImpl;
 import ru.sberstart.finalproject.application.manager.BankAccountManager;
 import ru.sberstart.finalproject.domain.enitity.bankaccount.BankAccount;
 import ru.sberstart.finalproject.global.exceptions.ForbiddenTransactionException;
 import ru.sberstart.finalproject.global.exceptions.RecordNotFoundException;
 import ru.sberstart.finalproject.global.exceptions.UnsuccessfulOperationException;
-
-import java.math.BigDecimal;
 
 /**
  * Класс управления бизнес-логикой при работе с банковскими счетами.
@@ -35,11 +33,11 @@ public class BankAccountService {
     private final BankAccountManager manager;
     private final TransactionService transactionService;
 
-<span class="fc" id="L38">    public BankAccountService(BankAccountRepositoryImpl repository, TransactionService transactionService, BankAccountManager manager) {</span>
-<span class="fc" id="L39">        this.repository = repository;</span>
-<span class="fc" id="L40">        this.transactionService = transactionService;</span>
-<span class="fc" id="L41">        this.manager = manager;</span>
-<span class="fc" id="L42">    }</span>
+<span class="fc" id="L36">    public BankAccountService(BankAccountRepositoryImpl repository, TransactionService transactionService, BankAccountManager manager) {</span>
+<span class="fc" id="L37">        this.repository = repository;</span>
+<span class="fc" id="L38">        this.transactionService = transactionService;</span>
+<span class="fc" id="L39">        this.manager = manager;</span>
+<span class="fc" id="L40">    }</span>
 
     /**
      * Процесс создания банковского счета.
@@ -51,11 +49,11 @@ public class BankAccountService {
      * @return BankAccountFullInformationResponseDTO с полной информацией о созданном банковском счете.
      */
     public BankAccountCreationResponseDTO createBankAccount(BankAccountCreationRequestDTO bankAccountCreationDTO) {
-<span class="nc" id="L54">        BankAccount bankAccount = manager.creatingCustomizeAccount(bankAccountCreationDTO);</span>
+<span class="nc" id="L52">        BankAccount bankAccount = manager.creatingCustomizeAccount(bankAccountCreationDTO);</span>
 
-<span class="nc" id="L56">        BankAccount bankAccountRecord = repository.create(bankAccount).orElseThrow(UnsuccessfulOperationException::new);</span>
+<span class="nc" id="L54">        BankAccount bankAccountRecord = repository.create(bankAccount).orElseThrow(UnsuccessfulOperationException::new);</span>
 
-<span class="nc" id="L58">        return BankAccountMapper.INSTANCE.toBankAccountFullInformationResponseDTO(bankAccountRecord);</span>
+<span class="nc" id="L56">        return BankAccountMapper.INSTANCE.toBankAccountFullInformationResponseDTO(bankAccountRecord);</span>
     }
 
     /**
@@ -65,8 +63,8 @@ public class BankAccountService {
      * @return BankAccountInformationResponseDTO с информацией о банковском счете.
      */
     public BankAccountInformationResponseDTO getByNumber(String bankAccountNumber) {
-<span class="nc" id="L68">        BankAccountFullInformationDTO bankAccountInformation = getBankAccountFullInformationByNumber(bankAccountNumber);</span>
-<span class="nc" id="L69">        return BankAccountMapper.INSTANCE.toBankAccountInformationResponseDTO(bankAccountInformation);</span>
+<span class="nc" id="L66">        BankAccountFullInformationDTO bankAccountInformation = getBankAccountFullInformationByNumber(bankAccountNumber);</span>
+<span class="nc" id="L67">        return BankAccountMapper.INSTANCE.toBankAccountInformationResponseDTO(bankAccountInformation);</span>
     }
 
     /**
@@ -76,8 +74,8 @@ public class BankAccountService {
      * @return BankAccountCardIssueInformationDTO с информацией о банковском счете.
      */
     public BankAccountCardIssueInformationDTO getBankAccountCardIssueInformationByNumber(String bankAccountNumber) {
-<span class="nc" id="L79">        BankAccountFullInformationDTO bankAccountInformation = getBankAccountFullInformationByNumber(bankAccountNumber);</span>
-<span class="nc" id="L80">        return BankAccountMapper.INSTANCE.toBankAccountCardIssueInformationDTO(bankAccountInformation);</span>
+<span class="nc" id="L77">        BankAccountFullInformationDTO bankAccountInformation = getBankAccountFullInformationByNumber(bankAccountNumber);</span>
+<span class="nc" id="L78">        return BankAccountMapper.INSTANCE.toBankAccountCardIssueInformationDTO(bankAccountInformation);</span>
     }
 
     /**
@@ -88,8 +86,8 @@ public class BankAccountService {
      * @return BankAccountFullInformationDTO с информацией о банковском счете.
      */
     private BankAccountFullInformationDTO getBankAccountFullInformationByNumber(String bankAccountNumber) {
-<span class="nc bnc" id="L91" title="All 2 branches missed.">        if (manager.isInvalidateNumberPattern(bankAccountNumber)) throw new IllegalArgumentException();</span>
-<span class="nc" id="L92">        return repository.getByNumber(bankAccountNumber).orElseThrow(RecordNotFoundException::new);</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        if (manager.isInvalidateNumberPattern(bankAccountNumber)) throw new IllegalArgumentException();</span>
+<span class="nc" id="L90">        return repository.getByNumber(bankAccountNumber).orElseThrow(RecordNotFoundException::new);</span>
     }
 
     /**
@@ -101,11 +99,11 @@ public class BankAccountService {
      * @return BankAccountActiveInformationResponseDTO с информацией об активированном банковском счете.
      */
     public BankAccountActiveInformationResponseDTO approveBankAccount(BankAccountStateRequestDTO stateDTO) {
-<span class="nc bnc" id="L104" title="All 2 branches missed.">        if(!stateDTO.state().equals(BankAccountStates.ACTIVE)) throw new NotAvailableActionsException();</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        if(!stateDTO.state().equals(BankAccountStates.ACTIVE)) throw new NotAvailableActionsException();</span>
 
-<span class="nc" id="L106">        BankAccount bankAccount = updateBankAccount(stateDTO);</span>
+<span class="nc" id="L104">        BankAccount bankAccount = updateBankAccount(stateDTO);</span>
 
-<span class="nc" id="L108">        return BankAccountMapper.INSTANCE.toBankAccountActiveInformationResponseDTO(bankAccount);</span>
+<span class="nc" id="L106">        return BankAccountMapper.INSTANCE.toBankAccountActiveInformationResponseDTO(bankAccount);</span>
     }
 
     /**
@@ -117,11 +115,11 @@ public class BankAccountService {
      * @return BankAccountDeactivateInformationResponseDTO с информацией о приостановленном банковском счете.
      */
     public BankAccountDeactivateInformationResponseDTO suspendBankAccount(BankAccountStateRequestDTO stateDTO) {
-<span class="nc bnc" id="L120" title="All 2 branches missed.">        if(!stateDTO.state().equals(BankAccountStates.STOPPED)) throw new NotAvailableActionsException();</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">        if(!stateDTO.state().equals(BankAccountStates.STOPPED)) throw new NotAvailableActionsException();</span>
 
-<span class="nc" id="L122">        BankAccount bankAccount = updateBankAccount(stateDTO);</span>
+<span class="nc" id="L120">        BankAccount bankAccount = updateBankAccount(stateDTO);</span>
 
-<span class="nc" id="L124">        return BankAccountMapper.INSTANCE.toBankAccountDeactivateInformationResponseDTO(bankAccount);</span>
+<span class="nc" id="L122">        return BankAccountMapper.INSTANCE.toBankAccountDeactivateInformationResponseDTO(bankAccount);</span>
     }
 
     /**
@@ -133,17 +131,17 @@ public class BankAccountService {
      * @return BankAccountDeactivateInformationResponseDTO с информацией о закрытом банковском счете.
      */
     public BankAccountDeactivateInformationResponseDTO closeBankAccount(BankAccountStateRequestDTO stateDTO) {
-<span class="nc bnc" id="L136" title="All 2 branches missed.">        if(!stateDTO.state().equals(BankAccountStates.CLOSED)) throw new NotAvailableActionsException();</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">        if(!stateDTO.state().equals(BankAccountStates.CLOSED)) throw new NotAvailableActionsException();</span>
 
-<span class="nc" id="L138">        BankAccount bankAccount = updateBankAccount(stateDTO);</span>
+<span class="nc" id="L136">        BankAccount bankAccount = updateBankAccount(stateDTO);</span>
 
-<span class="nc" id="L140">        return BankAccountMapper.INSTANCE.toBankAccountDeactivateInformationResponseDTO(bankAccount);</span>
+<span class="nc" id="L138">        return BankAccountMapper.INSTANCE.toBankAccountDeactivateInformationResponseDTO(bankAccount);</span>
     }
 
     public BankAccount updateBankAccount(BankAccountStateRequestDTO stateDTO) {
-<span class="nc" id="L144">        BankAccount bankAccount = consistencyAccountRecordWithState(stateDTO);</span>
+<span class="nc" id="L142">        BankAccount bankAccount = consistencyAccountRecordWithState(stateDTO);</span>
 
-<span class="nc" id="L146">        return repository.updateState(bankAccount).orElseThrow(UnsuccessfulOperationException::new);</span>
+<span class="nc" id="L144">        return repository.updateState(bankAccount).orElseThrow(UnsuccessfulOperationException::new);</span>
     }
 
     /**
@@ -154,14 +152,14 @@ public class BankAccountService {
      * @return BankAccount с обновленным состоянием.
      */
     private BankAccount consistencyAccountRecordWithState(BankAccountStateRequestDTO stateDTO) {
-<span class="nc" id="L157">        BankAccount account = repository.getServiceInfoByNumber(stateDTO.number()).orElseThrow(UnsuccessfulOperationException::new);</span>
-<span class="nc bnc" id="L158" title="All 5 branches missed.">        switch (stateDTO.state()) {</span>
-<span class="nc" id="L159">            case CREATED -&gt; throw new UnsupportedOperationException();</span>
-<span class="nc" id="L160">            case ACTIVE -&gt; manager.approveAccount(account);</span>
-<span class="nc" id="L161">            case STOPPED -&gt; manager.suspendAccount(account);</span>
-<span class="nc" id="L162">            case CLOSED -&gt; manager.closeAccount(account);</span>
+<span class="nc" id="L155">        BankAccount account = repository.getServiceInfoByNumber(stateDTO.number()).orElseThrow(UnsuccessfulOperationException::new);</span>
+<span class="nc bnc" id="L156" title="All 5 branches missed.">        switch (stateDTO.state()) {</span>
+<span class="nc" id="L157">            case CREATED -&gt; throw new UnsupportedOperationException();</span>
+<span class="nc" id="L158">            case ACTIVE -&gt; manager.approveAccount(account);</span>
+<span class="nc" id="L159">            case STOPPED -&gt; manager.suspendAccount(account);</span>
+<span class="nc" id="L160">            case CLOSED -&gt; manager.closeAccount(account);</span>
         }
-<span class="nc" id="L164">        return account;</span>
+<span class="nc" id="L162">        return account;</span>
     }
 
     /**
@@ -174,9 +172,9 @@ public class BankAccountService {
      */
     @Transactional(rollbackFor = ForbiddenTransactionException.class)
     public BankAccountSuccessTransactionResponseDTO executeTransaction(BankAccountTransferTransactionRequestDTO transactionDTO) {
-<span class="nc" id="L177">        BankAccount senderBankAccount = transactionService.executeTransaction(transactionDTO);</span>
+<span class="nc" id="L175">        BankAccount senderBankAccount = transactionService.executeTransaction(transactionDTO);</span>
 
-<span class="nc" id="L179">        return BankAccountMapper.INSTANCE.toBankAccountSuccessTransactionDTO(senderBankAccount);</span>
+<span class="nc" id="L177">        return BankAccountMapper.INSTANCE.toBankAccountSuccessTransactionDTO(senderBankAccount);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

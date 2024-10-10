@@ -1,0 +1,264 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: petrSushilin
+      changes:
+        ################################################################################################################
+        ################################################################################################################
+        ##############################################  B  A  N  K  S  #################################################
+        ################################################################################################################
+        ################################################################################################################
+        - createTable:
+            tableName: Banks
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  defaultValueComputed: "RANDOM_UUID()"
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: identity_number
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+        - createIndex:
+            tableName: Banks
+            columns:
+              - column:
+                  name: identity_number
+            indexName: idx_identity_number
+        ################################################################################################################
+        ################################################################################################################
+        ##############################################  U  S  E  R  S  #################################################
+        ################################################################################################################
+        ################################################################################################################
+        - createTable:
+            tableName: Users
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  defaultValueComputed: "RANDOM_UUID()"
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: surname
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: birthdate
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone_number
+                  type: VARCHAR(15)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: passport_number
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: status
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+        - createIndex:
+            tableName: Users
+            columns:
+              - column:
+                  name: phone_number
+            indexName: idx_phone_number
+        ################################################################################################################
+        ################################################################################################################
+        ###################################  B  A  N  K  A  C  C  O  U  N  T  S  ########################################
+        ################################################################################################################
+        ################################################################################################################
+        - createTable:
+            tableName: BankAccounts
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  defaultValueComputed: "RANDOM_UUID()"
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: bank_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: registry_date
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: number
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: balance
+                  type: DECIMAL(20,2)
+                  defaultValueNumeric: 0.00
+              - column:
+                  name: state
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: BankAccounts
+            baseColumnNames: bank_id
+            referencedTableName: Banks
+            referencedColumnNames: id
+            onDelete: CASCADE
+            constraintName: fk_bankaccounts_banks
+        - addForeignKeyConstraint:
+            baseTableName: BankAccounts
+            baseColumnNames: user_id
+            referencedTableName: Users
+            referencedColumnNames: id
+            onDelete: CASCADE
+            constraintName: fk_bankaccounts_users
+        - createIndex:
+            indexName: idx_bankaccounts_bank_id
+            tableName: BankAccounts
+            columns:
+              - column:
+                  name: bank_id
+        - createIndex:
+            indexName: idx_bankaccounts_user_id
+            tableName: BankAccounts
+            columns:
+              - column:
+                  name: user_id
+        - createIndex:
+            tableName: BankAccounts
+            columns:
+              - column:
+                  name: number
+            indexName: idx_bankaccount_number
+        ################################################################################################################
+        ################################################################################################################
+        ####################################  C  A  R  D  S  E  C  R  E  T  S  ########################################
+        ################################################################################################################
+        ################################################################################################################
+        - createTable:
+            tableName: CardSecrets
+            columns:
+              - column:
+                  name: card_number
+                  type: VARCHAR(255)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    unique: true
+              - column:
+                  name: holder_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: holder_surname
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: validate_period
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CVV
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: secret_code
+                  type: VARCHAR(270)
+                  constraints:
+                    nullable: false
+        ################################################################################################################
+        ################################################################################################################
+        ##############################################  C  A  R  D  S  #################################################
+        ################################################################################################################
+        ################################################################################################################
+        - createTable:
+            tableName: Cards
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  defaultValueComputed: "RANDOM_UUID()"
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: bankaccount_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: number
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: state
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: Cards
+            baseColumnNames: bankaccount_id
+            referencedTableName: BankAccounts
+            referencedColumnNames: id
+            onDelete: CASCADE
+            constraintName: fk_cards_bankaccounts
+        - addForeignKeyConstraint:
+            baseTableName: Cards
+            baseColumnNames: number
+            referencedTableName: CardSecrets
+            referencedColumnNames: card_number
+            onDelete: CASCADE
+            constraintName: fk_cardsecrets_cards_card_number
+        - createIndex:
+            tableName: Cards
+            columns:
+              - column:
+                  name: bankaccount_id
+            indexName: idx_cards_bankaccount_id
+        - createIndex:
+            tableName: Cards
+            columns:
+              - column:
+                  name: number
+            indexName: idx_card_number

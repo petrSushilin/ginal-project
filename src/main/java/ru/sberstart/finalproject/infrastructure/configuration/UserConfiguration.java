@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.sberstart.finalproject.api.controller.UserController;
 import ru.sberstart.finalproject.application.service.UserService;
-import ru.sberstart.finalproject.infrastructure.repostitory.implementation.UserRepositoryImpl;
+import ru.sberstart.finalproject.infrastructure.repostitory.UserRepositoryImpl;
 
 @Configuration
 public class UserConfiguration {

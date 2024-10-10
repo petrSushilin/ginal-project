@@ -3,7 +3,7 @@ package ru.sberstart.finalproject.domain.chain_of_responsibility.transactions;
 import ru.sberstart.finalproject.application.manager.BankAccountManager;
 import ru.sberstart.finalproject.domain.enitity.bankaccount.BankAccount;
 import ru.sberstart.finalproject.global.exceptions.ForbiddenTransactionException;
-import ru.sberstart.finalproject.infrastructure.repostitory.implementation.BankAccountRepositoryImpl;
+import ru.sberstart.finalproject.infrastructure.repostitory.BankAccountRepositoryImpl;
 
 import java.util.List;
 
